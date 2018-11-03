@@ -17,7 +17,7 @@
         class="com.google.android.gms.maps.SupportMapFragment"
         android:id="@+id/mapsFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/placesFragment" />
 
@@ -40,17 +40,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date"
+                    android:text="@string/date_field"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/dateField"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="YYYY/MM/DD"/>
+                    android:gravity="end"
+                    android:onClick="onSetDate"
+                    android:text="@string/date_field_def" />
 
             </LinearLayout>
 
@@ -64,17 +65,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Time"
+                    android:text="@string/time_field"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/timeField"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="12:00 PM"/>
+                    android:gravity="end"
+                    android:onClick="onSetTime"
+                    android:text="@string/time_field_def" />
 
             </LinearLayout>
 
@@ -88,13 +90,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notes"
+                    android:text="@string/notes_field"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="bold" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="text"
                     android:textSize="14sp"
                     android:maxLines="50"/>
 
