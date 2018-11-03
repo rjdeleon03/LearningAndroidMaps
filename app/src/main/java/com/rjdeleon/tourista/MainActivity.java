@@ -15,43 +15,37 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap _googleMap;
-    private List<Marker> _markers = new ArrayList<>();
+    private Marker _currMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
-        mapFragment.getMapAsync(this);
-
         SupportPlaceAutocompleteFragment placeAutocompleteFragment =
                 (SupportPlaceAutocompleteFragment) getSupportFragmentManager().findFragmentById(R.id.placesFragment);
 
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapsFragment);
+        mapFragment.getMapAsync(this);
+
+        assert placeAutocompleteFragment != null;
         placeAutocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
                 System.out.println("Place: " + place.getName());
 
-                for(Marker marker : _markers) {
-                    marker.remove();
-                }
-                _markers.clear();
+                LatLng placeCoords = place.getLatLng();
 
-                LatLng latLng = place.getLatLng();
-                _markers.add(_googleMap
-                        .addMarker(new MarkerOptions()
-                                .position(place.getLatLng())
-                                .title(place.getName().toString())));
-                _googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                if (_currMarker != null) _currMarker.remove();
+
+                _currMarker = _googleMap.addMarker(new MarkerOptions().position(placeCoords).title(place.getName().toString()));
+                _googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placeCoords, 12.0f));
+
             }
 
             @Override
