@@ -104,4 +104,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         int actualHr = hr%12 == 0 ? 12 : hr%12;
         _timeTextView.setText(getString(R.string.time_field_template, actualHr, min, amOrPm));
     }
+
+    public void onSaveButtonClick(View view) {
+        finish();
+    }
 }
