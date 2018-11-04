@@ -11,25 +11,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDjS_1Kjov8pm6mLwSiQV7ZY1E39XCQiag" />
 
         <uses-library
-            android:name="org.apache.http.legacy" android:required="false"/>
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".DestinationListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity">
+        </activity>
+
         <activity
             android:name=".PlacesMapActivity"
-            android:label="@string/title_activity_places_map">
-        </activity>
+            android:label="@string/title_activity_places_map"></activity>
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@ public class Destination {
 
     @NonNull
     @PrimaryKey (autoGenerate = true)
-    private String id;
+    private long id;
 
     @TypeConverters({TimestampConverter.class})
     private Date dateTime;
@@ -23,11 +23,11 @@ public class Destination {
     private String notes;
 
     @NonNull
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(@NonNull long id) {
         this.id = id;
     }
 
