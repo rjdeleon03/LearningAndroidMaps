@@ -6,9 +6,9 @@
 
     <string name="date_field">Date</string>
     <string name="date_field_def">YYYY/MM/DD</string>
-    <string name="date_field_template">%1$d/%2$d/%3$d</string>
+    <string name="date_field_template">%1$d/%2$02d/%3$02d</string>
     <string name="time_field">Time</string>
     <string name="time_field_def">12:00 PM</string>
-    <string name="time_field_template">%1$d:%2$d %3$s</string>
+    <string name="time_field_template">%1$d:%2$02d %3$s</string>
     <string name="notes_field">Notes</string>
 </resources>
