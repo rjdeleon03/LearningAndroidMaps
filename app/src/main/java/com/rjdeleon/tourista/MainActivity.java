@@ -20,25 +20,32 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rjdeleon.tourista.data.Destination;
+import com.rjdeleon.tourista.data.DestinationDatabase;
 
 import java.util.Calendar;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
+    private DestinationDatabase _destinationDatabase;
     private GoogleMap _googleMap;
     private Marker _currMarker;
+    private Place _currPlace;
 
     private TextView _dateTextView;
     private TextView _timeTextView;
+    private TextView _notesEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        _destinationDatabase = ((TouristaApp) getApplication()).getDatabase();
         _dateTextView = findViewById(R.id.dateField);
         _timeTextView = findViewById(R.id.timeField);
+        _notesEditText = findViewById(R.id.notesField);
 
         SupportPlaceAutocompleteFragment placeAutocompleteFragment =
                 (SupportPlaceAutocompleteFragment) getSupportFragmentManager().findFragmentById(R.id.placesFragment);
@@ -51,11 +58,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         placeAutocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                System.out.println("Place: " + place.getName());
+
+                _currPlace = place;
 
                 LatLng placeCoords = place.getLatLng();
-
                 if (_currMarker != null) _currMarker.remove();
 
                 _currMarker = _googleMap.addMarker(new MarkerOptions().position(placeCoords).title(place.getName().toString()));
@@ -106,6 +112,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void onSaveButtonClick(View view) {
+        if (_currPlace == null || _destinationDatabase == null
+                || _notesEditText == null) return;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Destination destination = new Destination();
+                destination.setLat(_currPlace.getLatLng().latitude);
+                destination.setLng(_currPlace.getLatLng().longitude);
+                destination.setPlace(_currPlace.getName().toString());
+                destination.setNotes(_notesEditText.getText().toString());
+                _destinationDatabase.daoAccess().insertDestination(destination);
+            }
+        }).start();
         finish();
     }
 }
