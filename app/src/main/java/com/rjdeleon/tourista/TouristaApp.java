@@ -3,7 +3,7 @@ package com.rjdeleon.tourista;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
-import com.rjdeleon.tourista.data.DestinationDatabase;
+import com.rjdeleon.tourista.Data.DestinationDatabase;
 
 public class TouristaApp extends Application {
 

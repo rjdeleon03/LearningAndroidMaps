@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.data;
+package com.rjdeleon.tourista.Data;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

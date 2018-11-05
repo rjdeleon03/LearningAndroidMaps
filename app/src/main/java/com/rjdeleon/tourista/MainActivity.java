@@ -20,8 +20,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.rjdeleon.tourista.data.Destination;
-import com.rjdeleon.tourista.data.DestinationDatabase;
+import com.rjdeleon.tourista.Data.Destination;
+import com.rjdeleon.tourista.Data.DestinationDatabase;
 
 import java.util.Calendar;
 import java.util.TimeZone;

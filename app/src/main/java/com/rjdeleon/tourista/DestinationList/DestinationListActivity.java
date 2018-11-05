@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.destination;
+package com.rjdeleon.tourista.DestinationList;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.view.View;
 import com.rjdeleon.tourista.MainActivity;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.TouristaApp;
-import com.rjdeleon.tourista.data.DestinationDatabase;
+import com.rjdeleon.tourista.Data.DestinationDatabase;
 
 public class DestinationListActivity extends AppCompatActivity {
 
@@ -28,6 +28,7 @@ public class DestinationListActivity extends AppCompatActivity {
         _destinationList.setLayoutManager(new LinearLayoutManager(this));
 
         _adapter = new DestinationListAdapter();
+        _destinationList.setAdapter(_adapter);
     }
 
     @Override
@@ -37,11 +38,17 @@ public class DestinationListActivity extends AppCompatActivity {
     }
 
     private void getDestinationsList() {
+        final DestinationListActivity finalSelf = this;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 _adapter.setDestinationList(_destinationDatabase.daoAccess().getAllDestinations());
-                _adapter.notifyDataSetChanged();
+                finalSelf.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        _adapter.notifyDataSetChanged();
+                    }
+                });
             }
         }).start();
     }
