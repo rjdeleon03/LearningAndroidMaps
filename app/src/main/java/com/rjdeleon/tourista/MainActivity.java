@@ -29,6 +29,7 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private DestinationDatabase _destinationDatabase;
+    private Calendar _calendar;
     private GoogleMap _googleMap;
     private Marker _currMarker;
     private Place _currPlace;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         _dateTextView = findViewById(R.id.dateField);
         _timeTextView = findViewById(R.id.timeField);
         _notesEditText = findViewById(R.id.notesField);
+
+        _calendar = Calendar.getInstance(TimeZone.getDefault());
+        setDateTextViewContent(_calendar.get(Calendar.YEAR), _calendar.get(Calendar.MONTH), _calendar.get(Calendar.DAY_OF_MONTH));
+        setTimeTextViewContent(_calendar.get(Calendar.HOUR_OF_DAY), _calendar.get(Calendar.MINUTE));
 
         SupportPlaceAutocompleteFragment placeAutocompleteFragment =
                 (SupportPlaceAutocompleteFragment) getSupportFragmentManager().findFragmentById(R.id.placesFragment);
@@ -83,16 +88,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void onSetDate(View view) {
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
         DatePickerDialog dialog = new DatePickerDialog(this, this,
-                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
+                _calendar.get(Calendar.YEAR), _calendar.get(Calendar.MONTH),
+                _calendar.get(Calendar.DAY_OF_MONTH));
         dialog.show();
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+        setDateTextViewContent(y, m, d);
+    }
+
+    private void setDateTextViewContent(int y, int m, int d) {
         _dateTextView.setText(getString(R.string.date_field_template, y, m+1, d));
     }
 
@@ -106,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hr, int min) {
+        setTimeTextViewContent(hr, min);
+    }
+
+    private void setTimeTextViewContent(int hr, int min) {
         String amOrPm = hr+1 > 12 ? "PM" : "AM";
         int actualHr = hr%12 == 0 ? 12 : hr%12;
         _timeTextView.setText(getString(R.string.time_field_template, actualHr, min, amOrPm));
