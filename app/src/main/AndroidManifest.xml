@@ -20,7 +20,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".DestinationList.DestinationListActivity">
+        <activity android:name=".Screens.DestinationList.DestinationListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
