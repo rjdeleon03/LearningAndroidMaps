@@ -1,5 +1,7 @@
 package com.rjdeleon.tourista.Screens.DestinationList;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -54,8 +56,12 @@ public class DestinationListViewMvcImpl extends BaseViewMvc<DestinationListViewM
         public void bindData (List<Destination> destinationList) {
             _destinationList = new ArrayList<>(destinationList);
 
-            // TODO: Causes crash
-            notifyDataSetChanged();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         @NonNull
