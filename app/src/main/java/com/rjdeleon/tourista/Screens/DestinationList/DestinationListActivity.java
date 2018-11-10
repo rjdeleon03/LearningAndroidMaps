@@ -7,11 +7,12 @@ import android.view.LayoutInflater;
 
 import com.rjdeleon.tourista.Data.Destination;
 import com.rjdeleon.tourista.MainActivity;
-import com.rjdeleon.tourista.TouristaApp;
+import com.rjdeleon.tourista.Screens.Application.TouristaApp;
+import com.rjdeleon.tourista.Screens.Common.BaseActivity;
 
 import java.util.List;
 
-public class DestinationListActivity extends AppCompatActivity
+public class DestinationListActivity extends BaseActivity
         implements DestinationListViewMvc.Listener, FetchDestinationsListUseCase.Listener {
 
     // DI
@@ -24,7 +25,7 @@ public class DestinationListActivity extends AppCompatActivity
         _viewMvc = new DestinationListViewMvcImpl(LayoutInflater.from(this), null);
         setContentView(_viewMvc.getRootView());
 
-        _fetchDestinationsListUc = new FetchDestinationsListUseCase((TouristaApp) getApplication());
+        _fetchDestinationsListUc = getCompositionRoot().getFetchDestinationsListUseCase();
 
     }
 

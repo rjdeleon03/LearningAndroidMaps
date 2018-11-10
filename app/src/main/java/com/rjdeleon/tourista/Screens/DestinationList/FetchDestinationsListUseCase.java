@@ -1,9 +1,8 @@
 package com.rjdeleon.tourista.Screens.DestinationList;
 
 import com.rjdeleon.tourista.Common.BaseObservable;
+import com.rjdeleon.tourista.Data.DaoAccess;
 import com.rjdeleon.tourista.Data.Destination;
-import com.rjdeleon.tourista.Data.DestinationDatabase;
-import com.rjdeleon.tourista.TouristaApp;
 
 import java.util.List;
 
@@ -13,20 +12,20 @@ public class FetchDestinationsListUseCase extends BaseObservable<FetchDestinatio
         void onFetchOfAllDestinations(List<Destination> destinations);
     }
 
-    // Database
-    private DestinationDatabase _destinationDatabase;
+    // Database access object
+    private DaoAccess _daoAccess;
 
 
-    public FetchDestinationsListUseCase(TouristaApp application) {
+    public FetchDestinationsListUseCase(DaoAccess daoAccess) {
 
-        _destinationDatabase = application.getDatabase();
+        _daoAccess = daoAccess;
     }
 
     public void fetchAllDestinations() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<Destination> destinations = _destinationDatabase.daoAccess().getAllDestinations();
+                List<Destination> destinations = _daoAccess.getAllDestinations();
                 for(Listener listener : getListeners()) {
                     listener.onFetchOfAllDestinations(destinations);
                 }
