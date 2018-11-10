@@ -4,20 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 
+import com.rjdeleon.tourista.Data.Destination;
 import com.rjdeleon.tourista.MainActivity;
 import com.rjdeleon.tourista.TouristaApp;
-import com.rjdeleon.tourista.Data.DestinationDatabase;
+
+import java.util.List;
 
 public class DestinationListActivity extends AppCompatActivity
-        implements DestinationListViewMvc.Listener {
-
-    // Database
-    private DestinationDatabase _destinationDatabase;
+        implements DestinationListViewMvc.Listener, FetchDestinationsListUseCase.Listener {
 
     // DI
     private DestinationListViewMvc _viewMvc;
+    private FetchDestinationsListUseCase _fetchDestinationsListUc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,8 @@ public class DestinationListActivity extends AppCompatActivity
         _viewMvc = new DestinationListViewMvcImpl(LayoutInflater.from(this), null);
         setContentView(_viewMvc.getRootView());
 
-        _destinationDatabase = ((TouristaApp) getApplication()).getDatabase();
+        _fetchDestinationsListUc = new FetchDestinationsListUseCase((TouristaApp) getApplication());
+
     }
 
     @Override
@@ -38,21 +38,18 @@ public class DestinationListActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         _viewMvc.registerListener(this);
+        _fetchDestinationsListUc.registerListener(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         _viewMvc.unregisterListener(this);
+        _fetchDestinationsListUc.unregisterListener(this);
     }
 
     private void getDestinationsList() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                _viewMvc.bindDestinations(_destinationDatabase.daoAccess().getAllDestinations());
-            }
-        }).start();
+        _fetchDestinationsListUc.fetchAllDestinations();
     }
 
     @Override
@@ -61,12 +58,8 @@ public class DestinationListActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    //region Old methods
-
-    public void onAddButtonClick(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    @Override
+    public void onFetchOfAllDestinations(List<Destination> destinations) {
+        _viewMvc.bindDestinations(destinations);
     }
-
-    //endregion
 }
