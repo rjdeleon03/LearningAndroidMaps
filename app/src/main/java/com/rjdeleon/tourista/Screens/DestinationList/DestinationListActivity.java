@@ -3,13 +3,10 @@ package com.rjdeleon.tourista.Screens.DestinationList;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.rjdeleon.tourista.MainActivity;
-import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.TouristaApp;
 import com.rjdeleon.tourista.Data.DestinationDatabase;
 
@@ -25,7 +22,6 @@ public class DestinationListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         _viewMvc = new DestinationListViewMvcImpl(LayoutInflater.from(this), null);
         setContentView(_viewMvc.getRootView());
 
@@ -51,7 +47,6 @@ public class DestinationListActivity extends AppCompatActivity
     }
 
     private void getDestinationsList() {
-        final DestinationListActivity finalSelf = this;
         new Thread(new Runnable() {
             @Override
             public void run() {
