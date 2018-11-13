@@ -20,7 +20,8 @@ public class DestinationListActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _viewMvc = new DestinationListViewMvcImpl(LayoutInflater.from(this), null);
+        _viewMvc = getCompositionRoot().getViewMvcFactory()
+                .newInstance(DestinationListViewMvc.class, null);
         setContentView(_viewMvc.getRootView());
 
         _fetchDestinationsListUc = getCompositionRoot().getFetchDestinationsListUseCase();

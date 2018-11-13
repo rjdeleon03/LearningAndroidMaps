@@ -9,10 +9,13 @@ public class TouristaApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        _compositionRoot = _compositionRoot;
+        getCompositionRoot();
     }
 
     public CompositionRoot getCompositionRoot() {
+        if (_compositionRoot == null) {
+            _compositionRoot = new CompositionRoot(getApplicationContext());
+        }
         return _compositionRoot;
     }
 }

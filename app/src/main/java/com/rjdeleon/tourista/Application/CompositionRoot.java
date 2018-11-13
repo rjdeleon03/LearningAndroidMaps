@@ -21,7 +21,8 @@ public class CompositionRoot {
     }
 
     @UiThread
-    private DestinationDatabase getDatabase() {
+    // TODO: Set to private
+    public DestinationDatabase getDatabase() {
         if (_destinationDatabase == null) {
             return _destinationDatabase = Room.databaseBuilder(_appContext,
                     DestinationDatabase.class,

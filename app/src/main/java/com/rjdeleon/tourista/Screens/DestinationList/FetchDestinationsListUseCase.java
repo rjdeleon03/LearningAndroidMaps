@@ -30,6 +30,6 @@ public class FetchDestinationsListUseCase extends BaseObservable<FetchDestinatio
                     listener.onFetchOfAllDestinations(destinations);
                 }
             }
-        });
+        }).start();
     }
 }
