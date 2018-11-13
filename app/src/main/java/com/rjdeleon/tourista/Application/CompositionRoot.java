@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.Screens.Application;
+package com.rjdeleon.tourista.Application;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;

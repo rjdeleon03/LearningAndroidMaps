@@ -1,13 +1,26 @@
 package com.rjdeleon.tourista.Screens.Common;
 
+import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 
-import com.rjdeleon.tourista.Screens.Application.CompositionRoot;
-import com.rjdeleon.tourista.Screens.Application.TouristaApp;
+import com.rjdeleon.tourista.Application.CompositionRoot;
+import com.rjdeleon.tourista.Application.PresentationCompositionRoot;
+import com.rjdeleon.tourista.Application.TouristaApp;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public CompositionRoot getCompositionRoot() {
+    private PresentationCompositionRoot _presentationCompositionRoot;
+
+    @UiThread
+    protected  PresentationCompositionRoot getCompositionRoot() {
+        if (_presentationCompositionRoot == null) {
+            _presentationCompositionRoot = new PresentationCompositionRoot(
+                    getAppCompositionRoot());
+        }
+        return _presentationCompositionRoot;
+    }
+
+    public CompositionRoot getAppCompositionRoot() {
         return ((TouristaApp) getApplication()).getCompositionRoot();
     }
 }

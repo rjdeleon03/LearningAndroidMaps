@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rjdeleon.tourista.Data.Destination;
 import com.rjdeleon.tourista.Data.DestinationDatabase;
-import com.rjdeleon.tourista.Screens.Application.TouristaApp;
+import com.rjdeleon.tourista.Application.TouristaApp;
 
 import java.util.Calendar;
 import java.util.TimeZone;

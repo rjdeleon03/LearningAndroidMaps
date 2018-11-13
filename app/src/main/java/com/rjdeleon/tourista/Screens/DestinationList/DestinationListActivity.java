@@ -1,13 +1,11 @@
 package com.rjdeleon.tourista.Screens.DestinationList;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import com.rjdeleon.tourista.Data.Destination;
 import com.rjdeleon.tourista.MainActivity;
-import com.rjdeleon.tourista.Screens.Application.TouristaApp;
 import com.rjdeleon.tourista.Screens.Common.BaseActivity;
 
 import java.util.List;
