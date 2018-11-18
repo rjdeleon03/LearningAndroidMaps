@@ -1,7 +1,5 @@
 package com.rjdeleon.tourista.Common.DependencyInjection;
 
-import com.rjdeleon.tourista.Screens.DestinationList.FetchDestinationsListUseCase;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -10,5 +8,5 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
 
-    public FetchDestinationsListUseCase getFetchDestinationsListUseCase();
+    PresentationComponent newPresentationComponent(PresentationModule presentationModule);
 }

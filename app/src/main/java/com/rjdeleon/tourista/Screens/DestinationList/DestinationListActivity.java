@@ -3,7 +3,6 @@ package com.rjdeleon.tourista.Screens.DestinationList;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.rjdeleon.tourista.Common.DependencyInjection.DaggerPresentationComponent;
 import com.rjdeleon.tourista.Data.Destination;
 import com.rjdeleon.tourista.MainActivity;
 import com.rjdeleon.tourista.Screens.Common.BaseActivity;

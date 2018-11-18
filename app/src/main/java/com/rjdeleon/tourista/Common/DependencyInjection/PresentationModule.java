@@ -11,19 +11,11 @@ import dagger.Provides;
 @Module
 public class PresentationModule {
 
-    private final ApplicationComponent _applicationComponent;
     private final LayoutInflater _layoutInflater;
 
-    public PresentationModule(ApplicationComponent applicationComponent,
-                              LayoutInflater layoutInflater) {
+    public PresentationModule(LayoutInflater layoutInflater) {
 
-        _applicationComponent = applicationComponent;
         _layoutInflater = layoutInflater;
-    }
-
-    @Provides
-    FetchDestinationsListUseCase getFetchDestinationsListUseCase() {
-        return _applicationComponent.getFetchDestinationsListUseCase();
     }
 
     @Provides
