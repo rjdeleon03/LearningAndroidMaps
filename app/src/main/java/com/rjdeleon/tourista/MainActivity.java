@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _destinationDatabase = ((TouristaApp) getApplication()).getCompositionRoot().getDatabase();
+//        _destinationDatabase = ((TouristaApp) getApplication()).getCompositionRoot().getDatabase();
         _dateTextView = findViewById(R.id.dateField);
         _timeTextView = findViewById(R.id.timeField);
         _notesEditText = findViewById(R.id.notesField);

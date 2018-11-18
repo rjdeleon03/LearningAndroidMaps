@@ -2,20 +2,23 @@ package com.rjdeleon.tourista.Application;
 
 import android.app.Application;
 
+import com.rjdeleon.tourista.Common.DependencyInjection.ApplicationComponent;
+import com.rjdeleon.tourista.Common.DependencyInjection.ApplicationModule;
+import com.rjdeleon.tourista.Common.DependencyInjection.DaggerApplicationComponent;
+
 public class TouristaApp extends Application {
 
-    private CompositionRoot _compositionRoot;
+    private ApplicationComponent _applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        getCompositionRoot();
+        _applicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(getApplicationContext()))
+                .build();
     }
 
-    public CompositionRoot getCompositionRoot() {
-        if (_compositionRoot == null) {
-            _compositionRoot = new CompositionRoot(getApplicationContext());
-        }
-        return _compositionRoot;
+    public ApplicationComponent getApplicationComponent() {
+        return _applicationComponent;
     }
 }

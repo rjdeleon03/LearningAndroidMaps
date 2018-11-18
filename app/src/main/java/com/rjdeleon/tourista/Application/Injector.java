@@ -1,13 +1,14 @@
 package com.rjdeleon.tourista.Application;
 
+import com.rjdeleon.tourista.Common.DependencyInjection.PresentationComponent;
 import com.rjdeleon.tourista.Screens.DestinationList.DestinationListActivity;
 
 public class Injector {
 
-    private PresentationCompositionRoot _presentationCompositionRoot;
+    private PresentationComponent _presentationComponent;
 
-    public Injector(PresentationCompositionRoot presentationCompositionRoot) {
-        _presentationCompositionRoot = presentationCompositionRoot;
+    public Injector(PresentationComponent presentationComponent) {
+        _presentationComponent = presentationComponent;
     }
 
     public void inject(Object client) {
@@ -19,7 +20,7 @@ public class Injector {
     }
 
     private void injectDestinationListActivity(DestinationListActivity client) {
-        client.viewMvcFactory = _presentationCompositionRoot.getViewMvcFactory();
-        client.fetchDestinationsListUc = _presentationCompositionRoot.getFetchDestinationsListUseCase();
+//        client.viewMvcFactory = _presentationComponent.getViewMvcFactory();
+//        client.fetchDestinationsListUc = _presentationComponent.getFetchDestinationsListUseCase();
     }
 }

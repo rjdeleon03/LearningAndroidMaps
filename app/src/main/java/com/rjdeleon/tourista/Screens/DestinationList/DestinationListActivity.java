@@ -3,6 +3,7 @@ package com.rjdeleon.tourista.Screens.DestinationList;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.rjdeleon.tourista.Common.DependencyInjection.DaggerPresentationComponent;
 import com.rjdeleon.tourista.Data.Destination;
 import com.rjdeleon.tourista.MainActivity;
 import com.rjdeleon.tourista.Screens.Common.BaseActivity;
@@ -10,11 +11,17 @@ import com.rjdeleon.tourista.Screens.Common.ViewMvcFactory;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class DestinationListActivity extends BaseActivity
         implements DestinationListViewMvc.Listener, FetchDestinationsListUseCase.Listener {
 
     // DI
-    public ViewMvcFactory viewMvcFactory;
+
+    @Inject
+    ViewMvcFactory viewMvcFactory;
+
+    @Inject
     public FetchDestinationsListUseCase fetchDestinationsListUc;
 
     private DestinationListViewMvc _viewMvc;
@@ -22,7 +29,8 @@ public class DestinationListActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getInjector().inject(this);
+
+        getPresentationComponent().inject(this);
 
         _viewMvc = viewMvcFactory
                 .newInstance(DestinationListViewMvc.class, null);
