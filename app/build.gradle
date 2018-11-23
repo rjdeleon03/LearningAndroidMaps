@@ -19,12 +19,21 @@ android {
     }
 }
 
+ext {
+    archRoomVersion = "1.1.1"
+    archLifecycleVersion = "1.1.1"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:support-v13:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    // Room
+    implementation 'android.arch.persistence.room:runtime:' + archRoomVersion
+    annotationProcessor 'android.arch.persistence.room:compiler:' + archRoomVersion
 
     // Places SDK
     implementation 'com.google.android.gms:play-services-places:16.0.0'
