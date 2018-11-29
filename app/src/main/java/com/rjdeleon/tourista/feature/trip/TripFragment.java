@@ -1,21 +1,21 @@
 package com.rjdeleon.tourista.feature.trip;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.feature.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TripFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TripFragment extends Fragment {
+public class TripFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,6 +24,8 @@ public class TripFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FloatingActionButton addDestButton;
 
     public TripFragment() {
         // Required empty public constructor
@@ -60,6 +62,18 @@ public class TripFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trip, container, false);
+        View view = inflater.inflate(R.layout.fragment_trip, container, false);
+
+        addDestButton = view.findViewById(R.id.addDestButton);
+        addDestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (navController != null) {
+                    navController.navigate(R.id.action_tripFragment_to_destinationFragment);
+                }
+            }
+        });
+
+        return view;
     }
 }

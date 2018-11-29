@@ -18,5 +18,15 @@
         android:id="@+id/tripFragment"
         android:name="com.rjdeleon.tourista.feature.trip.TripFragment"
         android:label="fragment_trip"
-        tools:layout="@layout/fragment_trip" />
+        tools:layout="@layout/fragment_trip" >
+        <action
+            android:id="@+id/action_tripFragment_to_destinationFragment"
+            app:destination="@id/destinationFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/destinationFragment"
+        android:name="com.rjdeleon.tourista.feature.destination.DestinationFragment"
+        android:label="fragment_destination"
+        tools:layout="@layout/fragment_destination"/>
+
 </navigation>

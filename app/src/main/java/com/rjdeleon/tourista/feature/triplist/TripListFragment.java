@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.feature.base.BaseFragment;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,7 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
  * Use the {@link TripListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TripListFragment extends Fragment {
+public class TripListFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +31,6 @@ public class TripListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private NavController navController;
     private Button transitionButton;
 
     public TripListFragment() {
@@ -70,7 +70,6 @@ public class TripListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_trip_list, container, false);
 
-        navController = NavHostFragment.findNavController(this);
         transitionButton = view.findViewById(R.id.transitionButton);
         transitionButton.setOnClickListener(new View.OnClickListener() {
             @Override
