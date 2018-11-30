@@ -1,25 +1,26 @@
 package com.rjdeleon.tourista.data;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "trip_table")
+@Entity(tableName = "trip_table",
+        indices = {@Index("id")})
 public class Trip {
 
-    @NonNull
     @PrimaryKey(autoGenerate = true)
-    private String id;
+    private long id;
 
     @NonNull
     private String name;
 
     @NonNull
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

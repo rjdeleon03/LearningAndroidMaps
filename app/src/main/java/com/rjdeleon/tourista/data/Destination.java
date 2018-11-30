@@ -2,24 +2,24 @@ package com.rjdeleon.tourista.data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
-import android.support.annotation.NonNull;
 
 import java.util.Date;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "dest_table",
+        indices = {@Index("tripId")},
         foreignKeys = @ForeignKey(entity = Trip.class,
                                 parentColumns = "id",
-                                childColumns = "userId",
+                                childColumns = "tripId",
                                 onDelete = CASCADE))
 public class Destination {
 
-    @NonNull
     @PrimaryKey (autoGenerate = true)
-    private String id;
+    private long id;
 
     @TypeConverters({TimestampConverter.class})
     private Date timestamp;
@@ -28,14 +28,13 @@ public class Destination {
     private double lat;
     private double lng;
     private String notes;
-    private String tripId;
+    private long tripId;
 
-    @NonNull
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -79,11 +78,11 @@ public class Destination {
         this.notes = notes;
     }
 
-    public String getTripId() {
+    public long getTripId() {
         return tripId;
     }
 
-    public void setTripId(String tripId) {
+    public void setTripId(long tripId) {
         this.tripId = tripId;
     }
 }
