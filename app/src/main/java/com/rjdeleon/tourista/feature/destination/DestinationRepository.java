@@ -2,29 +2,27 @@ package com.rjdeleon.tourista.feature.destination;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.os.AsyncTask;
 
 import com.rjdeleon.tourista.data.AppDao;
 import com.rjdeleon.tourista.data.AppDatabase;
+import com.rjdeleon.tourista.data.DbAsyncTask;
 import com.rjdeleon.tourista.data.Destination;
-
-import java.util.List;
 
 public class DestinationRepository {
 
     private AppDao mAppDao;
-    private LiveData<List<Destination>> mDestinations;
-    private long mTripId;
+    private LiveData<Destination> mDestination;
+    private long mId;
 
-    public DestinationRepository(Application application,long tripId) {
+    public DestinationRepository(Application application, long id) {
         AppDatabase db = AppDatabase.getDatabase(application.getApplicationContext());
         mAppDao = db.daoAccess();
-        mTripId = tripId;
-        mDestinations = mAppDao.getDestinationsPerTrip(mTripId);
+        mId = id;
+        mDestination = mAppDao.getDestination(mId);
     }
 
-    public LiveData<List<Destination>> getDestinations() {
-        return mDestinations;
+    public LiveData<Destination> getDestination() {
+        return mDestination;
     }
 
     public void insert(Destination destination) {
@@ -35,12 +33,10 @@ public class DestinationRepository {
         new UpdateAsyncTask(mAppDao).execute(destination);
     }
 
-    private static class InsertAsyncTask extends AsyncTask<Destination, Void, Void> {
+    private static class InsertAsyncTask extends DbAsyncTask<Destination> {
 
-        private AppDao mAsyncAppDao;
-
-        public InsertAsyncTask(AppDao appDao) {
-            mAsyncAppDao = appDao;
+        InsertAsyncTask(AppDao appDao) {
+            super(appDao);
         }
 
         @Override
@@ -50,12 +46,10 @@ public class DestinationRepository {
         }
     }
 
-    private static class UpdateAsyncTask extends AsyncTask<Destination, Void, Void> {
+    private static class UpdateAsyncTask extends DbAsyncTask<Destination> {
 
-        private AppDao mAsyncAppDao;
-
-        public UpdateAsyncTask(AppDao appDao) {
-            mAsyncAppDao = appDao;
+        UpdateAsyncTask(AppDao appDao) {
+            super(appDao);
         }
 
         @Override
