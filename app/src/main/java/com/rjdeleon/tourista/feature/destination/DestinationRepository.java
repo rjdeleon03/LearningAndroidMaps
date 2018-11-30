@@ -2,6 +2,7 @@ package com.rjdeleon.tourista.feature.destination;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 
 import com.rjdeleon.tourista.data.AppDao;
 import com.rjdeleon.tourista.data.AppDatabase;
@@ -14,10 +15,17 @@ public class DestinationRepository {
     private LiveData<Destination> mDestination;
     private long mId;
 
-    public DestinationRepository(Application application, long id) {
+    DestinationRepository(Application application, long id) {
         AppDatabase db = AppDatabase.getDatabase(application.getApplicationContext());
         mAppDao = db.daoAccess();
         mId = id;
+
+        if (mDestination == null) {
+            MutableLiveData<Destination> destination = new MutableLiveData<>();
+            destination.setValue(new Destination());
+            mDestination = destination;
+            return;
+        }
         mDestination = mAppDao.getDestination(mId);
     }
 
@@ -25,11 +33,11 @@ public class DestinationRepository {
         return mDestination;
     }
 
-    public void insert(Destination destination) {
+    void insert(Destination destination) {
         new InsertAsyncTask(mAppDao).execute(destination);
     }
 
-    public void update(Destination destination) {
+    void update(Destination destination) {
         new UpdateAsyncTask(mAppDao).execute(destination);
     }
 

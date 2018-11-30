@@ -2,6 +2,7 @@ package com.rjdeleon.tourista.feature.destination;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
+import com.rjdeleon.tourista.feature.base.BaseFragment;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -36,7 +38,7 @@ import java.util.TimeZone;
  * Use the {@link DestinationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DestinationFragment extends Fragment implements DatePickerDialog.OnDateSetListener,
+public class DestinationFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener, OnMapReadyCallback, PlaceSelectionListener {
 
     private static final String ARG_DESTINATION_ID = "DESTINATION ID";
@@ -49,6 +51,8 @@ public class DestinationFragment extends Fragment implements DatePickerDialog.On
     private GoogleMap mGoogleMap;
     private Marker mMarker;
     private Calendar mCalendar;
+
+    private DestinationViewModel mDestinationViewModel;
 
     public DestinationFragment() {
         // Required empty public constructor
@@ -75,6 +79,7 @@ public class DestinationFragment extends Fragment implements DatePickerDialog.On
         if (getArguments() != null) {
             // TODO: Get arguments and store globally
         }
+        mDestinationViewModel = ViewModelProviders.of(this).get(DestinationViewModel.class);
     }
 
     @Override
@@ -202,6 +207,9 @@ public class DestinationFragment extends Fragment implements DatePickerDialog.On
                 destination.setLat(mMarker.getPosition().latitude);
                 destination.setLng(mMarker.getPosition().longitude);
                 destination.setNotes(notesField.getText().toString());
+
+                mDestinationViewModel.insert(destination);
+                navController.navigateUp();
             }
         });
 

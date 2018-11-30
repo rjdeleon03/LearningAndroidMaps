@@ -18,6 +18,10 @@ public class DestinationViewModel extends AndroidViewModel {
         mDestination = mRepository.getDestination();
     }
 
+    public DestinationViewModel(@NonNull Application application) {
+        this(application, -1);
+    }
+
     public LiveData<Destination> getDestination() {
         return mDestination;
     }

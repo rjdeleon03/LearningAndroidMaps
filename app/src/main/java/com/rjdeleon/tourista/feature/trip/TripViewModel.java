@@ -18,8 +18,16 @@ public class TripViewModel extends AndroidViewModel {
         mTrip = mRepository.getTrip();
     }
 
+    public TripViewModel(@NonNull Application application) {
+        this(application, -1);
+    }
+
     public LiveData<Trip> getTrip() {
         return mTrip;
+    }
+
+    public void insert(Trip trip) {
+        mRepository.insert(trip);
     }
 
     public void delete() {

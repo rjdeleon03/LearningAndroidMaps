@@ -24,6 +24,8 @@ public class TripFragment extends BaseFragment {
     private DestinationListAdapter mAdapter;
 
     private FloatingActionButton addDestButton;
+    private FloatingActionButton saveTripButton;
+
     private RecyclerView recyclerView;
 
     public TripFragment() {
@@ -58,6 +60,17 @@ public class TripFragment extends BaseFragment {
                 if (navController != null) {
                     navController.navigate(R.id.action_tripFragment_to_destinationFragment);
                 }
+            }
+        });
+
+        saveTripButton = view.findViewById(R.id.saveTripButton);
+        saveTripButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Trip trip = new Trip();
+                trip.setName("Some Trip");
+                mTripViewModel.insert(trip);
+                navController.navigateUp();
             }
         });
 
