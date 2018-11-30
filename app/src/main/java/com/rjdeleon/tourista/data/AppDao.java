@@ -1,5 +1,6 @@
 package com.rjdeleon.tourista.data;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -9,7 +10,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 @Dao
-public interface DaoAccess {
+public interface AppDao {
 
     @Insert
     void insertTrip(Trip trip);
@@ -21,10 +22,10 @@ public interface DaoAccess {
     void deleteTrip(Trip trip);
 
     @Query("SELECT * FROM trip_table")
-    List<Trip> getAllTrips();
+    LiveData<List<Trip>> getAllTrips();
 
     @Query("SELECT * FROM trip_table WHERE id = :tripId")
-    Trip getTrip(String tripId);
+    LiveData<Trip> getTrip(long tripId);
 
     @Insert
     void insertDestination(Destination destination);
@@ -36,8 +37,8 @@ public interface DaoAccess {
     void deleteDestination(Destination destination);
 
     @Query("SELECT * FROM dest_table WHERE tripId = :tripId")
-    List<Destination> getDestinationsPerTrip(String tripId);
+    LiveData<List<Destination>> getDestinationsPerTrip(long tripId);
 
     @Query("SELECT * FROM dest_table WHERE id = :destId")
-    Destination getDestination(String destId);
+    LiveData<Destination> getDestination(long destId);
 }
