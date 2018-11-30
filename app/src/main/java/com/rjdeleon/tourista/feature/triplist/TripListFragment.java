@@ -1,21 +1,33 @@
 package com.rjdeleon.tourista.feature.triplist;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.feature.base.BaseFragment;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TripListFragment extends BaseFragment {
 
+    private TripListViewModel mTripListViewModel;
+    private TripListAdapter mAdapter;
+
     private FloatingActionButton addTripButton;
+    private RecyclerView recyclerView;
 
     public TripListFragment() {
         // Required empty public constructor
@@ -24,6 +36,15 @@ public class TripListFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAdapter = new TripListAdapter(getContext());
+        mTripListViewModel = ViewModelProviders.of(this).get(TripListViewModel.class);
+        mTripListViewModel.getTrips().observe(this, new Observer<List<Trip>>() {
+            @Override
+            public void onChanged(@Nullable List<Trip> trips) {
+                mAdapter.setTrips(trips);
+            }
+        });
     }
 
     @Override
@@ -31,6 +52,10 @@ public class TripListFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_trip_list, container, false);
+
+        recyclerView = view.findViewById(R.id.tripList);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         addTripButton = view.findViewById(R.id.addTripButton);
         addTripButton.setOnClickListener(new View.OnClickListener() {
