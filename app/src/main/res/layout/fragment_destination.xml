@@ -23,7 +23,7 @@
             class="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/mapsFragment"
+            app:layout_constraintBottom_toTopOf="@+id/mapsPlaceFragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
 
     <fragment
         class="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/mapsFragment"
+        android:id="@+id/mapsPlaceFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,9 +48,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/mapsFragment"
-        app:layout_constraintEnd_toStartOf="@+id/mapsFragment"
-        app:layout_constraintStart_toEndOf="@+id/mapsFragment">
+        app:layout_constraintBottom_toBottomOf="@+id/mapsPlaceFragment"
+        app:layout_constraintEnd_toStartOf="@+id/mapsPlaceFragment"
+        app:layout_constraintStart_toEndOf="@+id/mapsPlaceFragment">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -147,7 +147,7 @@
         android:clickable="true"
         android:src="@drawable/ic_check_black_24dp"
         app:backgroundTint="@android:color/holo_green_light"
-        app:layout_constraintBottom_toBottomOf="@+id/mapsFragment"
-        app:layout_constraintEnd_toEndOf="@+id/mapsFragment" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
