@@ -62,7 +62,7 @@ public class TripListFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if(navController != null)
-                    navController.navigate(R.id.action_tripListFragment_to_tripFragment);
+                    navController.navigate(R.id.action_tripListFragment_to_new_trip_nav_graph);
             }
         });
 

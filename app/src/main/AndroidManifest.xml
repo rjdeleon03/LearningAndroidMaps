@@ -32,6 +32,8 @@
             android:name=".PlacesMapActivity"
             android:label="@string/title_activity_places_map">
         </activity>
+        <activity android:name=".feature.newtrip.NewTripActivity">
+        </activity>
     </application>
 
 </manifest>
