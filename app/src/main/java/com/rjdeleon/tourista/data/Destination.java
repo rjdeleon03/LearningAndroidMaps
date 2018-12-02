@@ -28,7 +28,7 @@ public class Destination {
     private double lat;
     private double lng;
     private String notes;
-    private long tripId;
+    private String tripId;
 
     public long getId() {
         return id;
@@ -78,11 +78,11 @@ public class Destination {
         this.notes = notes;
     }
 
-    public long getTripId() {
+    public String getTripId() {
         return tripId;
     }
 
-    public void setTripId(long tripId) {
+    public void setTripId(String tripId) {
         this.tripId = tripId;
     }
 }

@@ -12,8 +12,9 @@ import java.util.List;
         indices = {@Index("id")})
 public class Trip {
 
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+    @PrimaryKey
+    @NonNull
+    private String id;
 
     @NonNull
     private String name;
@@ -22,11 +23,11 @@ public class Trip {
     private List<Destination> destinations;
 
     @NonNull
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

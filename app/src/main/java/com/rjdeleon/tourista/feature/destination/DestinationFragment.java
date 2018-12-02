@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
+import com.rjdeleon.tourista.feature.TopViewModel;
 import com.rjdeleon.tourista.feature.base.BaseFragment;
 
 import java.util.Calendar;
@@ -52,7 +53,7 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
     private Marker mMarker;
     private Calendar mCalendar;
 
-    private DestinationViewModel mDestinationViewModel;
+    private TopViewModel mTopViewModel;
 
     public DestinationFragment() {
         // Required empty public constructor
@@ -79,7 +80,7 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
         if (getArguments() != null) {
             // TODO: Get arguments and store globally
         }
-        mDestinationViewModel = ViewModelProviders.of(this).get(DestinationViewModel.class);
+        mTopViewModel = ViewModelProviders.of(getActivity()).get(TopViewModel.class);
     }
 
     @Override
@@ -208,7 +209,8 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
                 destination.setLng(mMarker.getPosition().longitude);
                 destination.setNotes(notesField.getText().toString());
 
-                mDestinationViewModel.insert(destination);
+//                mDestinationViewModel.insert(destination);
+                mTopViewModel.insertDestination(destination);
                 navController.navigateUp();
             }
         });

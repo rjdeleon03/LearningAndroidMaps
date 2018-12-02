@@ -29,7 +29,7 @@ public class TripListRepository {
         new InsertAsyncTask(mAppDao).execute(trip);
     }
 
-    public void delete(long id) {
+    public void delete(String id) {
         new DeleteAsyncTask(mAppDao).execute(id);
     }
 
@@ -46,14 +46,14 @@ public class TripListRepository {
         }
     }
 
-    private static class DeleteAsyncTask extends DbAsyncTask<Long> {
+    private static class DeleteAsyncTask extends DbAsyncTask<String> {
 
         protected DeleteAsyncTask(AppDao appDao) {
             super(appDao);
         }
 
         @Override
-        protected Void doInBackground(Long... nums) {
+        protected Void doInBackground(String... nums) {
             mAsyncAppDao.deleteTrip(nums[0]);
             return null;
         }

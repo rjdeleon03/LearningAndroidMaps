@@ -19,13 +19,13 @@ public interface AppDao {
     void updateTrip(Trip trip);
 
     @Query("DELETE FROM trip_table WHERE id = :tripId")
-    void deleteTrip(long tripId);
+    void deleteTrip(String tripId);
 
     @Query("SELECT * FROM trip_table")
     LiveData<List<Trip>> getAllTrips();
 
     @Query("SELECT * FROM trip_table WHERE id = :tripId")
-    LiveData<Trip> getTrip(long tripId);
+    LiveData<Trip> getTrip(String tripId);
 
     @Insert
     void insertDestination(Destination destination);
@@ -37,7 +37,7 @@ public interface AppDao {
     void deleteDestination(long destId);
 
     @Query("SELECT * FROM dest_table WHERE tripId = :tripId")
-    LiveData<List<Destination>> getDestinationsPerTrip(long tripId);
+    LiveData<List<Destination>> getDestinationsPerTrip(String tripId);
 
     @Query("SELECT * FROM dest_table WHERE id = :destId")
     LiveData<Destination> getDestination(long destId);

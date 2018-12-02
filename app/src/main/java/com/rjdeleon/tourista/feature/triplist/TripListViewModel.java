@@ -28,7 +28,7 @@ public class TripListViewModel extends AndroidViewModel {
         mRepository.insert(trip);
     }
 
-    public void delete(long id) {
+    public void delete(String id) {
         mRepository.delete(id);
     }
 }
