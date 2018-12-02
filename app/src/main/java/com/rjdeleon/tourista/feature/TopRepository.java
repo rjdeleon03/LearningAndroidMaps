@@ -57,10 +57,7 @@ public class TopRepository {
         if (mCachedDestinations.getValue() == null) return;
 
         trip.setId(UUID.randomUUID().toString());
-        for(Destination destination : mCachedDestinations.getValue()) {
-            destination.setTripId(trip.getId());
-            new InsertDestinationAsyncTask(mAppDao).execute(destination);
-        }
+        trip.setDestinations(mCachedDestinations.getValue());
         new InsertTripAsyncTask(mAppDao).execute(trip);
     }
 
@@ -81,6 +78,11 @@ public class TopRepository {
         @Override
         protected Void doInBackground(Trip... trips) {
             mAsyncAppDao.insertTrip(trips[0]);
+
+            for(Destination destination : trips[0].getDestinations()) {
+                destination.setTripId(trips[0].getId());
+                new InsertDestinationAsyncTask(mAsyncAppDao).execute(destination);
+            }
             return null;
         }
     }
