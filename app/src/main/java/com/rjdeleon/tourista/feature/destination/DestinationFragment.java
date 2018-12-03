@@ -213,6 +213,7 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
                 destination.setLat(mMarker.getPosition().latitude);
                 destination.setLng(mMarker.getPosition().longitude);
                 destination.setNotes(notesField.getText().toString());
+                destination.setTimestamp(mCalendar.getTime());
 
 //                mDestinationViewModel.insert(destination);
                 mTopViewModel.insertDestination(destination);
