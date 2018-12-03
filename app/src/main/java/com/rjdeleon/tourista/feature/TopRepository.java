@@ -44,15 +44,15 @@ public class TopRepository {
         }
     }
 
-    public LiveData<Trip> getCachedTrip() {
+    LiveData<Trip> getCachedTrip() {
         return mCachedTrip;
     }
 
-    public LiveData<List<Destination>> getCachedDestinations() {
+    LiveData<List<Destination>> getCachedDestinations() {
         return mCachedDestinations;
     }
 
-    public void insertTrip(Trip trip) {
+    void insertTrip(Trip trip) {
 
         if (mCachedDestinations.getValue() == null) return;
 
@@ -61,7 +61,7 @@ public class TopRepository {
         new InsertTripAsyncTask(mAppDao).execute(trip);
     }
 
-    public void insertDestination(Destination destination) {
+    void insertDestination(Destination destination) {
 
         if (mCachedDestinations.getValue() == null) return;
         List<Destination> destinations = mCachedDestinations.getValue();

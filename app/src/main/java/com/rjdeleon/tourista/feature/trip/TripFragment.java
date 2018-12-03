@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,8 +44,13 @@ public class TripFragment extends BaseFragment {
 
         mAdapter = new DestinationListAdapter(getContext());
 
-        mTopViewModel = ViewModelProviders.of(getActivity()).get(TopViewModel.class);
-        mTopViewModel.getCachedTrip().observe(getActivity(), new Observer<Trip>() {
+        FragmentActivity af = getActivity();
+
+        assert af != null;
+        mTopViewModel = ViewModelProviders.of(af).get(TopViewModel.class);
+        mTopViewModel.initialize();
+
+        mTopViewModel.getCachedTrip().observe(af, new Observer<Trip>() {
             @Override
             public void onChanged(@Nullable Trip trip) {
                 if (trip == null) return;
@@ -52,7 +58,7 @@ public class TripFragment extends BaseFragment {
             }
         });
 
-        mTopViewModel.getCachedDestinations().observe(getActivity(), new Observer<List<Destination>>() {
+        mTopViewModel.getCachedDestinations().observe(af, new Observer<List<Destination>>() {
             @Override
             public void onChanged(@Nullable List<Destination> destinations) {
                 if (destinations == null) return;
@@ -92,5 +98,11 @@ public class TripFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
+    }
+
+    @Override
+    public void onDetach() {
+        mTopViewModel.cleanUp();
+        super.onDetach();
     }
 }

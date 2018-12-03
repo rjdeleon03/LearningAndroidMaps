@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +81,11 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
         if (getArguments() != null) {
             // TODO: Get arguments and store globally
         }
-        mTopViewModel = ViewModelProviders.of(getActivity()).get(TopViewModel.class);
+
+        FragmentActivity af = getActivity();
+
+        assert af != null;
+        mTopViewModel = ViewModelProviders.of(af).get(TopViewModel.class);
     }
 
     @Override

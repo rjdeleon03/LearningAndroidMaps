@@ -12,19 +12,34 @@ import java.util.List;
 
 public class TopViewModel extends AndroidViewModel {
 
+    private Application mApplication;
     private TopRepository mRepository;
     private LiveData<Trip> mCachedTrip;
     private LiveData<List<Destination>> mCachedDestinations;
 
-    public TopViewModel(@NonNull Application application, String id) {
+    private TopViewModel(@NonNull Application application, String id) {
         super(application);
-        mRepository = new TopRepository(application, id);
-        mCachedTrip = mRepository.getCachedTrip();
-        mCachedDestinations = mRepository.getCachedDestinations();
+        mApplication = application;
     }
 
     public TopViewModel(@NonNull Application application) {
         this(application, null);
+    }
+
+    private void initialize(String id) {
+        mRepository = new TopRepository(mApplication, id);
+        mCachedTrip = mRepository.getCachedTrip();
+        mCachedDestinations = mRepository.getCachedDestinations();
+    }
+
+    public void initialize() {
+        initialize(null);
+    }
+
+    public void cleanUp() {
+        mRepository = null;
+        mCachedTrip = null;
+        mCachedDestinations = null;
     }
 
     public LiveData<Trip> getCachedTrip() {
