@@ -35,6 +35,10 @@ import com.rjdeleon.tourista.feature.base.BaseFragment;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DestinationFragment#newInstance} factory method to
@@ -45,10 +49,9 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
 
     private static final String ARG_DESTINATION_ID = "DESTINATION ID";
 
-    private TextView timeField;
-    private TextView dateField;
-    private EditText notesField;
-    private FloatingActionButton saveDestButton;
+    @BindView(R.id.timeField) TextView timeField;
+    @BindView(R.id.dateField) TextView dateField;
+    @BindView(R.id.notesField) EditText notesField;
 
     private GoogleMap mGoogleMap;
     private Marker mMarker;
@@ -93,18 +96,18 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_destination, container, false);
+        ButterKnife.bind(this, view);
 
         initializeMapsAndPlaces();
-        initializeTimeDateFields(view);
-        initializeSaveButton(view);
-        notesField = view.findViewById(R.id.notesField);
+        initializeTimeDateFields();
 
         return view;
     }
 
+    //region Maps and places
+
     private void initializeMapsAndPlaces() {
         FragmentManager fm = getChildFragmentManager();
-        assert fm != null;
 
         SupportMapFragment mapFragment = (SupportMapFragment) fm.findFragmentById(R.id.mapsPlaceFragment);
         assert mapFragment != null;
@@ -113,7 +116,6 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
         SupportPlaceAutocompleteFragment placeFragment = (SupportPlaceAutocompleteFragment) fm.findFragmentById(R.id.placeSearchFragment);
         assert placeFragment != null;
         placeFragment.setOnPlaceSelectedListener(this);
-
     }
 
     @Override
@@ -139,38 +141,31 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
         // TODO: Handle place fragment error
     }
 
-    private void initializeTimeDateFields(View view) {
+    //endregion
 
-        timeField = view.findViewById(R.id.timeField);
-        dateField = view.findViewById(R.id.dateField);
+    //region Date and time input
 
+    private void initializeTimeDateFields() {
         mCalendar = Calendar.getInstance(TimeZone.getDefault());
         setDateTextViewContent(mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
         setTimeTextViewContent(mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE));
+    }
 
-        final Fragment finalSelf = this;
-        timeField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getContext() == null) return;
-                TimePickerDialog dialog = new TimePickerDialog(getContext(),
-                        (TimePickerDialog.OnTimeSetListener) finalSelf,
-                        mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE),  false);
-                dialog.show();
-            }
-        });
+    @OnClick(R.id.timeField)
+    void showTimePicker() {
+        if (getContext() == null) return;
+        TimePickerDialog dialog = new TimePickerDialog(getContext(), this,
+                mCalendar.get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE),  false);
+        dialog.show();
+    }
 
-        dateField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (getContext() == null) return;
-                DatePickerDialog dialog = new DatePickerDialog(getContext(),
-                        (DatePickerDialog.OnDateSetListener) finalSelf,
-                        mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
-                        mCalendar.get(Calendar.DAY_OF_MONTH));
-                dialog.show();
-            }
-        });
+    @OnClick(R.id.dateField)
+    void showDatePicker() {
+        if (getContext() == null) return;
+        DatePickerDialog dialog = new DatePickerDialog(getContext(), this,
+                mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
+                mCalendar.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
     }
 
     private void setDateTextViewContent(int y, int m, int d) {
@@ -200,26 +195,20 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
                 hr, min);
     }
 
-    private void initializeSaveButton(View view) {
-        saveDestButton = view.findViewById(R.id.saveDestButton);
+    //endregion
 
-        saveDestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mMarker == null) return;
+    @OnClick(R.id.saveDestButton)
+    void saveDestination() {
+        if (mMarker == null) return;
 
-                Destination destination = new Destination();
-                destination.setPlace(mMarker.getTitle());
-                destination.setLat(mMarker.getPosition().latitude);
-                destination.setLng(mMarker.getPosition().longitude);
-                destination.setNotes(notesField.getText().toString());
-                destination.setTimestamp(mCalendar.getTime());
+        Destination destination = new Destination();
+        destination.setPlace(mMarker.getTitle());
+        destination.setLat(mMarker.getPosition().latitude);
+        destination.setLng(mMarker.getPosition().longitude);
+        destination.setNotes(notesField.getText().toString());
+        destination.setTimestamp(mCalendar.getTime());
 
-//                mDestinationViewModel.insert(destination);
-                mTopViewModel.insertDestination(destination);
-                navController.navigateUp();
-            }
-        });
-
+        mTopViewModel.insertDestination(destination);
+        navController.navigateUp();
     }
 }

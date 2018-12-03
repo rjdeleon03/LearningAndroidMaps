@@ -21,6 +21,10 @@ import com.rjdeleon.tourista.feature.base.BaseFragment;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -29,10 +33,7 @@ public class TripFragment extends BaseFragment {
     private TopViewModel mTopViewModel;
     private DestinationListAdapter mAdapter;
 
-    private FloatingActionButton addDestButton;
-    private FloatingActionButton saveTripButton;
-
-    private RecyclerView recyclerView;
+    @BindView(R.id.destinationList) RecyclerView recyclerView;
 
     public TripFragment() {
         // Required empty public constructor
@@ -72,28 +73,8 @@ public class TripFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_trip, container, false);
+        ButterKnife.bind(this, view);
 
-        addDestButton = view.findViewById(R.id.addDestButton);
-        addDestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { if (navController != null) {
-                    navController.navigate(R.id.action_tripFragment_to_destinationFragment);
-                }
-            }
-        });
-
-        saveTripButton = view.findViewById(R.id.saveTripButton);
-        saveTripButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Trip trip = new Trip();
-                trip.setName("Some Trip");
-                mTopViewModel.insertTrip(trip);
-                navController.navigateUp();
-            }
-        });
-
-        recyclerView = view.findViewById(R.id.destinationList);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -104,5 +85,20 @@ public class TripFragment extends BaseFragment {
     public void onDetach() {
         mTopViewModel.cleanUp();
         super.onDetach();
+    }
+
+    @OnClick(R.id.addDestButton)
+    void addDestination() {
+        if (navController != null) {
+            navController.navigate(R.id.action_tripFragment_to_destinationFragment);
+        }
+    }
+
+    @OnClick(R.id.saveTripButton)
+    void saveTrip() {
+        Trip trip = new Trip();
+        trip.setName("Some Trip");
+        mTopViewModel.insertTrip(trip);
+        navController.navigateUp();
     }
 }

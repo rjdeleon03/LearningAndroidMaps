@@ -17,11 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 ext {
     archRoomVersion = "1.1.1"
     archLifecycleVersion = "1.1.1"
+    butterknifeVersion = "9.0.0-rc2"
 }
 
 dependencies {
@@ -45,6 +50,10 @@ dependencies {
     // Lifecycle
     implementation 'android.arch.lifecycle:extensions:' + archLifecycleVersion
     implementation 'android.arch.lifecycle:viewmodel:' + archLifecycleVersion
+
+    // Butterknife
+    implementation 'com.jakewharton:butterknife:' + butterknifeVersion
+    annotationProcessor 'com.jakewharton:butterknife-compiler:' + butterknifeVersion
 
     implementation 'com.android.support:support-vector-drawable:28.0.0'
     testImplementation 'junit:junit:4.12'
