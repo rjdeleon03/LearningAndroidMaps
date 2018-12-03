@@ -17,13 +17,9 @@ public class TopViewModel extends AndroidViewModel {
     private LiveData<Trip> mCachedTrip;
     private LiveData<List<Destination>> mCachedDestinations;
 
-    private TopViewModel(@NonNull Application application, String id) {
+    public TopViewModel(@NonNull Application application) {
         super(application);
         mApplication = application;
-    }
-
-    public TopViewModel(@NonNull Application application) {
-        this(application, null);
     }
 
     private void initialize(String id) {
