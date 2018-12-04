@@ -47,6 +47,7 @@ public class TopViewModel extends AndroidViewModel {
     }
 
     public void insertTrip(Trip trip) {
+        trip.setDestinations(mCachedDestinations.getValue());
         mRepository.insertTrip(trip);
     }
 

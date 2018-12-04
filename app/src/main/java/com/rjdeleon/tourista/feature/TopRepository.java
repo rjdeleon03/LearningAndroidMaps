@@ -57,7 +57,6 @@ public class TopRepository {
         if (mCachedDestinations.getValue() == null) return;
 
         trip.setId(UUID.randomUUID().toString());
-        trip.setDestinations(mCachedDestinations.getValue());
         new InsertTripAsyncTask(mAppDao).execute(trip);
     }
 

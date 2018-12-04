@@ -11,6 +11,7 @@ import java.util.List;
 
 public class TripListViewModel extends AndroidViewModel {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private TripListRepository mRepository;
     private LiveData<List<Trip>> mTrips;
 
@@ -20,15 +21,7 @@ public class TripListViewModel extends AndroidViewModel {
         mTrips = mRepository.getTrips();
     }
 
-    public LiveData<List<Trip>> getTrips() {
+    LiveData<List<Trip>> getTrips() {
         return mTrips;
-    }
-
-    public void insert(Trip trip) {
-        mRepository.insert(trip);
-    }
-
-    public void delete(String id) {
-        mRepository.delete(id);
     }
 }
