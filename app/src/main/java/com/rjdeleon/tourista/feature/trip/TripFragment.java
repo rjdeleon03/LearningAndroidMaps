@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
@@ -33,6 +34,7 @@ public class TripFragment extends BaseFragment {
     private TopViewModel mTopViewModel;
     private DestinationListAdapter mAdapter;
 
+    @BindView(R.id.tripNameField) TextView tripNameField;
     @BindView(R.id.destinationList) RecyclerView recyclerView;
 
     public TripFragment() {
@@ -51,20 +53,14 @@ public class TripFragment extends BaseFragment {
         mTopViewModel = ViewModelProviders.of(af).get(TopViewModel.class);
         mTopViewModel.initialize();
 
-        mTopViewModel.getCachedTrip().observe(af, new Observer<Trip>() {
-            @Override
-            public void onChanged(@Nullable Trip trip) {
-                if (trip == null) return;
-                mAdapter.setDestinations(trip.getDestinations());
-            }
+        mTopViewModel.getCachedTrip().observe(af, trip -> {
+            if (trip == null) return;
+            mAdapter.setDestinations(trip.getDestinations());
         });
 
-        mTopViewModel.getCachedDestinations().observe(af, new Observer<List<Destination>>() {
-            @Override
-            public void onChanged(@Nullable List<Destination> destinations) {
-                if (destinations == null) return;
-                mAdapter.setDestinations(destinations);
-            }
+        mTopViewModel.getCachedDestinations().observe(af, destinations -> {
+            if (destinations == null) return;
+            mAdapter.setDestinations(destinations);
         });
     }
 
@@ -96,8 +92,12 @@ public class TripFragment extends BaseFragment {
 
     @OnClick(R.id.saveTripButton)
     void saveTrip() {
+        String tripName = tripNameField.getText().toString().trim();
+        List<Destination> destinations = mTopViewModel.getCachedDestinations().getValue();
+        if (tripName.isEmpty() || destinations == null || destinations.isEmpty()) return;
+
         Trip trip = new Trip();
-        trip.setName("Some Trip");
+        trip.setName(tripName);
         mTopViewModel.insertTrip(trip);
         navController.navigateUp();
     }
