@@ -26,12 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity
-            android:name=".PlacesMapActivity"
-            android:label="@string/title_activity_places_map">
-        </activity>
     </application>
 
 </manifest>
