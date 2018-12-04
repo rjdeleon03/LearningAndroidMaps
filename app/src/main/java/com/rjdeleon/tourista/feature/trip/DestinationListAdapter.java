@@ -1,5 +1,6 @@
 package com.rjdeleon.tourista.feature.trip;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,14 +12,19 @@ import android.widget.TextView;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DestinationListAdapter extends RecyclerView.Adapter<DestinationListAdapter.DestinationViewHolder> {
 
     private List<Destination> mDestinations;
     private LayoutInflater mInflater;
 
-    public DestinationListAdapter(Context context) {
+    DestinationListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
@@ -35,6 +41,10 @@ public class DestinationListAdapter extends RecyclerView.Adapter<DestinationList
 
         Destination destination = mDestinations.get(i);
         destinationViewHolder.title.setText(destination.getPlace());
+
+        @SuppressLint("SimpleDateFormat")
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm a");
+        destinationViewHolder.timestamp.setText(df.format(destination.getTimestamp()));
     }
 
     @Override
@@ -42,18 +52,19 @@ public class DestinationListAdapter extends RecyclerView.Adapter<DestinationList
         return mDestinations == null ? 0 : mDestinations.size();
     }
 
-    public void setDestinations(List<Destination> destinations) {
+    void setDestinations(List<Destination> destinations) {
         mDestinations = destinations;
         notifyDataSetChanged();
     }
 
     class DestinationViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView title;
+        @BindView(R.id.destinationTitle) TextView title;
+        @BindView(R.id.destinationTimestamp) TextView timestamp;
 
         private DestinationViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.destinationTitle);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
