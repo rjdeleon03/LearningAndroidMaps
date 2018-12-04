@@ -21,9 +21,12 @@ public class TopRepository {
     private MutableLiveData<List<Destination>> mCachedDestinations;
     private String mId;
 
-    TopRepository(Application application, String id) {
+    TopRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application.getApplicationContext());
         mAppDao = db.daoAccess();
+    }
+
+    void initialize(String id) {
         mId = id;
         mCachedTrip = mAppDao.getTrip(mId);
 
@@ -34,14 +37,22 @@ public class TopRepository {
             mId = UUID.randomUUID().toString();
         }
 
-        LiveData<List<Destination>> ldd = mAppDao.getDestinationsPerTrip(mId);
-        MutableLiveData<List<Destination>> destinations = new MutableLiveData<>();
-        if (ldd == null || ldd.getValue() == null) {
-            destinations.setValue(new ArrayList<Destination>());
-            mCachedDestinations = destinations;
-        } else {
-            destinations.setValue(ldd.getValue());
+        if (mCachedDestinations == null) {
+            LiveData<List<Destination>> ldd = mAppDao.getDestinationsPerTrip(mId);
+            MutableLiveData<List<Destination>> destinations = new MutableLiveData<>();
+            if (ldd == null || ldd.getValue() == null) {
+                destinations.setValue(new ArrayList<>());
+                mCachedDestinations = destinations;
+            } else {
+                destinations.setValue(ldd.getValue());
+            }
         }
+    }
+
+    void cleanUp() {
+        mId = null;
+        mCachedTrip = null;
+        mCachedDestinations = null;
     }
 
     LiveData<Trip> getCachedTrip() {

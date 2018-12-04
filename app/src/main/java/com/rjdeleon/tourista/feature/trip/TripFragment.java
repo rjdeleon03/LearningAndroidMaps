@@ -79,7 +79,8 @@ public class TripFragment extends BaseFragment {
 
     @Override
     public void onDetach() {
-        mTopViewModel.cleanUp();
+        if (isRemoving())
+            mTopViewModel.cleanUp();
         super.onDetach();
     }
 

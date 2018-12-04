@@ -20,10 +20,11 @@ public class TopViewModel extends AndroidViewModel {
     public TopViewModel(@NonNull Application application) {
         super(application);
         mApplication = application;
+        mRepository = new TopRepository(mApplication);
     }
 
     private void initialize(String id) {
-        mRepository = new TopRepository(mApplication, id);
+        mRepository.initialize(id);
         mCachedTrip = mRepository.getCachedTrip();
         mCachedDestinations = mRepository.getCachedDestinations();
     }
@@ -33,7 +34,7 @@ public class TopViewModel extends AndroidViewModel {
     }
 
     public void cleanUp() {
-        mRepository = null;
+        mRepository.cleanUp();
         mCachedTrip = null;
         mCachedDestinations = null;
     }
