@@ -3,7 +3,9 @@ package com.rjdeleon.tourista.feature.destination;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -79,14 +81,18 @@ public class DestinationFragment extends BaseFragment implements DatePickerDialo
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // TODO: Get arguments and store globally
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         FragmentActivity af = getActivity();
-
         assert af != null;
         mTopViewModel = ViewModelProviders.of(af).get(TopViewModel.class);
     }

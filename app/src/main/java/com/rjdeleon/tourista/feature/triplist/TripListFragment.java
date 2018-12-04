@@ -2,6 +2,7 @@ package com.rjdeleon.tourista.feature.triplist;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -35,11 +36,12 @@ public class TripListFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        mAdapter = new TripListAdapter(getContext());
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mAdapter = new TripListAdapter(context);
         mTripListViewModel = ViewModelProviders.of(this).get(TripListViewModel.class);
         mTripListViewModel.getTrips().observe(this, new Observer<List<Trip>>() {
             @Override

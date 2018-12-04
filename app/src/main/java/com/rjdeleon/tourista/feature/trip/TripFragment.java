@@ -2,6 +2,7 @@ package com.rjdeleon.tourista.feature.trip;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -42,13 +43,12 @@ public class TripFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-        mAdapter = new DestinationListAdapter(getContext());
+        mAdapter = new DestinationListAdapter(context);
 
         FragmentActivity af = getActivity();
-
         assert af != null;
         mTopViewModel = ViewModelProviders.of(af).get(TopViewModel.class);
         mTopViewModel.initialize();

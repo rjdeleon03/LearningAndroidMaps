@@ -6,18 +6,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Trip;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripViewHolder> {
 
     private List<Trip> mTrips;
     private final LayoutInflater mInflater;
 
-    public TripListAdapter(Context context) {
+    TripListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
@@ -30,7 +34,10 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
 
     @Override
     public void onBindViewHolder(@NonNull TripViewHolder viewHolder, int i) {
+        if (mTrips == null) return;
 
+        Trip trip = mTrips.get(i);
+        viewHolder.tripName.setText(trip.getName());
     }
 
     @Override
@@ -38,15 +45,18 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
         return mTrips == null ? 0 : mTrips.size();
     }
 
-    public void setTrips(List<Trip> trips) {
+    void setTrips(List<Trip> trips) {
         mTrips = trips;
         notifyDataSetChanged();
     }
 
     class TripViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.tripName) TextView tripName;
+
         TripViewHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
