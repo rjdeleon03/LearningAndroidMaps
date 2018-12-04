@@ -79,6 +79,14 @@ public class TopRepository {
         mCachedDestinations.setValue(destinations);
     }
 
+    void deleteDestination(Destination destination) {
+
+        if (mCachedDestinations.getValue() == null) return;
+        List<Destination> destinations = mCachedDestinations.getValue();
+        destinations.remove(destination);
+        mCachedDestinations.setValue(destinations);
+    }
+
     private static class InsertTripAsyncTask extends DbAsyncTask<Trip> {
 
         InsertTripAsyncTask(AppDao appDao) {

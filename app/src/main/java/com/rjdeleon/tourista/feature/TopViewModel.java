@@ -55,4 +55,8 @@ public class TopViewModel extends AndroidViewModel {
     public void insertDestination(Destination destination) {
         mRepository.insertDestination(destination);
     }
+
+    public void deleteDestination(Destination destination) {
+        mRepository.deleteDestination(destination);
+    }
 }
