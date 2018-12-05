@@ -57,6 +57,12 @@ public class DestinationListAdapter extends RecyclerView.Adapter<DestinationList
         notifyDataSetChanged();
     }
 
+    Destination getDestinationAt(int index) {
+        if (mDestinations == null || mDestinations.size() <= index) return null;
+
+        return mDestinations.get(index);
+    }
+
     class DestinationViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.destinationTitle) TextView title;

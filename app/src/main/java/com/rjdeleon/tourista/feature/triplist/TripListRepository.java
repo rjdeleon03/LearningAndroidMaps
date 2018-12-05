@@ -15,13 +15,13 @@ public class TripListRepository {
     private AppDao mAppDao;
     private LiveData<List<Trip>> mTrips;
 
-    public TripListRepository(Application application) {
+    TripListRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application.getApplicationContext());
         mAppDao = db.daoAccess();
         mTrips = mAppDao.getAllTrips();
     }
 
-    public LiveData<List<Trip>> getTrips() {
+    LiveData<List<Trip>> getTrips() {
         return mTrips;
     }
 
@@ -29,13 +29,13 @@ public class TripListRepository {
         new InsertAsyncTask(mAppDao).execute(trip);
     }
 
-    public void delete(String id) {
-        new DeleteAsyncTask(mAppDao).execute(id);
+    public void delete(Trip trip) {
+        new DeleteAsyncTask(mAppDao).execute(trip);
     }
 
     private static class InsertAsyncTask extends DbAsyncTask<Trip> {
 
-        protected InsertAsyncTask(AppDao appDao) {
+        InsertAsyncTask(AppDao appDao) {
             super(appDao);
         }
 
@@ -46,15 +46,15 @@ public class TripListRepository {
         }
     }
 
-    private static class DeleteAsyncTask extends DbAsyncTask<String> {
+    private static class DeleteAsyncTask extends DbAsyncTask<Trip> {
 
-        protected DeleteAsyncTask(AppDao appDao) {
+        DeleteAsyncTask(AppDao appDao) {
             super(appDao);
         }
 
         @Override
-        protected Void doInBackground(String... nums) {
-            mAsyncAppDao.deleteTrip(nums[0]);
+        protected Void doInBackground(Trip... trips) {
+            mAsyncAppDao.deleteTrip(trips[0]);
             return null;
         }
     }

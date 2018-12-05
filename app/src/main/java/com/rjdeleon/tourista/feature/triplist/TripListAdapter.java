@@ -50,6 +50,12 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
         notifyDataSetChanged();
     }
 
+    Trip getTripAt(int index) {
+        if (mTrips == null || mTrips.size() <= index) return null;
+
+        return mTrips.get(index);
+    }
+
     class TripViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tripName) TextView tripName;

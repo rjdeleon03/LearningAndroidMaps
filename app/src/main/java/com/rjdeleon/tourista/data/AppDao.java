@@ -18,8 +18,8 @@ public interface AppDao {
     @Update
     void updateTrip(Trip trip);
 
-    @Query("DELETE FROM trip_table WHERE id = :tripId")
-    void deleteTrip(String tripId);
+    @Delete
+    void deleteTrip(Trip trip);
 
     @Query("SELECT * FROM trip_table")
     LiveData<List<Trip>> getAllTrips();

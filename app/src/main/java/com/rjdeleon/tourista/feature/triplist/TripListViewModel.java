@@ -24,4 +24,8 @@ public class TripListViewModel extends AndroidViewModel {
     LiveData<List<Trip>> getTrips() {
         return mTrips;
     }
+
+    void deleteTrip(Trip trip) {
+        mRepository.delete(trip);
+    }
 }

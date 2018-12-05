@@ -28,8 +28,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemLongClick;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -87,8 +85,7 @@ public class TripFragment extends BaseFragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 mTopViewModel.deleteDestination(
-                        mTopViewModel.getCachedDestinations().getValue()
-                                .get(viewHolder.getAdapterPosition()));
+                        mAdapter.getDestinationAt(viewHolder.getAdapterPosition()));
             }
         }).attachToRecyclerView(recyclerView);
 
