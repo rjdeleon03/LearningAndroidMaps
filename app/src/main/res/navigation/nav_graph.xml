@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_tripFragment_to_destinationFragment"
             app:destination="@id/destinationFragment"/>
+        <argument
+            android:name="tripId"
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/destinationFragment"

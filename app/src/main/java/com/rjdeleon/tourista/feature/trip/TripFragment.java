@@ -52,17 +52,7 @@ public class TripFragment extends BaseFragment {
         FragmentActivity af = getActivity();
         assert af != null;
         mTopViewModel = ViewModelProviders.of(af).get(TopViewModel.class);
-        mTopViewModel.initialize();
 
-        mTopViewModel.getCachedTrip().observe(af, trip -> {
-            if (trip == null) return;
-            mAdapter.setDestinations(trip.getDestinations());
-        });
-
-        mTopViewModel.getCachedDestinations().observe(af, destinations -> {
-            if (destinations == null) return;
-            mAdapter.setDestinations(destinations);
-        });
     }
 
     @Override
@@ -71,6 +61,24 @@ public class TripFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_trip, container, false);
         ButterKnife.bind(this, view);
+
+        if (getArguments() != null) {
+            mTopViewModel.initialize(TripFragmentArgs.fromBundle(getArguments()).getTripId());
+        } else {
+            mTopViewModel.initialize();
+        }
+
+        FragmentActivity af = getActivity();
+        assert af != null;
+        mTopViewModel.getCachedTrip().observe(af, trip -> {
+            if (trip == null) return;
+            tripNameField.setText(trip.getName());
+        });
+
+        mTopViewModel.getCachedDestinations().observe(af, destinations -> {
+            if (destinations == null) return;
+            mAdapter.setDestinations(destinations);
+        });
 
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

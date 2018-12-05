@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.feature.base.BaseFragment;
+import com.rjdeleon.tourista.feature.trip.TripFragmentDirections;
 
 import java.util.List;
 
@@ -82,7 +83,11 @@ public class TripListFragment extends BaseFragment {
 
     @OnClick(R.id.addTripButton)
     void addTrip() {
+        TripListFragmentDirections.ActionTripListFragmentToTripFragment action =
+                TripListFragmentDirections.actionTripListFragmentToTripFragment(
+                        mAdapter.getTripAt(0).getId());
+
         if(navController != null)
-            navController.navigate(R.id.action_tripListFragment_to_tripFragment);
+            navController.navigate(action);
     }
 }
