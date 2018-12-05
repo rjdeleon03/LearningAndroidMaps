@@ -23,7 +23,7 @@ public class TopViewModel extends AndroidViewModel {
         mRepository = new TopRepository(mApplication);
     }
 
-    private void initialize(String id) {
+    public void initialize(String id) {
         mRepository.initialize(id);
         mCachedTrip = mRepository.getCachedTrip();
         mCachedDestinations = mRepository.getCachedDestinations();
