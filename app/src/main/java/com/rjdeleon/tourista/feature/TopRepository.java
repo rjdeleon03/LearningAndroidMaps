@@ -19,7 +19,7 @@ import java.util.UUID;
 public class TopRepository {
 
     private AppDao mAppDao;
-    private LiveData<Trip> mCachedTrip;
+    private MutableLiveData<Trip> mCachedTrip;
     private MutableLiveData<List<Destination>> mCachedDestinations;
     private String mId;
 
@@ -30,13 +30,19 @@ public class TopRepository {
 
     void initialize(String id) {
         mId = id;
-        mCachedTrip = mAppDao.getTrip(mId);
-
         if (mCachedTrip == null) {
-            MutableLiveData<Trip> trip = new MutableLiveData<>();
-            trip.setValue(new Trip());
-            mCachedTrip = trip;
-            mId = UUID.randomUUID().toString();
+            mCachedTrip = new MutableLiveData<>();
+            mCachedTrip.setValue(new Trip());
+
+            LiveData<Trip> ldt = mAppDao.getTrip(mId);
+            ldt.observeForever(new Observer<Trip>() {
+                @Override
+                public void onChanged(@Nullable Trip trip) {
+                    if (trip != null) {
+                        mCachedTrip.setValue(trip);
+                    }
+                }
+            });
         }
 
         if (mCachedDestinations == null) {
@@ -47,7 +53,9 @@ public class TopRepository {
             ldd.observeForever(new Observer<List<Destination>>() {
                 @Override
                 public void onChanged(@Nullable List<Destination> destinations) {
-                    mCachedDestinations.setValue(destinations);
+                    if (destinations != null) {
+                        mCachedDestinations.setValue(destinations);
+                    }
                 }
             });
         }

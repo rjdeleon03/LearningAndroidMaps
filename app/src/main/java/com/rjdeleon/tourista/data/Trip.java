@@ -14,10 +14,10 @@ public class Trip {
 
     @PrimaryKey
     @NonNull
-    private String id;
+    private String id = "";
 
     @NonNull
-    private String name;
+    private String name = "";
 
     @Ignore
     private List<Destination> destinations;
@@ -27,7 +27,7 @@ public class Trip {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 

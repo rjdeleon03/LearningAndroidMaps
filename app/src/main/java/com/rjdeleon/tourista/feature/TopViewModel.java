@@ -47,12 +47,20 @@ public class TopViewModel extends AndroidViewModel {
         return mCachedDestinations;
     }
 
-    public void insertTrip(Trip trip) {
+    public void insertOrUpdateTrip(Trip trip) {
+        if (trip.getId().isEmpty()) {
+            insertTrip(trip);
+        } else {
+            updateTrip(trip);
+        }
+    }
+
+    private void insertTrip(Trip trip) {
         trip.setDestinations(mCachedDestinations.getValue());
         mRepository.insertTrip(trip);
     }
 
-    public void updateTrip(Trip trip) {
+    private void updateTrip(Trip trip) {
         trip.setDestinations(mCachedDestinations.getValue());
         mRepository.updateTrip(trip);
     }

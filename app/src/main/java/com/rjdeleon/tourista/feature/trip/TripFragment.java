@@ -121,11 +121,7 @@ public class TripFragment extends BaseFragment {
         assert trip != null;
         trip.setName(tripName);
 
-        if (trip.getId().isEmpty()) {
-            mTopViewModel.insertTrip(trip);
-        } else {
-            mTopViewModel.updateTrip(trip);
-        }
+        mTopViewModel.insertOrUpdateTrip(trip);
 
         /* Navigate back */
         navController.navigateUp();
