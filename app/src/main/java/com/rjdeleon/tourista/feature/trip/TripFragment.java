@@ -1,12 +1,9 @@
 package com.rjdeleon.tourista.feature.trip;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -120,9 +117,17 @@ public class TripFragment extends BaseFragment {
         List<Destination> destinations = mTopViewModel.getCachedDestinations().getValue();
         if (tripName.isEmpty() || destinations == null || destinations.isEmpty()) return;
 
-        Trip trip = new Trip();
+        Trip trip = mTopViewModel.getCachedTrip().getValue();
+        assert trip != null;
         trip.setName(tripName);
-        mTopViewModel.insertTrip(trip);
+
+        if (trip.getId().isEmpty()) {
+            mTopViewModel.insertTrip(trip);
+        } else {
+            mTopViewModel.updateTrip(trip);
+        }
+
+        /* Navigate back */
         navController.navigateUp();
     }
 }

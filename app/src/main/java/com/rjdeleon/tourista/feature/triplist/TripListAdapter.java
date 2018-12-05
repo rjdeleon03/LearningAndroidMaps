@@ -13,6 +13,7 @@ import com.rjdeleon.tourista.data.Trip;
 
 import java.util.List;
 
+import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -37,6 +38,7 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
         if (mTrips == null) return;
 
         Trip trip = mTrips.get(i);
+        viewHolder.id = trip.getId();
         viewHolder.tripName.setText(trip.getName());
     }
 
@@ -59,10 +61,21 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
     class TripViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tripName) TextView tripName;
+        String id;
 
         TripViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TripListFragmentDirections.ActionTripListFragmentToTripFragment action =
+                            TripListFragmentDirections.actionTripListFragmentToTripFragment().setTripId(id);
+
+                    Navigation.findNavController(v).navigate(action);
+                }
+            });
         }
     }
 }

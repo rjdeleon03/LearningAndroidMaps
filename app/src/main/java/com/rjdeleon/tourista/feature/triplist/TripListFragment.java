@@ -24,6 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,11 +84,7 @@ public class TripListFragment extends BaseFragment {
 
     @OnClick(R.id.addTripButton)
     void addTrip() {
-        TripListFragmentDirections.ActionTripListFragmentToTripFragment action =
-                TripListFragmentDirections.actionTripListFragmentToTripFragment(
-                        mAdapter.getTripAt(0).getId());
-
-        if(navController != null)
-            navController.navigate(action);
+        if(navController == null) return;
+        navController.navigate(R.id.action_tripListFragment_to_tripFragment);
     }
 }

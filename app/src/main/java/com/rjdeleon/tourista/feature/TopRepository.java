@@ -3,6 +3,8 @@ package com.rjdeleon.tourista.feature;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 
 import com.rjdeleon.tourista.data.AppDao;
 import com.rjdeleon.tourista.data.AppDatabase;
@@ -38,14 +40,16 @@ public class TopRepository {
         }
 
         if (mCachedDestinations == null) {
+            mCachedDestinations = new MutableLiveData<>();
+            mCachedDestinations.setValue(new ArrayList<Destination>());
+
             LiveData<List<Destination>> ldd = mAppDao.getDestinationsPerTrip(mId);
-            MutableLiveData<List<Destination>> destinations = new MutableLiveData<>();
-            if (ldd == null || ldd.getValue() == null) {
-                destinations.setValue(new ArrayList<>());
-                mCachedDestinations = destinations;
-            } else {
-                destinations.setValue(ldd.getValue());
-            }
+            ldd.observeForever(new Observer<List<Destination>>() {
+                @Override
+                public void onChanged(@Nullable List<Destination> destinations) {
+                    mCachedDestinations.setValue(destinations);
+                }
+            });
         }
     }
 
@@ -69,6 +73,12 @@ public class TopRepository {
 
         trip.setId(UUID.randomUUID().toString());
         new InsertTripAsyncTask(mAppDao).execute(trip);
+    }
+
+    void updateTrip(Trip trip) {
+
+        if (mCachedDestinations.getValue() == null) return;
+        new UpdateTripAsyncTask(mAppDao).execute(trip);
     }
 
     void insertDestination(Destination destination) {
@@ -105,6 +115,29 @@ public class TopRepository {
         }
     }
 
+    private static class UpdateTripAsyncTask extends DbAsyncTask<Trip> {
+
+        UpdateTripAsyncTask(AppDao appDao) {
+            super(appDao);
+        }
+
+        @Override
+        protected Void doInBackground(Trip... trips) {
+            mAsyncAppDao.updateTrip(trips[0]);
+
+            for(Destination destination : trips[0].getDestinations()) {
+                destination.setTripId(trips[0].getId());
+
+                if (destination.getId() == 0) {
+                    new InsertDestinationAsyncTask(mAsyncAppDao).execute(destination);
+                } else {
+                    new UpdateDestinationAsyncTask(mAsyncAppDao).execute(destination);
+                }
+            }
+            return null;
+        }
+    }
+
     private static class InsertDestinationAsyncTask extends DbAsyncTask<Destination> {
 
         InsertDestinationAsyncTask(AppDao appDao) {
@@ -114,6 +147,19 @@ public class TopRepository {
         @Override
         protected Void doInBackground(Destination... destinations) {
             mAsyncAppDao.insertDestination(destinations[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateDestinationAsyncTask extends DbAsyncTask<Destination> {
+
+        UpdateDestinationAsyncTask(AppDao appDao) {
+            super(appDao);
+        }
+
+        @Override
+        protected Void doInBackground(Destination... destinations) {
+            mAsyncAppDao.updateDestination(destinations[0]);
             return null;
         }
     }

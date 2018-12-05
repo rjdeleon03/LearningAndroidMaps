@@ -24,7 +24,8 @@
             app:destination="@id/destinationFragment"/>
         <argument
             android:name="tripId"
-            app:argType="string"/>
+            android:defaultValue="value"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/destinationFragment"
