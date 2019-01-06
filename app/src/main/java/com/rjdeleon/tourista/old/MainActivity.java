@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista;
+package com.rjdeleon.tourista.old;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rjdeleon.tourista.R;
 
 import java.util.ArrayList;
 import java.util.List;
