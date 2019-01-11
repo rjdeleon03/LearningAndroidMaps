@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".TripActivity">
 
+    <fragment
+        android:id="@+id/navigation_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_main"/>
+
 </android.support.constraint.ConstraintLayout>
