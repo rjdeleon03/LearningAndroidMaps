@@ -1,31 +1,32 @@
 package com.rjdeleon.tourista.data;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "trips")
 public class Trip {
 
     @PrimaryKey(autoGenerate = true)
-    private String id;
+    private long id;
 
     private String name;
 
-    public Trip(String id, String name) {
+    public Trip(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
+    @Ignore
     public Trip(String name) {
         this.name = name;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
