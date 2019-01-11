@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Trip;
+import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
 import java.util.List;
 
@@ -69,7 +70,9 @@ public class TripsFragment extends Fragment {
         mAddTripButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                TripDialogFragment tdf = TripDialogFragment.newInstance();
+                assert getFragmentManager() != null;
+                tdf.show(getFragmentManager(), TripDialogFragment.TAG);
             }
         });
     }
