@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Trip;
+import com.rjdeleon.tourista.databinding.FragmentTripsBinding;
 import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
 import java.util.List;
@@ -26,6 +29,7 @@ public class TripsFragment extends Fragment {
 
     private TripsAdapter mAdapter;
     private TripsViewModel mViewModel;
+
     private FloatingActionButton mAddTripButton;
 
     public TripsFragment() {
@@ -60,9 +64,12 @@ public class TripsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_trips, container, false);
-        setupAddTripButton(view);
-        return view;
+        FragmentTripsBinding binding = FragmentTripsBinding.inflate(inflater, container, false);
+        binding.tripsRecyclerView.setAdapter(mAdapter);
+        binding.setLifecycleOwner(this);
+
+        setupAddTripButton(binding.getRoot());
+        return binding.getRoot();
     }
 
     private void setupAddTripButton(View view) {

@@ -22,6 +22,9 @@ public class Trip {
         this.name = name;
     }
 
+    @Ignore
+    public Trip() {}
+
     public long getId() {
         return id;
     }

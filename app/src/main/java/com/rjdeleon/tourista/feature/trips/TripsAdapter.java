@@ -25,13 +25,14 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListView
     @NonNull
     @Override
     public TripListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        return new TripListViewHolder(mInflater.inflate(R.layout.fragment_trips, parent, false));
+        return new TripListViewHolder(mInflater.inflate(R.layout.item_trip, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull TripListViewHolder viewHolder, int i) {
         Trip trip = mTrips.get(i);
         viewHolder.tripNameText.setText(trip.getName());
+        viewHolder.setItemClickListener(createItemClickListener(trip.getId()));
     }
 
     @Override
@@ -44,13 +45,28 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListView
         notifyDataSetChanged();
     }
 
+    private View.OnClickListener createItemClickListener(final long tripId) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        };
+    }
+
     class TripListViewHolder extends RecyclerView.ViewHolder {
 
+        private View itemView;
         TextView tripNameText;
 
-        public TripListViewHolder(@NonNull View itemView) {
+        TripListViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             tripNameText = itemView.findViewById(R.id.tripNameText);
+        }
+
+        void setItemClickListener(View.OnClickListener listener) {
+            itemView.setOnClickListener(listener);
         }
     }
 }
