@@ -1,6 +1,7 @@
 package com.rjdeleon.tourista.feature.tripIndiv;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import com.rjdeleon.tourista.R;
 
 public class TripIndivFragment extends Fragment {
+
+    private TripIndivViewModel mViewModel;
 
     public TripIndivFragment() {
         // Required empty public constructor
@@ -19,7 +22,7 @@ public class TripIndivFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 

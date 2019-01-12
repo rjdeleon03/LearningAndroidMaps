@@ -1,9 +1,7 @@
-package com.rjdeleon.tourista.feature.tripDialog;
+package com.rjdeleon.tourista.feature.tripIndiv;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
@@ -11,37 +9,35 @@ import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
 
-class TripDialogRepository {
+public class TripIndivRepository {
 
     private final TripDao mDao;
-    private final MutableLiveData<Trip> mTrip;
+    private final LiveData<Trip> mTrip;
 
-    TripDialogRepository(@NonNull Application application) {
+    TripIndivRepository(@NonNull Application application, long id) {
         mDao = AppDatabase.getInstance(application.getApplicationContext()).tripDao();
-        mTrip = new MediatorLiveData<>();
-        mTrip.setValue(new Trip());
+        mTrip = mDao.findById(id);
     }
 
     LiveData<Trip> getTrip() {
         return mTrip;
     }
 
-    void save()
-    {
-        new InsertAsyncTask(mDao).execute(mTrip.getValue());
+    void save() {
+        new UpdateAsyncTask(mDao).execute(mTrip.getValue());
     }
 
-    private static class InsertAsyncTask extends AsyncTask<Trip, Void, Void> {
+    private static class UpdateAsyncTask extends AsyncTask<Trip, Void, Void> {
 
         private TripDao mDao;
 
-        InsertAsyncTask(TripDao dao) {
+        UpdateAsyncTask(TripDao dao) {
             mDao = dao;
         }
 
         @Override
         protected Void doInBackground(Trip... trips) {
-            mDao.insert(trips[0]);
+            mDao.update(trips[0]);
             return null;
         }
     }

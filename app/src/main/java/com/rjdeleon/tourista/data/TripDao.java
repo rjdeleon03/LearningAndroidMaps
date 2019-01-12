@@ -16,7 +16,7 @@ public interface TripDao {
     LiveData<List<Trip>> getAll();
 
     @Query("SELECT * from trips WHERE id = :id")
-    LiveData<Trip> findById(String id);
+    LiveData<Trip> findById(long id);
 
     @Insert
     void insert(Trip trip);
