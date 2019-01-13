@@ -13,6 +13,8 @@ import com.rjdeleon.tourista.data.Trip;
 
 import java.util.List;
 
+import androidx.navigation.Navigation;
+
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListViewHolder> {
 
     private LayoutInflater mInflater;
@@ -49,7 +51,10 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListView
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                TripsFragmentDirections.ActionTripsFragmentToTripIndivFragment action =
+                        TripsFragmentDirections.actionTripsFragmentToTripIndivFragment();
+                action.setTripId(tripId);
+                Navigation.findNavController(view).navigate(action);
             }
         };
     }

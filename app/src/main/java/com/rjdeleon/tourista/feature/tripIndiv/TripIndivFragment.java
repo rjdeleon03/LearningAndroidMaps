@@ -1,5 +1,7 @@
 package com.rjdeleon.tourista.feature.tripIndiv;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,15 @@ public class TripIndivFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null && getActivity() != null) {
+            long tripId = TripIndivFragmentArgs.fromBundle(getArguments()).getTripId();
+
+            TripIndivViewModelFactory factory = new TripIndivViewModelFactory(
+                    getActivity().getApplication(), tripId);
+            mViewModel = ViewModelProviders.of(this, factory).get(TripIndivViewModel.class);
+        }
     }
 
     @Override
