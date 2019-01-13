@@ -10,9 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
-import android.view.View;
 
-import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.databinding.DialogTripBinding;
 
 import java.util.Objects;

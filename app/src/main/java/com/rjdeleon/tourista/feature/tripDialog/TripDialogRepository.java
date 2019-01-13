@@ -26,8 +26,7 @@ class TripDialogRepository {
         return mTrip;
     }
 
-    void save()
-    {
+    void save() {
         new InsertAsyncTask(mDao).execute(mTrip.getValue());
     }
 

@@ -1,25 +1,25 @@
-package com.rjdeleon.tourista.feature.tripIndiv;
+package com.rjdeleon.tourista.feature.destination;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.rjdeleon.tourista.feature.tripIndiv.TripIndivViewModel;
-
-public class TripIndivViewModelFactory implements ViewModelProvider.Factory {
+public class DestinationViewModelFactory implements ViewModelProvider.Factory {
 
     private final Application mApplication;
     private final long mId;
+    private final long mTripId;
 
-    TripIndivViewModelFactory(Application application, long id) {
+    DestinationViewModelFactory(Application application, long id, long tripId) {
         this.mApplication = application;
         this.mId = id;
+        this.mTripId = tripId;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new TripIndivViewModel(mApplication, mId);
+        return (T) new DestinationViewModel(mApplication, mId, mTripId);
     }
 }
