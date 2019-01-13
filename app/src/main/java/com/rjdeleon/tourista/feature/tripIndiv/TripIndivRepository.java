@@ -6,25 +6,39 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.data.AppDatabase;
+import com.rjdeleon.tourista.data.Destination;
+import com.rjdeleon.tourista.data.DestinationDao;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
 
+import java.util.List;
+
 public class TripIndivRepository {
 
-    private final TripDao mDao;
+    private final TripDao mTripDao;
     private final LiveData<Trip> mTrip;
 
+    private final DestinationDao mDestDao;
+    private final LiveData<List<Destination>> mDestinations;
+
     TripIndivRepository(@NonNull Application application, long id) {
-        mDao = AppDatabase.getInstance(application.getApplicationContext()).tripDao();
-        mTrip = mDao.findById(id);
+        AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
+        mTripDao = db.tripDao();
+        mTrip = mTripDao.findById(id);
+        mDestDao = db.destinationDao();
+        mDestinations = mDestDao.findByTripId(id);
     }
 
     LiveData<Trip> getTrip() {
         return mTrip;
     }
 
+    LiveData<List<Destination>> getDestinations() {
+        return mDestinations;
+    }
+
     void save() {
-        new UpdateAsyncTask(mDao).execute(mTrip.getValue());
+        new UpdateAsyncTask(mTripDao).execute(mTrip.getValue());
     }
 
     private static class UpdateAsyncTask extends AsyncTask<Trip, Void, Void> {

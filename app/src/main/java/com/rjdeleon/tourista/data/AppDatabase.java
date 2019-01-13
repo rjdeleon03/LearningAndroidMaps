@@ -12,6 +12,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();
 
     public abstract TripDao tripDao();
+    public abstract DestinationDao destinationDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

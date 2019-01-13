@@ -61,17 +61,17 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListView
 
     class TripListViewHolder extends RecyclerView.ViewHolder {
 
-        private View itemView;
+        private View mItemView;
         TextView tripNameText;
 
         TripListViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemView = itemView;
-            tripNameText = itemView.findViewById(R.id.tripNameText);
+            mItemView = itemView;
+            tripNameText = mItemView.findViewById(R.id.tripNameText);
         }
 
         void setItemClickListener(View.OnClickListener listener) {
-            itemView.setOnClickListener(listener);
+            mItemView.setOnClickListener(listener);
         }
     }
 }
