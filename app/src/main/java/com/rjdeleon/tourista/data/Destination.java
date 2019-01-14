@@ -5,6 +5,11 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import org.joda.time.DateTime;
+
+import java.util.Date;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
@@ -21,44 +26,38 @@ public class Destination {
     private String name;
     private String address;
     private String notes;
-    private int year;
-    private int month;
-    private int day;
-    private int hour;
-    private int minute;
+
+    @TypeConverters({Converters.class})
+    private DateTime date;
     private long tripId;
 
     public Destination(long id, String name, String address, String notes,
-                       int year, int month, int day, int hour, int minute, long tripId) {
+                       DateTime date, long tripId) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.notes = notes;
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        this.hour = hour;
-        this.minute = minute;
+        this.date = date;
         this.tripId = tripId;
     }
 
     @Ignore
     public Destination(String name, String address, String notes,
-                       int year, int month, int day, int hour, int minute, long tripId) {
+                       DateTime date, long tripId) {
         this.name = name;
         this.address = address;
         this.notes = notes;
-        this.year = year;
-        this.month = month;
-        this.day = day;
-        this.hour = hour;
-        this.minute = minute;
+        this.date = date;
         this.tripId = tripId;
     }
 
     @Ignore
     public Destination(long tripId) {
         this.tripId = tripId;
+        this.name = "";
+        this.address = "";
+        this.notes = "";
+        this.date = DateTime.now();
     }
 
     public long getId() {
@@ -93,44 +92,12 @@ public class Destination {
         this.notes = notes;
     }
 
-    public int getYear() {
-        return year;
+    public DateTime getDate() {
+        return date;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
+    public void setDate(DateTime date) {
+        this.date = date;
     }
 
     public long getTripId() {
