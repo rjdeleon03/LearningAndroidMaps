@@ -10,7 +10,7 @@ import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.data.DestinationDao;
 
-public class DestinationRepository {
+class DestinationRepository {
 
     private final DestinationDao mDao;
     private final LiveData<Destination> mDestination;
@@ -19,10 +19,8 @@ public class DestinationRepository {
         mDao = AppDatabase.getInstance(application.getApplicationContext()).destinationDao();
 
         if (id == 0) {
-            Destination d = new Destination();
-            d.setTripId(tripId);
             MutableLiveData<Destination> md = new MutableLiveData<>();
-            md.setValue(d);
+            md.setValue(new Destination(tripId));
             mDestination = md;
         } else {
             mDestination = mDao.findById(id);
@@ -40,9 +38,9 @@ public class DestinationRepository {
 
         assert destination != null;
         if (destination.getId() == 0) {
-            new InsertAsyncTask(mDao).doInBackground(destination);
+            new InsertAsyncTask(mDao).execute(destination);
         } else {
-            new UpdateAsyncTask(mDao).doInBackground(destination);
+            new UpdateAsyncTask(mDao).execute(destination);
         }
     }
 

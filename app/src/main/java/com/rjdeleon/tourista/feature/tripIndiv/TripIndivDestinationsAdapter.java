@@ -33,7 +33,7 @@ public class TripIndivDestinationsAdapter
     @Override
     public void onBindViewHolder(@NonNull TripIndivDestinationsViewHolder tripIndivDestinationsViewHolder, int i) {
         Destination destination = mDestinations.get(i);
-        tripIndivDestinationsViewHolder.destinationNameText.setText(destination.getName());
+        tripIndivDestinationsViewHolder.destinationNameText.setText(destination.getNotes());
     }
 
     @Override

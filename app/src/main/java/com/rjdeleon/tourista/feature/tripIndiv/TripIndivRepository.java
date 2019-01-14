@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
-import com.rjdeleon.tourista.data.DestinationDao;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
 
@@ -17,16 +16,13 @@ public class TripIndivRepository {
 
     private final TripDao mTripDao;
     private final LiveData<Trip> mTrip;
-
-    private final DestinationDao mDestDao;
     private final LiveData<List<Destination>> mDestinations;
 
     TripIndivRepository(@NonNull Application application, long id) {
         AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
         mTripDao = db.tripDao();
         mTrip = mTripDao.findById(id);
-        mDestDao = db.destinationDao();
-        mDestinations = mDestDao.findByTripId(id);
+        mDestinations = db.destinationDao().findByTripId(id);
     }
 
     LiveData<Trip> getTrip() {

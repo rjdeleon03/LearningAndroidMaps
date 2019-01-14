@@ -57,7 +57,9 @@ public class Destination {
     }
 
     @Ignore
-    public Destination() {}
+    public Destination(long tripId) {
+        this.tripId = tripId;
+    }
 
     public long getId() {
         return id;

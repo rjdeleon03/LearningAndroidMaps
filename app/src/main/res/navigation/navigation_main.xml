@@ -22,5 +22,20 @@
         <argument
             android:name="tripId"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_tripIndivFragment_to_destinationFragment"
+            app:destination="@id/destinationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/destinationFragment"
+        android:name="com.rjdeleon.tourista.feature.destination.DestinationFragment"
+        android:label="fragment_destination"
+        tools:layout="@layout/fragment_destination" >
+        <argument
+            android:name="id"
+            android:defaultValue="0L" />
+        <argument
+            android:name="tripId"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>
