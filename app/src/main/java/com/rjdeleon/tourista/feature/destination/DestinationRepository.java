@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import com.rjdeleon.tourista.common.CustomMutableLiveData;
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.data.DestinationDao;
@@ -19,7 +20,7 @@ class DestinationRepository {
         mDao = AppDatabase.getInstance(application.getApplicationContext()).destinationDao();
 
         if (id == 0) {
-            MutableLiveData<Destination> md = new MutableLiveData<>();
+            CustomMutableLiveData<Destination> md = new CustomMutableLiveData<>();
             md.setValue(new Destination(tripId));
             mDestination = md;
         } else {

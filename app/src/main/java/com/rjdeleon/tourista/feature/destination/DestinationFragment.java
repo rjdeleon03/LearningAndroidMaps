@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.databinding.FragmentDestinationBinding;
 
 import org.joda.time.DateTime;
@@ -85,7 +86,8 @@ public class DestinationFragment extends Fragment {
         final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-
+                Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+                dest.setDate(dest.getDate().withDate(y, m+1, d));
             }
         };
 
@@ -107,7 +109,8 @@ public class DestinationFragment extends Fragment {
         final TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int h, int m) {
-
+                Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+                dest.setDate(dest.getDate().withHourOfDay(h).withMinuteOfHour(m));
             }
         };
 

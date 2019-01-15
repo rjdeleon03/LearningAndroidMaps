@@ -6,6 +6,10 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.rjdeleon.tourista.BR;
 
 import org.joda.time.DateTime;
 
@@ -19,7 +23,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         parentColumns = "id",
         childColumns = "tripId",
         onDelete = CASCADE)})
-public class Destination {
+public class Destination extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -57,7 +61,9 @@ public class Destination {
         this.name = "";
         this.address = "";
         this.notes = "";
-        this.date = DateTime.now();
+        this.date = DateTime.now()
+                .withSecondOfMinute(0)
+                .withMillisOfSecond(0);
     }
 
     public long getId() {
@@ -92,12 +98,14 @@ public class Destination {
         this.notes = notes;
     }
 
+    @Bindable
     public DateTime getDate() {
         return date;
     }
 
     public void setDate(DateTime date) {
         this.date = date;
+        notifyPropertyChanged(BR.date);
     }
 
     public long getTripId() {

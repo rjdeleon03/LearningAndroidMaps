@@ -69,7 +69,8 @@
                             android:text="@string/destination_date_format"
                             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent"
+                            dateText="@{viewModel.destination.date}"/>
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -93,7 +94,8 @@
                             android:text="@string/destination_time_format"
                             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent"
+                            timeText="@{viewModel.destination.date}"/>
 
                     </android.support.constraint.ConstraintLayout>
 
