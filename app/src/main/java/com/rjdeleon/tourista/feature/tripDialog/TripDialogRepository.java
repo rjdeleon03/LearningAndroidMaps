@@ -1,15 +1,16 @@
 package com.rjdeleon.tourista.feature.tripDialog;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.MutableLiveData;
 
 class TripDialogRepository {
 

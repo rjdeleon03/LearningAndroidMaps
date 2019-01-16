@@ -1,14 +1,15 @@
 package com.rjdeleon.tourista.feature.trips;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
 public class TripsRepository {
 

@@ -1,9 +1,7 @@
 package com.rjdeleon.tourista.feature.tripIndiv;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
@@ -11,6 +9,9 @@ import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
 public class TripIndivRepository {
 

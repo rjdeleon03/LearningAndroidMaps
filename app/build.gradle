@@ -6,6 +6,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.rjdeleon.tourista"
         minSdkVersion 19
@@ -28,7 +32,6 @@ ext {
     androidVersion = "1.0.0"
     androidVersionRc = "1.0.0-rc01"
     archComponentVersion = "2.0.0-rc01"
-    archLifecycleVersion = "1.1.1"
     navVersion = "1.0.0-alpha08"
 }
 

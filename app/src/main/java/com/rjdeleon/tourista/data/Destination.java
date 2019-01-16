@@ -1,21 +1,20 @@
 package com.rjdeleon.tourista.data;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-
 import com.rjdeleon.tourista.BR;
 
 import org.joda.time.DateTime;
 
-import java.util.Date;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.adapters.Converters;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-import static android.arch.persistence.room.ForeignKey.CASCADE;
+import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "destinations",
     indices = { @Index("tripId") },
@@ -31,7 +30,7 @@ public class Destination extends BaseObservable {
     private String address;
     private String notes;
 
-    @TypeConverters({Converters.class})
+    @TypeConverters({DateTimeConverters.class})
     private DateTime date;
     private long tripId;
 

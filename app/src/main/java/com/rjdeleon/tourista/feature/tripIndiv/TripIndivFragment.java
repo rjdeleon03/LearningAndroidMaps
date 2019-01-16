@@ -1,22 +1,21 @@
 package com.rjdeleon.tourista.feature.tripIndiv;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.databinding.FragmentTripIndivBinding;
 
 import java.util.List;
-import java.util.Objects;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 public class TripIndivFragment extends Fragment {

@@ -1,15 +1,15 @@
 package com.rjdeleon.tourista.feature.destination;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.common.CustomMutableLiveData;
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.data.DestinationDao;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
 class DestinationRepository {
 

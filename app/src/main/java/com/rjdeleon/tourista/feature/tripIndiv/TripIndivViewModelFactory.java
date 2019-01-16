@@ -1,11 +1,10 @@
 package com.rjdeleon.tourista.feature.tripIndiv;
 
 import android.app.Application;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
 
-import com.rjdeleon.tourista.feature.tripIndiv.TripIndivViewModel;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 public class TripIndivViewModelFactory implements ViewModelProvider.Factory {
 

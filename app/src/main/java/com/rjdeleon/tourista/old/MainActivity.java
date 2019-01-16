@@ -1,6 +1,5 @@
 package com.rjdeleon.tourista.old;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.android.gms.common.api.Status;
@@ -18,6 +17,8 @@ import com.rjdeleon.tourista.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 

@@ -19,12 +19,12 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".old.MainActivity">
-        </activity>
+        <!--<activity android:name=".old.MainActivity">-->
+        <!--</activity>-->
 
-        <activity
-            android:name=".old.PlacesMapActivity"
-            android:label="@string/title_activity_places_map"></activity>
+        <!--<activity-->
+            <!--android:name=".old.PlacesMapActivity"-->
+            <!--android:label="@string/title_activity_places_map"></activity>-->
 
         <activity android:name=".TripActivity">
             <intent-filter>

@@ -1,11 +1,12 @@
 package com.rjdeleon.tourista.feature.destination;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
 
 import com.rjdeleon.tourista.data.Destination;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 public class DestinationViewModel extends AndroidViewModel {
 

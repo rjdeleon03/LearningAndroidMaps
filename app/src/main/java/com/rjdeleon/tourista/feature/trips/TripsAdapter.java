@@ -1,8 +1,6 @@
 package com.rjdeleon.tourista.feature.trips;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,9 @@ import com.rjdeleon.tourista.data.Trip;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListViewHolder> {
 

@@ -1,9 +1,10 @@
 package com.rjdeleon.tourista.common;
 
-import android.databinding.BindingAdapter;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
+
+import androidx.databinding.BindingAdapter;
 
 public class BindingAdapters {
 

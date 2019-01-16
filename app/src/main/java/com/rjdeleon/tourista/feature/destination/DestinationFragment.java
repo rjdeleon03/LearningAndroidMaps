@@ -3,11 +3,7 @@ package com.rjdeleon.tourista.feature.destination;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +11,18 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.databinding.FragmentDestinationBinding;
 
 import org.joda.time.DateTime;
 
-import java.util.Date;
 import java.util.Objects;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 public class DestinationFragment extends Fragment {
