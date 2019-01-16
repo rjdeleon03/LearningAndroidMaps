@@ -24,13 +24,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DestinationFragment extends Fragment {
 
     private DestinationViewModel mViewModel;
-    private TextView mDestinationDateText;
-    private TextView mDestinationTimeText;
-    private FloatingActionButton mSaveButton;
 
     public DestinationFragment() {
         // Required empty public constructor
@@ -64,65 +63,43 @@ public class DestinationFragment extends Fragment {
         binding.setLifecycleOwner(this);
 
         View view = binding.getRoot();
-        setupDateTextView(view);
-        setupTimeTextView(view);
-        setupSaveButton(view);
+        ButterKnife.bind(this, view);
+
         return view;
     }
 
-    private void setupSaveButton(View view) {
-        mSaveButton = view.findViewById(R.id.saveDestinationButton);
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewModel.save();
-                Navigation.findNavController(v).navigateUp();
-            }
-        });
+    @OnClick(R.id.saveDestinationButton)
+    public void onSaveButtonClick(View view) {
+        mViewModel.save();
+        Navigation.findNavController(view).navigateUp();
     }
 
-    private void setupDateTextView(View view) {
-        final DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
-                dest.setDate(dest.getDate().withDate(y, m+1, d));
-            }
+    @OnClick(R.id.destinationDateText)
+    public void onDateTextClick() {
+        DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {
+            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+            dest.setDate(dest.getDate().withDate(y, m+1, d));
         };
 
-        mDestinationDateText = view.findViewById(R.id.destinationDateText);
-        mDestinationDateText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getDate();
+        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getDate();
 
-                DatePickerDialog d =
-                        new DatePickerDialog(Objects.requireNonNull(getContext()), listener,
-                                dt.getYear(), dt.getMonthOfYear() - 1, dt.getDayOfMonth());
-                d.show();
-            }
-        });
+        DatePickerDialog d =
+                new DatePickerDialog(Objects.requireNonNull(getContext()), listener,
+                        dt.getYear(), dt.getMonthOfYear() - 1, dt.getDayOfMonth());
+        d.show();
     }
 
-    private void setupTimeTextView(View view) {
-        final TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int h, int m) {
-                Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
-                dest.setDate(dest.getDate().withHourOfDay(h).withMinuteOfHour(m));
-            }
+    @OnClick(R.id.destinationTimeText)
+    public void onTimeTextClick() {
+        TimePickerDialog.OnTimeSetListener listener = (timePicker, h, m) -> {
+            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+            dest.setDate(dest.getDate().withHourOfDay(h).withMinuteOfHour(m));
         };
 
-        mDestinationTimeText = view.findViewById(R.id.destinationTimeText);
-        mDestinationTimeText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getDate();
-                TimePickerDialog d =
-                        new TimePickerDialog(Objects.requireNonNull(getContext()), listener,
-                                dt.getHourOfDay(), dt.getMinuteOfHour(), true);
-                d.show();
-            }
-        });
+        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getDate();
+        TimePickerDialog d =
+                new TimePickerDialog(Objects.requireNonNull(getContext()), listener,
+                        dt.getHourOfDay(), dt.getMinuteOfHour(), true);
+        d.show();
     }
 }

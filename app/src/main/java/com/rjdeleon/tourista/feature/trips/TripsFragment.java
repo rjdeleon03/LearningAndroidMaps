@@ -18,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +30,6 @@ public class TripsFragment extends Fragment {
 
     private TripsAdapter mAdapter;
     private TripsViewModel mViewModel;
-
-    private FloatingActionButton mAddTripButton;
 
     public TripsFragment() {
         // Required empty public constructor
@@ -67,20 +67,17 @@ public class TripsFragment extends Fragment {
         binding.tripsRecyclerView.setAdapter(mAdapter);
         binding.setLifecycleOwner(this);
 
-        setupAddTripButton(binding.getRoot());
-        return binding.getRoot();
+        View view = binding.getRoot();
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
-    private void setupAddTripButton(View view) {
-        mAddTripButton = view.findViewById(R.id.addTripButton);
-        mAddTripButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TripDialogFragment tdf = TripDialogFragment.newInstance();
-                assert getFragmentManager() != null;
-                tdf.show(getFragmentManager(), TripDialogFragment.TAG);
-            }
-        });
+    @OnClick(R.id.addTripButton)
+    public void onAddTripButtonClick(View view) {
+        TripDialogFragment tdf = TripDialogFragment.newInstance();
+        assert getFragmentManager() != null;
+        tdf.show(getFragmentManager(), TripDialogFragment.TAG);
     }
 
 }

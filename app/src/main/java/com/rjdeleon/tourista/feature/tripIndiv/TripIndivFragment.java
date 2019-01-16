@@ -17,12 +17,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class TripIndivFragment extends Fragment {
 
     private TripIndivViewModel mViewModel;
     private TripIndivDestinationsAdapter mAdapter;
-    private FloatingActionButton mAddDestButton;
 
     private long mId = 0;
 
@@ -40,9 +41,8 @@ public class TripIndivFragment extends Fragment {
 
         Bundle args = getArguments();
         if (args != null && getActivity() != null) {
-            long tripId = TripIndivFragmentArgs.fromBundle(getArguments()).getTripId();
 
-            mId = tripId;
+            mId = TripIndivFragmentArgs.fromBundle(getArguments()).getTripId();
             mAdapter = new TripIndivDestinationsAdapter(getContext());
             TripIndivViewModelFactory factory = new TripIndivViewModelFactory(
                     getActivity().getApplication(), mId);
@@ -65,21 +65,18 @@ public class TripIndivFragment extends Fragment {
         binding.destinationsRecyclerView.setAdapter(mAdapter);
         binding.setLifecycleOwner(this);
 
-        setupAddDestinationButton(binding.getRoot());
+        View view = binding.getRoot();
+        ButterKnife.bind(this, view);
 
-        return binding.getRoot();
+        return view;
     }
 
-    private void setupAddDestinationButton(View view) {
-        mAddDestButton = view.findViewById(R.id.addDestinationButton);
-        mAddDestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TripIndivFragmentDirections.ActionTripIndivFragmentToDestinationFragment action =
-                        TripIndivFragmentDirections.actionTripIndivFragmentToDestinationFragment();
-                action.setTripId(mId);
-                Navigation.findNavController(v).navigate(action);
-            }
-        });
+    @OnClick(R.id.addDestinationButton)
+    public void onAddDestinationClick(View view) {
+
+        TripIndivFragmentDirections.ActionTripIndivFragmentToDestinationFragment action =
+                TripIndivFragmentDirections.actionTripIndivFragmentToDestinationFragment();
+        action.setTripId(mId);
+        Navigation.findNavController(view).navigate(action);
     }
 }
