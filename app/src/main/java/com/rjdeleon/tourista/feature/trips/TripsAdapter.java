@@ -14,6 +14,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListViewHolder> {
 
@@ -48,26 +49,22 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripListView
     }
 
     private View.OnClickListener createItemClickListener(final long tripId) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TripsFragmentDirections.ActionTripsFragmentToTripIndivFragment action =
-                        TripsFragmentDirections.actionTripsFragmentToTripIndivFragment();
-                action.setTripId(tripId);
-                Navigation.findNavController(view).navigate(action);
-            }
+        return view -> {
+            TripsFragmentDirections.ActionTripsFragmentToTripIndivFragment action =
+                    TripsFragmentDirections.actionTripsFragmentToTripIndivFragment();
+            action.setTripId(tripId);
+            Navigation.findNavController(view).navigate(action);
         };
     }
 
     class TripListViewHolder extends RecyclerView.ViewHolder {
 
         private View mItemView;
-        TextView tripNameText;
+        @BindView(R.id.tripNameText) TextView tripNameText;
 
         TripListViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemView = itemView;
-            tripNameText = mItemView.findViewById(R.id.tripNameText);
         }
 
         void setItemClickListener(View.OnClickListener listener) {

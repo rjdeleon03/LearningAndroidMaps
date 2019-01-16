@@ -13,6 +13,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 
 public class TripIndivDestinationsAdapter
         extends RecyclerView.Adapter<TripIndivDestinationsAdapter.TripIndivDestinationsViewHolder> {
@@ -50,12 +51,11 @@ public class TripIndivDestinationsAdapter
     class TripIndivDestinationsViewHolder extends RecyclerView.ViewHolder {
 
         private View mItemView;
-        TextView destinationNameText;
+        @BindView(R.id.destinationNameText) TextView destinationNameText;
 
-        public TripIndivDestinationsViewHolder(@NonNull View itemView) {
+        TripIndivDestinationsViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemView = itemView;
-            destinationNameText = mItemView.findViewById(R.id.destinationNameText);
         }
 
         void setItemClickListener(View.OnClickListener listener) {
