@@ -14,6 +14,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class TripIndivDestinationsAdapter
         extends RecyclerView.Adapter<TripIndivDestinationsAdapter.TripIndivDestinationsViewHolder> {
@@ -56,6 +57,7 @@ public class TripIndivDestinationsAdapter
         TripIndivDestinationsViewHolder(@NonNull View itemView) {
             super(itemView);
             mItemView = itemView;
+            ButterKnife.bind(this, mItemView);
         }
 
         void setItemClickListener(View.OnClickListener listener) {

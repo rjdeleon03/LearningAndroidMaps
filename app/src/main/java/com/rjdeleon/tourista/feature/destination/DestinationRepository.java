@@ -3,7 +3,7 @@ package com.rjdeleon.tourista.feature.destination;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.rjdeleon.tourista.common.CustomMutableLiveData;
+import com.rjdeleon.tourista.core.common.CustomMutableLiveData;
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.data.DestinationDao;

@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.common;
+package com.rjdeleon.tourista.core.common;
 
 import android.widget.TextView;
 

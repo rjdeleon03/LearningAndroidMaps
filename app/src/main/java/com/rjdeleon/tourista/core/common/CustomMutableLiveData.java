@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.common;
+package com.rjdeleon.tourista.core.common;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Observable;
