@@ -29,8 +29,12 @@ public class BindingAdapters {
     @BindingAdapter("mapPlace")
     public static void setPlace(MapView view, Destination destination) {
         view.getMapAsync(googleMap -> {
-            LatLng latLng = new LatLng(destination.getLat(), destination.getLng());
             googleMap.clear();
+
+            if (destination.getName().isEmpty() || destination.getAddress().isEmpty())
+                return;
+
+            LatLng latLng = new LatLng(destination.getLat(), destination.getLng());
             googleMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title(destination.getName()));

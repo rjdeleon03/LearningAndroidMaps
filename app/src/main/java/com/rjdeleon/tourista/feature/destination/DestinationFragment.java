@@ -44,7 +44,7 @@ import butterknife.OnClick;
 
 import static com.rjdeleon.tourista.Constants.MAPVIEW_BUNDLE_KEY;
 
-public class DestinationFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
+public class DestinationFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "DestinationFragment";
     private DestinationViewModel mViewModel;
@@ -109,10 +109,6 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         }
 
         mapView.onSaveInstanceState(mapViewBundle);
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
     }
 
     @Override
@@ -186,7 +182,6 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
         mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
     }
 
     private void setupAutocompleteView() {
