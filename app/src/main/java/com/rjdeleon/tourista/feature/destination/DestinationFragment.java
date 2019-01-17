@@ -14,12 +14,16 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.GeoDataClient;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBufferResponse;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
+import com.rjdeleon.tourista.Constants;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.core.places.PlaceAutocompleteAdapter;
@@ -38,7 +42,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DestinationFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener {
+import static com.rjdeleon.tourista.Constants.MAPVIEW_BUNDLE_KEY;
+
+public class DestinationFragment extends BaseFragment implements GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
 
     private static final String TAG = "DestinationFragment";
     private DestinationViewModel mViewModel;
@@ -50,6 +56,9 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     @BindView(R.id.destinationAutocompleteText)
     AutoCompleteTextView autoCompleteTextView;
+
+    @BindView(R.id.destinationMap)
+    MapView mapView;
 
     public DestinationFragment() {
         // Required empty public constructor
@@ -68,7 +77,6 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
                     new DestinationViewModelFactory(getActivity().getApplication(), id, tripId);
             mViewModel = ViewModelProviders.of(this, factory).get(DestinationViewModel.class);
         }
-
         mGoogleApiClient = Places.getGeoDataClient(Objects.requireNonNull(getContext()));
         mPlaceAutocompleteAdapter =
                 new PlaceAutocompleteAdapter(getContext(), mGoogleApiClient, LAT_LNG_BOUNDS, null);
@@ -84,25 +92,51 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
-        autoCompleteTextView.setAdapter(mPlaceAutocompleteAdapter);
-        autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
 
-            final AutocompletePrediction prediction = mPlaceAutocompleteAdapter.getItem(position);
-            assert prediction != null;
-            Task<PlaceBufferResponse> placeResult = mGoogleApiClient.getPlaceById(prediction.getPlaceId());
-            placeResult.addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    PlaceBufferResponse places = task.getResult();
-                    assert places != null;
-                    mViewModel.setPlace(places.get(0));
-                    places.release();
-                } else {
-                    Log.e(TAG, "Place was not found.");
-                }
-            });
-        });
+        setupAutocompleteView();
+        setupGooglePlacesAndMaps(savedInstanceState);
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 
     @OnClick(R.id.saveDestinationButton)
@@ -143,5 +177,35 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    private void setupGooglePlacesAndMaps(Bundle savedInstanceState) {
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+        }
+        mapView.onCreate(mapViewBundle);
+        mapView.getMapAsync(this);
+    }
+
+    private void setupAutocompleteView() {
+        autoCompleteTextView.setAdapter(mPlaceAutocompleteAdapter);
+        autoCompleteTextView.setOnItemClickListener((parent, view1, position, id) -> {
+
+            final AutocompletePrediction prediction = mPlaceAutocompleteAdapter.getItem(position);
+            assert prediction != null;
+            Task<PlaceBufferResponse> placeResult = mGoogleApiClient.getPlaceById(prediction.getPlaceId());
+            placeResult.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    PlaceBufferResponse places = task.getResult();
+                    assert places != null;
+                    mViewModel.setPlace(places.get(0));
+                    places.release();
+                } else {
+                    Log.e(TAG, "Place was not found.");
+                }
+            });
+        });
     }
 }

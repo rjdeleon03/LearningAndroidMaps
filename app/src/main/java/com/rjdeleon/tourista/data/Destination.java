@@ -143,4 +143,12 @@ public class Destination extends BaseObservable {
     public void setTripId(long tripId) {
         this.tripId = tripId;
     }
+
+    public void setPlaceDetails(String name, String address, double lat, double lng) {
+        this.name = name;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+        notifyChange();
+    }
 }
