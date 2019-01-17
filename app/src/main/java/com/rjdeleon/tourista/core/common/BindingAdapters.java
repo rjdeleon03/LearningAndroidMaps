@@ -3,9 +3,7 @@ package com.rjdeleon.tourista.core.common;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rjdeleon.tourista.data.Destination;
@@ -38,7 +36,7 @@ public class BindingAdapters {
             googleMap.addMarker(new MarkerOptions()
                 .position(latLng)
                 .title(destination.getName()));
-            googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8.0f));
         });
     }
 }
