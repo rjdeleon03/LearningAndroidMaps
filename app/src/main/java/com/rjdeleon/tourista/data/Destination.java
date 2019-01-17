@@ -27,6 +27,9 @@ public class Destination extends BaseObservable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
+    private double lat;
+    private double lng;
+
     private String address;
     private String notes;
 
@@ -34,10 +37,12 @@ public class Destination extends BaseObservable {
     private DateTime date;
     private long tripId;
 
-    public Destination(long id, String name, String address, String notes,
-                       DateTime date, long tripId) {
+    public Destination(long id, String name, double lat, double lng,
+                       String address, String notes, DateTime date, long tripId) {
         this.id = id;
         this.name = name;
+        this.lat = lat;
+        this.lng = lng;
         this.address = address;
         this.notes = notes;
         this.date = date;
@@ -45,9 +50,11 @@ public class Destination extends BaseObservable {
     }
 
     @Ignore
-    public Destination(String name, String address, String notes,
-                       DateTime date, long tripId) {
+    public Destination(String name, double lat, double lng,
+                       String address, String notes, DateTime date, long tripId) {
         this.name = name;
+        this.lat = lat;
+        this.lng = lng;
         this.address = address;
         this.notes = notes;
         this.date = date;
@@ -73,12 +80,34 @@ public class Destination extends BaseObservable {
         this.id = id;
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
+    }
+
+    @Bindable
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+        notifyPropertyChanged(BR.lat);
+    }
+
+    @Bindable
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+        notifyPropertyChanged(BR.lng);
     }
 
     public String getAddress() {

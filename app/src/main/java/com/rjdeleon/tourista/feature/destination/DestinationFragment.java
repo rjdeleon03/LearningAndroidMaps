@@ -94,7 +94,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
                 if (task.isSuccessful()) {
                     PlaceBufferResponse places = task.getResult();
                     assert places != null;
-                    Place place = places.get(0);
+                    mViewModel.setPlace(places.get(0));
                     places.release();
                 } else {
                     Log.e(TAG, "Place was not found.");

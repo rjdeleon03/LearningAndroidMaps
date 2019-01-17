@@ -2,7 +2,10 @@ package com.rjdeleon.tourista.feature.destination;
 
 import android.app.Application;
 
+import com.google.android.gms.location.places.Place;
 import com.rjdeleon.tourista.data.Destination;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -25,5 +28,14 @@ public class DestinationViewModel extends AndroidViewModel {
 
     public void save() {
         mRepository.save();
+    }
+
+    public void setPlace(Place place) {
+        Destination destination = mDestination.getValue();
+        assert destination != null;
+        destination.setName(place.getName().toString());
+        destination.setAddress(Objects.requireNonNull(place.getAddress()).toString());
+        destination.setLat(place.getLatLng().latitude);
+        destination.setLng(place.getLatLng().longitude);
     }
 }
