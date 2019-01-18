@@ -26,6 +26,7 @@ public class Destination extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
+    private String placeId;
     private String name;
     private double lat;
     private double lng;
@@ -37,9 +38,10 @@ public class Destination extends BaseObservable {
     private DateTime date;
     private long tripId;
 
-    public Destination(long id, String name, double lat, double lng,
+    public Destination(long id, String placeId, String name, double lat, double lng,
                        String address, String notes, DateTime date, long tripId) {
         this.id = id;
+        this.placeId = placeId;
         this.name = name;
         this.lat = lat;
         this.lng = lng;
@@ -50,9 +52,10 @@ public class Destination extends BaseObservable {
     }
 
     @Ignore
-    public Destination(String name, double lat, double lng,
+    public Destination(String name, String placeId, double lat, double lng,
                        String address, String notes, DateTime date, long tripId) {
         this.name = name;
+        this.placeId = placeId;
         this.lat = lat;
         this.lng = lng;
         this.address = address;
@@ -64,6 +67,7 @@ public class Destination extends BaseObservable {
     @Ignore
     public Destination(long tripId) {
         this.tripId = tripId;
+        this.placeId = "";
         this.name = "";
         this.address = "";
         this.notes = "";
@@ -78,6 +82,14 @@ public class Destination extends BaseObservable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
     }
 
     @Bindable
@@ -144,7 +156,9 @@ public class Destination extends BaseObservable {
         this.tripId = tripId;
     }
 
-    public void setPlaceDetails(String name, String address, double lat, double lng) {
+    public void setPlaceDetails(String placeId, String name,
+                                String address, double lat, double lng) {
+        this.placeId = placeId;
         this.name = name;
         this.address = address;
         this.lat = lat;
