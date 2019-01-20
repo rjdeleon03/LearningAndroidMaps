@@ -1,11 +1,13 @@
 package com.rjdeleon.tourista.core.common;
 
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.data.Destination;
 
 import org.joda.time.DateTime;
@@ -14,18 +16,34 @@ import androidx.databinding.BindingAdapter;
 
 public class BindingAdapters {
 
+    @BindingAdapter("placeText")
+    public static void setPlaceText(AutoCompleteTextView view, String placeName) {
+        if (placeName == null) return;
+        view.setText(placeName);
+        view.clearFocus();
+    }
+
     @BindingAdapter("dateText")
     public static void setDateText(TextView view, DateTime dateTime) {
+        if (dateTime == null) {
+            view.setText(R.string.text_loading);
+            return;
+        }
         view.setText(dateTime.toString("yyyy/MM/dd"));
     }
 
     @BindingAdapter("timeText")
     public static void setTimeText(TextView view, DateTime dateTime) {
+        if (dateTime == null) {
+            view.setText(R.string.text_loading);
+            return;
+        }
         view.setText(dateTime.toString("hh:mm"));
     }
 
     @BindingAdapter("mapPlace")
     public static void setPlace(MapView view, Destination destination) {
+        if (destination == null) return;
         view.getMapAsync(googleMap -> {
             googleMap.clear();
 

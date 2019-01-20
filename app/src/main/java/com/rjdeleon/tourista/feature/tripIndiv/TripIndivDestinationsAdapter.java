@@ -12,6 +12,7 @@ import com.rjdeleon.tourista.data.Destination;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ public class TripIndivDestinationsAdapter
     private List<Destination> mDestinations;
     private LayoutInflater mInflater;
 
-    public TripIndivDestinationsAdapter(Context context) {
+    TripIndivDestinationsAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
@@ -37,6 +38,7 @@ public class TripIndivDestinationsAdapter
     public void onBindViewHolder(@NonNull TripIndivDestinationsViewHolder tripIndivDestinationsViewHolder, int i) {
         Destination destination = mDestinations.get(i);
         tripIndivDestinationsViewHolder.destinationNameText.setText(destination.getNotes());
+        tripIndivDestinationsViewHolder.setItemClickListener(createOnItemOnClickListener(destination.getId()));
     }
 
     @Override
@@ -44,9 +46,18 @@ public class TripIndivDestinationsAdapter
         return mDestinations == null ? 0 : mDestinations.size();
     }
 
-    public void setDestinations(List<Destination> destinations) {
+    void setDestinations(List<Destination> destinations) {
         mDestinations = destinations;
         notifyDataSetChanged();
+    }
+
+    private View.OnClickListener createOnItemOnClickListener(final long id) {
+        return view -> {
+            TripIndivFragmentDirections.ActionTripIndivFragmentToDestinationFragment action =
+                    TripIndivFragmentDirections.actionTripIndivFragmentToDestinationFragment();
+            action.setId(id);
+            Navigation.findNavController(view).navigate(action);
+        };
     }
 
     class TripIndivDestinationsViewHolder extends RecyclerView.ViewHolder {

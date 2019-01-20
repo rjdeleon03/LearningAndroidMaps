@@ -10,13 +10,14 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 public class DestinationViewModel extends AndroidViewModel {
 
     private final LiveData<Destination> mDestination;
     private final DestinationRepository mRepository;
 
-    public DestinationViewModel(@NonNull Application application, long id, long tripId) {
+    DestinationViewModel(@NonNull Application application, long id, long tripId) {
         super(application);
         mRepository = new DestinationRepository(application, id, tripId);
         mDestination = mRepository.getDestination();
@@ -26,15 +27,16 @@ public class DestinationViewModel extends AndroidViewModel {
         return mDestination;
     }
 
-    public void save() {
+    void save() {
         mRepository.save();
     }
 
-    public void setPlace(Place place) {
+    void setPlace(Place place) {
         Destination destination = mDestination.getValue();
         assert destination != null;
-        destination.setPlaceDetails(place.getName().toString(),
+        destination.setPlaceDetails(
                 place.getId(),
+                place.getName().toString(),
                 place.getAddress() != null ? place.getAddress().toString() : "",
                 place.getLatLng().latitude,
                 place.getLatLng().longitude);

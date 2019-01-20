@@ -48,7 +48,9 @@
                     android:id="@+id/destinationAutocompleteText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="@dimen/text_field_size"/>
+                    android:textSize="@dimen/text_field_size"
+                    android:hint="@string/destination_name"
+                    placeText="@{viewModel.destination.name}"/>
 
             </LinearLayout>
 
