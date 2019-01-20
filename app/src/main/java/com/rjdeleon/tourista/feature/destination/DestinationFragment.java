@@ -36,6 +36,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import butterknife.BindView;
@@ -114,6 +115,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @Override
     public void onResume() {
         super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         mapView.onResume();
     }
 
@@ -126,6 +128,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @Override
     public void onStop() {
         super.onStop();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         mapView.onStop();
     }
 

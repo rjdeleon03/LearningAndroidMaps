@@ -1,17 +1,31 @@
 package com.rjdeleon.tourista.core.base;
 
+import android.content.Context;
+import android.hardware.input.InputManager;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.Objects;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 public class BaseFragment extends Fragment {
 
-    protected void hideKeyboard()
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideKeyboard();
+    }
+
+    private void hideKeyboard()
     {
-        Objects.requireNonNull(getActivity())
-                .getWindow()
-                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        FragmentActivity activity = Objects.requireNonNull(getActivity());
+        InputMethodManager manager = ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE));
+
+        assert manager != null;
+        manager.hideSoftInputFromWindow(Objects
+                .requireNonNull(activity.getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }
