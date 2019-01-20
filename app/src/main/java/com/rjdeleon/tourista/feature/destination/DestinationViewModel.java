@@ -33,8 +33,8 @@ public class DestinationViewModel extends AndroidViewModel {
     public void setPlace(Place place) {
         Destination destination = mDestination.getValue();
         assert destination != null;
-        destination.setPlaceDetails(place.getName().toString(),
-                place.getId(),
+        destination.setPlaceDetails(place.getId(),
+                place.getName().toString(),
                 place.getAddress() != null ? place.getAddress().toString() : "",
                 place.getLatLng().latitude,
                 place.getLatLng().longitude);
