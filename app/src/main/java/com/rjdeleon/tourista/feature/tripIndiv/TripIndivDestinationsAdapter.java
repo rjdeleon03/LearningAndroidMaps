@@ -38,7 +38,8 @@ public class TripIndivDestinationsAdapter
     public void onBindViewHolder(@NonNull TripIndivDestinationsViewHolder tripIndivDestinationsViewHolder, int i) {
         Destination destination = mDestinations.get(i);
         tripIndivDestinationsViewHolder.destinationNameText.setText(destination.getNotes());
-        tripIndivDestinationsViewHolder.setItemClickListener(createOnItemOnClickListener(destination.getId()));
+        tripIndivDestinationsViewHolder
+                .setItemClickListener(createItemClickListener(destination.getId()));
     }
 
     @Override
@@ -51,7 +52,7 @@ public class TripIndivDestinationsAdapter
         notifyDataSetChanged();
     }
 
-    private View.OnClickListener createOnItemOnClickListener(final long id) {
+    private View.OnClickListener createItemClickListener(final long id) {
         return view -> {
             TripIndivFragmentDirections.ActionTripIndivFragmentToDestinationFragment action =
                     TripIndivFragmentDirections.actionTripIndivFragmentToDestinationFragment();
