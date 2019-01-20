@@ -51,10 +51,10 @@ public class BindingAdapters {
                 return;
 
             LatLng latLng = new LatLng(destination.getLat(), destination.getLng());
-            googleMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .title(destination.getName()));
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8.0f));
+            googleMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(destination.getName()));
         });
     }
 }

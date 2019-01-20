@@ -115,7 +115,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        setToolbarVisibility(ToolbarVisibility.GONE);
         mapView.onResume();
     }
 
@@ -128,7 +128,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        setToolbarVisibility(ToolbarVisibility.VISIBLE);
         mapView.onStop();
     }
 

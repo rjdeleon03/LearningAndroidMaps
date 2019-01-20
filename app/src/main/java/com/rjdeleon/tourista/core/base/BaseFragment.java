@@ -8,10 +8,16 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.Objects;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 public class BaseFragment extends Fragment {
+
+    protected enum ToolbarVisibility {
+        VISIBLE,
+        GONE
+    }
 
     @Override
     public void onStop() {
@@ -27,5 +33,14 @@ public class BaseFragment extends Fragment {
         assert manager != null;
         manager.hideSoftInputFromWindow(Objects
                 .requireNonNull(activity.getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    protected void setToolbarVisibility(ToolbarVisibility visibility) {
+
+        if (visibility == ToolbarVisibility.VISIBLE) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        } else {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        }
     }
 }
