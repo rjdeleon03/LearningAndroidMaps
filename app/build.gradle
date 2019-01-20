@@ -1,7 +1,15 @@
 apply plugin: 'com.android.application'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.rjdeleon.tourista"
         minSdkVersion 19
@@ -21,14 +29,18 @@ android {
 
 ext {
     roomVersion = "1.1.1"
+    androidVersion = "1.0.0"
+    androidVersionRc = "1.0.0-rc01"
+    archComponentVersion = "2.0.0-rc01"
+    navVersion = "1.0.0-alpha08"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:support-v13:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:' + androidVersion
+    implementation 'com.google.android.material:material:' + androidVersionRc
+    implementation 'androidx.legacy:legacy-support-v13:' + androidVersion
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // Places SDK
     implementation 'com.google.android.gms:play-services-places:16.0.0'
@@ -36,12 +48,28 @@ dependencies {
     // Maps SDK
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
 
-    // Room
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    // Google Room
+    implementation 'androidx.room:room-runtime:' + archComponentVersion
+    annotationProcessor 'androidx.room:room-compiler:' + archComponentVersion
 
-    implementation 'com.android.support:support-vector-drawable:28.0.0'
+    // Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:' + archComponentVersion
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:' + archComponentVersion
+
+    // Navigation
+    implementation 'android.arch.navigation:navigation-fragment:' + navVersion
+    implementation 'android.arch.navigation:navigation-ui:' + navVersion
+
+    // Joda time
+    implementation 'joda-time:joda-time:2.10.1'
+
+    // Butter Knife
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+    implementation 'androidx.vectordrawable:vectordrawable:' + androidVersion
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

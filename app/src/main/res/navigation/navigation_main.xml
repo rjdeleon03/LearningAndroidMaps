@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/tripsFragment">
+
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.rjdeleon.tourista.feature.trips.TripsFragment"
+        android:label="fragment_trips"
+        tools:layout="@layout/fragment_trips" >
+        <action
+            android:id="@+id/action_tripsFragment_to_tripIndivFragment"
+            app:destination="@id/tripIndivFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripIndivFragment"
+        android:name="com.rjdeleon.tourista.feature.tripIndiv.TripIndivFragment"
+        android:label="fragment_trip_indiv"
+        tools:layout="@layout/fragment_trip_indiv" >
+        <argument
+            android:name="tripId"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_tripIndivFragment_to_destinationFragment"
+            app:destination="@id/destinationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/destinationFragment"
+        android:name="com.rjdeleon.tourista.feature.destination.DestinationFragment"
+        android:label="fragment_destination"
+        tools:layout="@layout/fragment_destination" >
+        <argument
+            android:name="id"
+            android:defaultValue="0L" />
+        <argument
+            android:name="tripId"
+            android:defaultValue="0L" />
+    </fragment>
+</navigation>

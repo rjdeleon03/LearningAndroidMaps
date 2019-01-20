@@ -4,6 +4,7 @@
     <string name="title_places">Places</string>
     <string name="title_map">Map</string>
 
+    <!-- TODO: Remove old strings -->
     <string name="date_field">Date</string>
     <string name="date_field_def">YYYY/MM/DD</string>
     <string name="date_field_template">%1$d/%2$02d/%3$02d</string>
@@ -11,4 +12,15 @@
     <string name="time_field_def">12:00 PM</string>
     <string name="time_field_template">%1$d:%2$02d %3$s</string>
     <string name="notes_field">Notes</string>
+
+    <!-- New strings -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialog_trip_name">Trip Name</string>
+    <string name="destination_notes">Notes</string>
+    <string name="destination_time">Time</string>
+    <string name="destination_date">Date</string>
+    <string name="destination_date_format">YYYY/MM/DD</string>
+    <string name="destination_time_format">HH:MM</string>
+    <string name="text_loading">Loading...</string>
+    <string name="destination_name">Place</string>
 </resources>

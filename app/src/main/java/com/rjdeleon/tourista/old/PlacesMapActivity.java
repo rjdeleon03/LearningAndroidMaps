@@ -1,11 +1,12 @@
-package com.rjdeleon.tourista;
+package com.rjdeleon.tourista.old;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.rjdeleon.tourista.R;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PlacesMapActivity extends AppCompatActivity {
 
