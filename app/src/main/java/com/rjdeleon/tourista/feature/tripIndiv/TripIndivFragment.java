@@ -15,6 +15,7 @@ import com.rjdeleon.tourista.databinding.FragmentTripIndivBinding;
 import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import butterknife.ButterKnife;

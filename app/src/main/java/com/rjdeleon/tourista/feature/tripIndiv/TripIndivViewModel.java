@@ -17,7 +17,7 @@ public class TripIndivViewModel extends AndroidViewModel {
     private final LiveData<List<Destination>> mDestinations;
     private final TripIndivRepository mRepository;
 
-    public TripIndivViewModel(@NonNull Application application, long id) {
+    TripIndivViewModel(@NonNull Application application, long id) {
         super(application);
         mRepository = new TripIndivRepository(application, id);
         mTrip = mRepository.getTrip();
@@ -28,7 +28,7 @@ public class TripIndivViewModel extends AndroidViewModel {
         return mTrip;
     }
 
-    public LiveData<List<Destination>> getDestinations() {
+    LiveData<List<Destination>> getDestinations() {
         return mDestinations;
     }
 

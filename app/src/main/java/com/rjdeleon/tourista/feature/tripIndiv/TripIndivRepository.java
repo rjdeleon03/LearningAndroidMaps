@@ -13,7 +13,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-public class TripIndivRepository {
+class TripIndivRepository {
 
     private final TripDao mTripDao;
     private final LiveData<Trip> mTrip;
