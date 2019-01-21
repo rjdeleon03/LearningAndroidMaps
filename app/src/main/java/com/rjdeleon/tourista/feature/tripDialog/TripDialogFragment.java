@@ -21,9 +21,19 @@ public class TripDialogFragment extends DialogFragment {
     // region Static methods and properties
 
     public static final String TAG = "TRIP_DIALOG";
+    private static final String TAG_TRIP_ID = "TRIP_ID";
 
     public static TripDialogFragment newInstance() {
         return new TripDialogFragment();
+    }
+
+    public static TripDialogFragment newInstance(long id) {
+
+        TripDialogFragment fragment = new TripDialogFragment();
+        Bundle args = new Bundle();
+        args.putLong(TAG_TRIP_ID, id);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     // endregion
@@ -36,22 +46,23 @@ public class TripDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
                 .setTitle("Create Trip")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mViewModel.save();
-                        dismiss();
-                    }
+                .setPositiveButton("OK", (dialogInterface, i) -> {
+                    mViewModel.save();
+                    dismiss();
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dismiss();
-                    }
-                });
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dismiss());
+
+        // Get the trip ID
+        long tripId = 0;
+        Bundle args = getArguments();
+        if (args != null && getActivity() != null) {
+            tripId = args.getLong(TAG_TRIP_ID);
+        }
 
         // Set the viewModel
-        mViewModel = ViewModelProviders.of(this).get(TripDialogViewModel.class);
+        TripDialogViewModelFactory factory =
+                new TripDialogViewModelFactory(Objects.requireNonNull(getActivity()).getApplication(), tripId);
+        mViewModel = ViewModelProviders.of(this, factory).get(TripDialogViewModel.class);
 
         LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
         DialogTripBinding binding = DialogTripBinding.inflate(inflater);

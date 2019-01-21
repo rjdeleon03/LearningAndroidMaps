@@ -9,18 +9,22 @@ import com.rjdeleon.tourista.data.TripDao;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 class TripDialogRepository {
 
     private final TripDao mDao;
-    private final MutableLiveData<Trip> mTrip;
+    private final LiveData<Trip> mTrip;
 
-    TripDialogRepository(@NonNull Application application) {
+    TripDialogRepository(@NonNull Application application, long id) {
         mDao = AppDatabase.getInstance(application.getApplicationContext()).tripDao();
-        mTrip = new MediatorLiveData<>();
-        mTrip.setValue(new Trip());
+        if (id == 0) {
+            MutableLiveData<Trip> tripLd = new MutableLiveData<>();
+            tripLd.setValue(new Trip());
+            mTrip = tripLd;
+        } else {
+            mTrip = mDao.findById(id);
+        }
     }
 
     LiveData<Trip> getTrip() {
@@ -41,7 +45,12 @@ class TripDialogRepository {
 
         @Override
         protected Void doInBackground(Trip... trips) {
-            mDao.insert(trips[0]);
+            Trip trip = trips[0];
+            if (trip.getId() == 0) {
+                mDao.insert(trip);
+            } else {
+                mDao.update(trip);
+            }
             return null;
         }
     }

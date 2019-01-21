@@ -13,9 +13,9 @@ public class TripDialogViewModel extends AndroidViewModel {
     private final LiveData<Trip> mTrip;
     private final TripDialogRepository mRepository;
 
-    public TripDialogViewModel(@NonNull Application application) {
+    public TripDialogViewModel(@NonNull Application application, long id) {
         super(application);
-        mRepository = new TripDialogRepository(application);
+        mRepository = new TripDialogRepository(application, id);
         mTrip = mRepository.getTrip();
     }
 

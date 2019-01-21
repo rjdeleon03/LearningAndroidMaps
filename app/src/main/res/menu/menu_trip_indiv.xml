@@ -6,7 +6,6 @@
         android:id="@+id/action_edit_trip_name"
         android:icon="@drawable/ic_edit_black_24dp"
         android:title="@string/trip_indiv_edit"
-        app:actionViewClass="android.widget.EditText"
         app:showAsAction="ifRoom|collapseActionView"/>
 
 </menu>

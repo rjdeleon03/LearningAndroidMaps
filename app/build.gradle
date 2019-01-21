@@ -50,6 +50,7 @@ dependencies {
 
     // Google Room
     implementation 'androidx.room:room-runtime:' + archComponentVersion
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
     annotationProcessor 'androidx.room:room-compiler:' + archComponentVersion
 
     // Lifecycle

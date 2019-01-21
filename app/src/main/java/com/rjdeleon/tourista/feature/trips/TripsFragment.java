@@ -6,26 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rjdeleon.tourista.R;
-import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.databinding.FragmentTripsBinding;
 import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
-import java.util.List;
+import java.util.Objects;
 
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TripsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TripsFragment extends Fragment {
 
     private TripsAdapter mAdapter;
@@ -35,28 +27,13 @@ public class TripsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     * @return A new instance of fragment TripsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TripsFragment newInstance() {
-        return new TripsFragment();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mAdapter = new TripsAdapter(getContext());
         mViewModel = ViewModelProviders.of(this).get(TripsViewModel.class);
-        mViewModel.getTrips().observe(this, new Observer<List<Trip>>() {
-            @Override
-            public void onChanged(@Nullable List<Trip> trips) {
-                mAdapter.setTrips(trips);
-            }
-        });
+        mViewModel.getTrips().observe(this, trips -> mAdapter.setTrips(trips));
     }
 
     @Override
@@ -73,8 +50,16 @@ public class TripsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Objects.requireNonNull(
+                (Objects.requireNonNull((AppCompatActivity) getActivity()))
+                        .getSupportActionBar()).setTitle(R.string.app_name);
+    }
+
     @OnClick(R.id.addTripButton)
-    public void onAddTripButtonClick(View view) {
+    void onAddTripButtonClick() {
         TripDialogFragment tdf = TripDialogFragment.newInstance();
         assert getFragmentManager() != null;
         tdf.show(getFragmentManager(), TripDialogFragment.TAG);

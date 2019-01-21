@@ -4,21 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
-import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.databinding.FragmentTripIndivBinding;
-
-import java.util.List;
+import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import butterknife.ButterKnife;
@@ -29,16 +25,10 @@ public class TripIndivFragment extends BaseFragment {
     private TripIndivViewModel mViewModel;
     private TripIndivDestinationsAdapter mAdapter;
 
-    private EditText tripNameText;
-
     private long mId = 0;
 
     public TripIndivFragment() {
         // Required empty public constructor
-    }
-
-    public static TripIndivFragment newInstance() {
-        return new TripIndivFragment();
     }
 
     @Override
@@ -54,12 +44,7 @@ public class TripIndivFragment extends BaseFragment {
                     getActivity().getApplication(), mId);
             mViewModel = ViewModelProviders.of(this, factory).get(TripIndivViewModel.class);
             mViewModel.getDestinations().observe(this, destinations -> mAdapter.setDestinations(destinations));
-            mViewModel.getTrip().observe(this, trip -> {
-                getActionBar().setTitle(trip.getName());
-
-                if (tripNameText != null)
-                    tripNameText.setText(trip.getName());
-            });
+            mViewModel.getTrip().observe(this, trip -> getActionBar().setTitle(trip.getName()));
 
         }
     }
@@ -91,15 +76,18 @@ public class TripIndivFragment extends BaseFragment {
         getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
-    onBackP
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_trip_indiv, menu);
 
-        tripNameText = (EditText) menu.findItem(R.id.action_edit_trip_name).getActionView();
-        tripNameText.setHint(R.string.dialog_trip_name);
+        menu.findItem(R.id.action_edit_trip_name).setOnMenuItemClickListener(item -> {
+
+            TripDialogFragment tdf = TripDialogFragment.newInstance(mId);
+            assert getFragmentManager() != null;
+            tdf.show(getFragmentManager(), TripDialogFragment.TAG);
+            return true;
+        });
     }
 
     @OnClick(R.id.addDestinationButton)
