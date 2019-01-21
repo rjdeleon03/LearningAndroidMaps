@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import java.util.Objects;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -25,8 +26,7 @@ public class BaseFragment extends Fragment {
         hideKeyboard();
     }
 
-    private void hideKeyboard()
-    {
+    private void hideKeyboard() {
         FragmentActivity activity = Objects.requireNonNull(getActivity());
         InputMethodManager manager = ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE));
 
@@ -36,11 +36,14 @@ public class BaseFragment extends Fragment {
     }
 
     protected void setToolbarVisibility(ToolbarVisibility visibility) {
-
         if (visibility == ToolbarVisibility.VISIBLE) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+            getActionBar().show();
         } else {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+            getActionBar().hide();
         }
+    }
+
+    protected ActionBar getActionBar() {
+        return ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 }

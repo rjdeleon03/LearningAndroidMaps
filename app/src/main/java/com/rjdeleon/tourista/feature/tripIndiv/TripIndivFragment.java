@@ -2,11 +2,15 @@ package com.rjdeleon.tourista.feature.tripIndiv;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.databinding.FragmentTripIndivBinding;
 
@@ -20,10 +24,12 @@ import androidx.navigation.Navigation;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TripIndivFragment extends Fragment {
+public class TripIndivFragment extends BaseFragment {
 
     private TripIndivViewModel mViewModel;
     private TripIndivDestinationsAdapter mAdapter;
+
+    private EditText tripNameText;
 
     private long mId = 0;
 
@@ -47,11 +53,12 @@ public class TripIndivFragment extends Fragment {
             TripIndivViewModelFactory factory = new TripIndivViewModelFactory(
                     getActivity().getApplication(), mId);
             mViewModel = ViewModelProviders.of(this, factory).get(TripIndivViewModel.class);
-            mViewModel.getDestinations().observe(this, new Observer<List<Destination>>() {
-                @Override
-                public void onChanged(@Nullable List<Destination> destinations) {
-                    mAdapter.setDestinations(destinations);
-                }
+            mViewModel.getDestinations().observe(this, destinations -> mAdapter.setDestinations(destinations));
+            mViewModel.getTrip().observe(this, trip -> {
+                getActionBar().setTitle(trip.getName());
+
+                if (tripNameText != null)
+                    tripNameText.setText(trip.getName());
             });
 
         }
@@ -67,12 +74,36 @@ public class TripIndivFragment extends Fragment {
 
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
+        setHasOptionsMenu(true);
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+
+    onBackP
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_trip_indiv, menu);
+
+        tripNameText = (EditText) menu.findItem(R.id.action_edit_trip_name).getActionView();
+        tripNameText.setHint(R.string.dialog_trip_name);
+    }
+
     @OnClick(R.id.addDestinationButton)
-    public void onAddDestinationClick(View view) {
+    void onAddDestinationClick(View view) {
 
         TripIndivFragmentDirections.ActionTripIndivFragmentToDestinationFragment action =
                 TripIndivFragmentDirections.actionTripIndivFragmentToDestinationFragment();

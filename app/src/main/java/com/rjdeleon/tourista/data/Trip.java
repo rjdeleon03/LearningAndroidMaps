@@ -1,11 +1,15 @@
 package com.rjdeleon.tourista.data;
 
+import com.rjdeleon.tourista.BR;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "trips")
-public class Trip {
+public class Trip extends BaseObservable {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -33,11 +37,13 @@ public class Trip {
         this.id = id;
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 }
