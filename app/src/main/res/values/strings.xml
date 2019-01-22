@@ -24,4 +24,5 @@
     <string name="text_loading">Loading...</string>
     <string name="destination_name">Place</string>
     <string name="trip_indiv_edit">Edit</string>
+    <string name="error_calendar_permission">Calendar integration is not permitted.</string>
 </resources>

@@ -5,12 +5,9 @@ import android.app.Application;
 import com.google.android.gms.location.places.Place;
 import com.rjdeleon.tourista.data.Destination;
 
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 public class DestinationViewModel extends AndroidViewModel {
 
