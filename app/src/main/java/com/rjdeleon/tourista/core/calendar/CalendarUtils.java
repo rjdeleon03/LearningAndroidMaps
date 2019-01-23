@@ -1,10 +1,11 @@
 package com.rjdeleon.tourista.core.calendar;
 
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CalendarUtils {
 
@@ -12,7 +13,7 @@ public class CalendarUtils {
     private static final String NAME = "tourista_calendar";
     private static final String DISPLAY_NAME = "Tourista Calendar";
 
-    public static void createCalendar(AppCompatActivity activity, String account) {
+    public static void createCalendar(Activity activity, String account) {
 
         // TODO: Check if calendar exists
 
@@ -34,9 +35,40 @@ public class CalendarUtils {
         activity.getContentResolver().insert(uri, cv);
     }
 
-    private static void verifyCalendarExists() {}
+    private static boolean verifyCalendarExists(Activity activity, String account) {
 
-    private static void create() {}
+        Cursor cursor = null;
+        ContentResolver cr = activity.getContentResolver();
+
+        String[] projection = {
+                CalendarContract.Calendars.ALLOWED_ATTENDEE_TYPES,
+                CalendarContract.Calendars.ACCOUNT_NAME,
+                CalendarContract.Calendars.NAME,
+                CalendarContract.Calendars.CALENDAR_LOCATION,
+                CalendarContract.Calendars.CALENDAR_TIME_ZONE
+        };
+
+        Uri uri = CalendarContract.Calendars.CONTENT_URI;
+        String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND ("
+                + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
+                + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";
+        String[] selectionArgs = new String[]{account, ACCOUNT_TYPE,
+                account};
+
+        cursor = cr.query(uri, projection, selection, selectionArgs, null);
+
+        if (cursor == null)
+            return false;
+
+        while (cursor.moveToNext()) {
+            if (cursor.getString(cursor.getColumnIndex(CalendarContract.Calendars.NAME)).equals(NAME))
+                return true;
+        }
+
+        return false;
+    }
+
+    public static void create() {}
 
     private static void readEvent() {}
 
