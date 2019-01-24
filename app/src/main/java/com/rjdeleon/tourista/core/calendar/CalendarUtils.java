@@ -1,7 +1,9 @@
 package com.rjdeleon.tourista.core.calendar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -13,9 +15,7 @@ public class CalendarUtils {
     private static final String NAME = "tourista_calendar";
     private static final String DISPLAY_NAME = "Tourista Calendar";
 
-    public static void createCalendar(Activity activity, String account) {
-
-        // TODO: Check if calendar exists
+    public static long createCalendar(Activity activity, String account) {
 
         ContentValues cv = new ContentValues();
         cv.put(CalendarContract.Calendars.ACCOUNT_NAME, account);
@@ -32,20 +32,19 @@ public class CalendarUtils {
         uri = uri.buildUpon().appendQueryParameter(android.provider.CalendarContract.CALLER_IS_SYNCADAPTER,"true")
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, account)
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, account).build();
-        activity.getContentResolver().insert(uri, cv);
+        Uri calendarUri = activity.getContentResolver().insert(uri, cv);
+        return ContentUris.parseId(calendarUri);
     }
 
-    private static boolean verifyCalendarExists(Activity activity, String account) {
+    @SuppressLint("MissingPermission")
+    public static boolean verifyCalendarExists(Activity activity, String account) {
 
         Cursor cursor = null;
         ContentResolver cr = activity.getContentResolver();
 
         String[] projection = {
-                CalendarContract.Calendars.ALLOWED_ATTENDEE_TYPES,
-                CalendarContract.Calendars.ACCOUNT_NAME,
-                CalendarContract.Calendars.NAME,
-                CalendarContract.Calendars.CALENDAR_LOCATION,
-                CalendarContract.Calendars.CALENDAR_TIME_ZONE
+                CalendarContract.Calendars._ID,
+                CalendarContract.Calendars.NAME
         };
 
         Uri uri = CalendarContract.Calendars.CONTENT_URI;
@@ -61,8 +60,11 @@ public class CalendarUtils {
             return false;
 
         while (cursor.moveToNext()) {
-            if (cursor.getString(cursor.getColumnIndex(CalendarContract.Calendars.NAME)).equals(NAME))
+            if (cursor.getString(cursor.getColumnIndex(CalendarContract.Calendars.NAME)).equals(NAME)){
+                cursor.close();
                 return true;
+            }
+            cursor.close();
         }
 
         return false;

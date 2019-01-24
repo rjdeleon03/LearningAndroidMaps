@@ -25,4 +25,6 @@
     <string name="destination_name">Place</string>
     <string name="trip_indiv_edit">Edit</string>
     <string name="error_calendar_permission">Calendar integration is not permitted.</string>
+    <string name="sharedprefs_calendar">SHARED_PREFS_CALENDAR</string>
+    <string name="sharedprefs_calendar_id">SHARED_PREFS_CALENDAR_ID</string>
 </resources>
