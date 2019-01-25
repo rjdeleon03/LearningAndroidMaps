@@ -31,8 +31,12 @@ public class BaseFragment extends Fragment {
         InputMethodManager manager = ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE));
 
         assert manager != null;
-        manager.hideSoftInputFromWindow(Objects
-                .requireNonNull(activity.getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        try {
+            manager.hideSoftInputFromWindow(Objects
+                    .requireNonNull(activity.getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     protected void setToolbarVisibility(ToolbarVisibility visibility) {
