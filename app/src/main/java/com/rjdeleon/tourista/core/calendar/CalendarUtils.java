@@ -126,7 +126,10 @@ public class CalendarUtils {
         String[] selectionArgs = {String.valueOf(destination.getEventId())};
 
         Uri uri = CalendarContract.Events.CONTENT_URI;
-        return cr.delete(uri, selectionClause, selectionArgs);
+        int ret = cr.delete(uri, selectionClause, selectionArgs);
+
+        deleteRemindersByEventId(context, destination.getEventId());
+        return ret;
     }
 
     private static void createReminder(Context context, long eventId) {
@@ -137,5 +140,17 @@ public class CalendarUtils {
         cv.put(CalendarContract.Reminders.MINUTES, EVENT_REMINDER_MINS);
         cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
         cr.insert(CalendarContract.Reminders.CONTENT_URI, cv);
+    }
+
+    private static void deleteRemindersByEventId(Context context, long eventId) {
+
+        ContentResolver cr = context.getContentResolver();
+
+        String selectionClause = CalendarContract.Reminders.EVENT_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(eventId)};
+
+        Uri uri = CalendarContract.Reminders.CONTENT_URI;
+        cr.delete(uri, selectionClause, selectionArgs);
+
     }
 }
