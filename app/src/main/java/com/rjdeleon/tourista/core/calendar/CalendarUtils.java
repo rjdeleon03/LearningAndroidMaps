@@ -5,9 +5,15 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
+
+import com.rjdeleon.tourista.data.Destination;
+
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class CalendarUtils {
 
@@ -70,7 +76,24 @@ public class CalendarUtils {
         return false;
     }
 
-    public static void create() {}
+    public static long createEvent(Context context, Destination destination, long calendarId) {
+
+        ContentResolver cr = context.getContentResolver();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CalendarContract.Events.DTSTART, destination.getDate().getMillis());
+        // TODO: Update event end time
+        cv.put(CalendarContract.Events.DTEND, destination.getDate().plusMinutes(30).getMillis());
+        cv.put(CalendarContract.Events.TITLE, destination.getName());
+        cv.put(CalendarContract.Events.DESCRIPTION, destination.getNotes());
+        cv.put(CalendarContract.Events.CALENDAR_ID, calendarId);
+        cv.put(CalendarContract.Events.EVENT_LOCATION, destination.getName());
+        // TODO: Update event timezone
+        cv.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+
+        Uri eventUri = cr.insert(CalendarContract.Events.CONTENT_URI, cv);
+        return ContentUris.parseId(eventUri);
+    }
 
     private static void readEvent() {}
 

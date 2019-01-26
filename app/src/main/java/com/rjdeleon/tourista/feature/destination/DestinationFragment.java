@@ -26,7 +26,9 @@ import com.google.android.gms.tasks.Task;
 import com.rjdeleon.tourista.Constants;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
+import com.rjdeleon.tourista.core.calendar.CalendarUtils;
 import com.rjdeleon.tourista.core.places.PlaceAutocompleteAdapter;
+import com.rjdeleon.tourista.core.sharedprefs.SharedPrefsUtils;
 import com.rjdeleon.tourista.data.Destination;
 import com.rjdeleon.tourista.databinding.FragmentDestinationBinding;
 
@@ -144,6 +146,11 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     @OnClick(R.id.saveDestinationButton)
     void onSaveButtonClick(View view) {
+        Destination destination = mViewModel.getDestination().getValue();
+
+        if (destination == null || getContext() == null) return;
+        long eventId = CalendarUtils.createEvent(getContext(), destination, SharedPrefsUtils.getCalendarId(getContext()));
+
         mViewModel.save();
         Navigation.findNavController(view).navigateUp();
     }

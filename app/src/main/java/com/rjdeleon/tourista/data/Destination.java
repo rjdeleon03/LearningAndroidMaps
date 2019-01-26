@@ -30,6 +30,7 @@ public class Destination extends BaseObservable {
     private String name;
     private double lat;
     private double lng;
+    private long eventId;
 
     private String address;
     private String notes;
@@ -38,13 +39,14 @@ public class Destination extends BaseObservable {
     private DateTime date;
     private long tripId;
 
-    public Destination(long id, String placeId, String name, double lat, double lng,
+    public Destination(long id, String placeId, String name, double lat, double lng, long eventId,
                        String address, String notes, DateTime date, long tripId) {
         this.id = id;
         this.placeId = placeId;
         this.name = name;
         this.lat = lat;
         this.lng = lng;
+        this.eventId = eventId;
         this.address = address;
         this.notes = notes;
         this.date = date;
@@ -52,12 +54,13 @@ public class Destination extends BaseObservable {
     }
 
     @Ignore
-    public Destination(String name, String placeId, double lat, double lng,
+    public Destination(String name, String placeId, double lat, double lng, long eventId,
                        String address, String notes, DateTime date, long tripId) {
         this.name = name;
         this.placeId = placeId;
         this.lat = lat;
         this.lng = lng;
+        this.eventId = eventId;
         this.address = address;
         this.notes = notes;
         this.date = date;
@@ -120,6 +123,14 @@ public class Destination extends BaseObservable {
     public void setLng(double lng) {
         this.lng = lng;
         notifyPropertyChanged(BR.lng);
+    }
+
+    public long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
     public String getAddress() {
