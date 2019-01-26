@@ -189,7 +189,7 @@ public class Destination extends BaseObservable {
         notifyPropertyChanged(BR.startTime);
 
         /* On start time set, end time must be 10 minutes later */
-        if (endTime.getMillis() - startTime.getMillis() < 10 * 6000) {
+        if (endTime.getMillis() - this.startTime.getMillis() < 10 * 6000) {
             setEndTime(this.startTime.plusMinutes(10));
         }
     }
@@ -204,7 +204,7 @@ public class Destination extends BaseObservable {
         notifyPropertyChanged(BR.endTime);
 
         /* On end time set, start time must be 10 minutes earlier */
-        if (endTime.getMillis() - startTime.getMillis() < 10 * 6000) {
+        if (this.endTime.getMillis() - startTime.getMillis() < 10 * 6000) {
             setStartTime(this.endTime.minusMinutes(10));
         }
     }

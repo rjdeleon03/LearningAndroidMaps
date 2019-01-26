@@ -20,6 +20,7 @@ public class CalendarUtils {
     private static final String ACCOUNT_TYPE = "com.rjdeleon.tourista";
     private static final String NAME = "tourista_calendar";
     private static final String DISPLAY_NAME = "Tourista Calendar";
+    private static final String EVENT_REMINDER_MINS = "30";
 
     public static long createCalendar(Activity activity, String account) {
 
@@ -87,10 +88,23 @@ public class CalendarUtils {
         cv.put(CalendarContract.Events.DESCRIPTION, destination.getNotes());
         cv.put(CalendarContract.Events.CALENDAR_ID, calendarId);
         cv.put(CalendarContract.Events.EVENT_LOCATION, destination.getName());
-        cv.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+        cv.put(CalendarContract.Events.EVENT_TIMEZONE, destination.getTimeZone());
 
         Uri eventUri = cr.insert(CalendarContract.Events.CONTENT_URI, cv);
-        return ContentUris.parseId(eventUri);
+        long eventId = ContentUris.parseId(eventUri);
+        createReminder(context, eventId);
+        return eventId;
+    }
+
+    private static void createReminder(Context context, long eventId) {
+
+
+        ContentResolver cr = context.getContentResolver();
+        ContentValues cv = new ContentValues();
+        cv.put(CalendarContract.Reminders.EVENT_ID, String.valueOf(eventId));
+        cv.put(CalendarContract.Reminders.MINUTES, EVENT_REMINDER_MINS);
+        cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+        cr.insert(CalendarContract.Reminders.CONTENT_URI, cv);
     }
 
     private static void readEvent() {}
