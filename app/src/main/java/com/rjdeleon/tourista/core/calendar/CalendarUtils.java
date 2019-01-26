@@ -98,7 +98,6 @@ public class CalendarUtils {
 
     private static void createReminder(Context context, long eventId) {
 
-
         ContentResolver cr = context.getContentResolver();
         ContentValues cv = new ContentValues();
         cv.put(CalendarContract.Reminders.EVENT_ID, String.valueOf(eventId));
@@ -109,7 +108,34 @@ public class CalendarUtils {
 
     private static void readEvent() {}
 
-    private static void updateEvent() {}
+    public static int updateEvent(Context context, Destination destination, long calendarId) {
 
-    private static void deleteEvent() {}
+        ContentResolver cr = context.getContentResolver();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CalendarContract.Events.DTSTART, destination.getStartTime().getMillis());
+        cv.put(CalendarContract.Events.DTEND, destination.getEndTime().getMillis());
+        cv.put(CalendarContract.Events.TITLE, destination.getName());
+        cv.put(CalendarContract.Events.DESCRIPTION, destination.getNotes());
+        cv.put(CalendarContract.Events.CALENDAR_ID, calendarId);
+        cv.put(CalendarContract.Events.EVENT_LOCATION, destination.getName());
+        cv.put(CalendarContract.Events.EVENT_TIMEZONE, destination.getTimeZone());
+
+        String selectionClause = CalendarContract.Events.TITLE + " = ?";
+        String[] selectionArgs = {String.valueOf(destination.getEventId())};
+
+        Uri uri = CalendarContract.Events.CONTENT_URI;
+        return cr.update(uri, cv, selectionClause, selectionArgs);
+    }
+
+    private static int deleteEvent(Context context, Destination destination) {
+
+        ContentResolver cr = context.getContentResolver();
+
+        String selectionClause = CalendarContract.Events.TITLE + " = ?";
+        String[] selectionArgs = {String.valueOf(destination.getEventId())};
+
+        Uri uri = CalendarContract.Events.CONTENT_URI;
+        return cr.delete(uri, selectionClause, selectionArgs);
+    }
 }
