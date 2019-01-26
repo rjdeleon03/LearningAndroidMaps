@@ -42,7 +42,7 @@
                     android:layout_width="35dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_search_black_24dp"/>
+                    app:srcCompat="@drawable/ic_location_on_black_24dp"/>
 
                 <AutoCompleteTextView
                     android:id="@+id/destinationAutocompleteText"
@@ -75,7 +75,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:maxHeight="160dp"
+            android:maxHeight="300dp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,6 +91,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
+                    <!--
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -140,18 +141,114 @@
                             timeText="@{viewModel.destination.startTime}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                    -->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/destination_notes"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Menu"/>
-
-                    <EditText
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.destination.notes}"
-                        android:textSize="@dimen/text_field_size"/>
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_access_time_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/destinationStartDateText"
+                            dateText="@{viewModel.destination.startTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/destination_date_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/destinationStartTimeText"
+                            timeText="@{viewModel.destination.startTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/destination_time_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/destinationEndDateText"
+                            dateText="@{viewModel.destination.endTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/destination_date_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toBottomOf="@+id/destinationStartDateText" />
+
+                        <TextView
+                            android:id="@+id/destinationEndTimeText"
+                            timeText="@{viewModel.destination.endTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/destination_time_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/destinationStartTimeText" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/destination_timezone"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toBottomOf="@+id/destinationEndDateText" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/notesImageView"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_event_note_black_24dp" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:padding="6dp"
+                            android:text="@={viewModel.destination.notes}"
+                            android:textSize="@dimen/text_field_size"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/notesImageView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
 

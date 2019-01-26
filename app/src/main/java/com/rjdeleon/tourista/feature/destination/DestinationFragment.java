@@ -16,14 +16,10 @@ import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlaceBufferResponse;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
-import com.rjdeleon.tourista.Constants;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.core.calendar.CalendarUtils;
@@ -155,8 +151,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         Navigation.findNavController(view).navigateUp();
     }
 
-    @OnClick(R.id.destinationDateText)
-    void onDateTextClick() {
+    @OnClick(R.id.destinationStartDateText)
+    void onStartDateTextClick() {
         DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
             dest.setStartTime(dest.getStartTime().withDate(y, m+1, d));
@@ -170,14 +166,43 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         d.show();
     }
 
-    @OnClick(R.id.destinationTimeText)
-    void onTimeTextClick() {
+    @OnClick(R.id.destinationStartTimeText)
+    void onStartTimeTextClick() {
         TimePickerDialog.OnTimeSetListener listener = (timePicker, h, m) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
             dest.setStartTime(dest.getStartTime().withHourOfDay(h).withMinuteOfHour(m));
         };
 
         DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getStartTime();
+        TimePickerDialog d =
+                new TimePickerDialog(Objects.requireNonNull(getContext()), listener,
+                        dt.getHourOfDay(), dt.getMinuteOfHour(), true);
+        d.show();
+    }
+
+    @OnClick(R.id.destinationEndDateText)
+    void onEndDateTextClick() {
+        DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {
+            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+            dest.setEndTime(dest.getEndTime().withDate(y, m+1, d));
+        };
+
+        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getEndTime();
+
+        DatePickerDialog d =
+                new DatePickerDialog(Objects.requireNonNull(getContext()), listener,
+                        dt.getYear(), dt.getMonthOfYear() - 1, dt.getDayOfMonth());
+        d.show();
+    }
+
+    @OnClick(R.id.destinationEndTimeText)
+    void onEndTimeTextClick() {
+        TimePickerDialog.OnTimeSetListener listener = (timePicker, h, m) -> {
+            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+            dest.setEndTime(dest.getEndTime().withHourOfDay(h).withMinuteOfHour(m));
+        };
+
+        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getEndTime();
         TimePickerDialog d =
                 new TimePickerDialog(Objects.requireNonNull(getContext()), listener,
                         dt.getHourOfDay(), dt.getMinuteOfHour(), true);

@@ -3,6 +3,7 @@ package com.rjdeleon.tourista.data;
 import com.rjdeleon.tourista.BR;
 
 import org.joda.time.DateTime;
+import org.joda.time.Minutes;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -180,6 +181,11 @@ public class Destination extends BaseObservable {
     public void setStartTime(DateTime startTime) {
         this.startTime = startTime;
         notifyPropertyChanged(BR.startTime);
+
+        /* On start time set, end time must be 10 minutes later */
+        if (Minutes.minutesBetween(startTime, endTime).getMinutes() < 10) {
+            setEndTime(this.startTime.plusMinutes(10));
+        }
     }
 
     @Bindable
@@ -190,6 +196,11 @@ public class Destination extends BaseObservable {
     public void setEndTime(DateTime endTime) {
         this.endTime = endTime;
         notifyPropertyChanged(BR.endTime);
+
+        /* On end time set, start time must be 10 minutes earlier */
+        if (Minutes.minutesBetween(endTime, startTime).getMinutes() < 10) {
+            setStartTime(this.endTime.minusMinutes(10));
+        }
     }
 
     public boolean isAllDay() {
