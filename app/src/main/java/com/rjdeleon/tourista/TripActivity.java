@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.rjdeleon.tourista.core.calendar.CalendarUtils;
 import com.rjdeleon.tourista.core.permissions.PermissionUtils;
+import com.rjdeleon.tourista.core.sharedprefs.SharedPrefsUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,21 +30,16 @@ public class TripActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         setSupportActionBar(appToolbar);
-        getWriteCalendarPermission();
+        setupCalendar();
     }
 
-    private void getWriteCalendarPermission() {
+    private void setupCalendar() {
 
-        /* Get calendar read permission */
-        PermissionUtils.getCalendarPermission(this);
-    }
-
-    private void saveCalendarId(long id) {
-        SharedPreferences sp =
-                getSharedPreferences(getString(R.string.sharedprefs_calendar), Context.MODE_PRIVATE);
-        SharedPreferences.Editor spEditor = sp.edit();
-        spEditor.putLong(getString(R.string.sharedprefs_calendar_id), id);
-        spEditor.apply();
+        /* Check if calendar ID exists in shared prefs */
+        long calendarId = SharedPrefsUtils.getCalendarId(this);
+        if (calendarId == 0) {
+            PermissionUtils.getCalendarPermission(this);
+        }
     }
 
     @Override
@@ -53,7 +49,7 @@ public class TripActivity extends AppCompatActivity {
         if (PermissionUtils.verifyCalendarPermissionResponse(requestCode, grantResults)) {
 
             long calendarId = CalendarUtils.createCalendar(this, ACCOUNT);
-            saveCalendarId(calendarId);
+            SharedPrefsUtils.saveCalendarId(this, calendarId);
 
         } else {
 
