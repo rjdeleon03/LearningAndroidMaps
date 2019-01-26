@@ -50,7 +50,7 @@ dependencies {
 
     // Google Room
     implementation 'androidx.room:room-runtime:' + archComponentVersion
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'androidx.room:room-compiler:' + archComponentVersion
 
     // Lifecycle
@@ -67,6 +67,9 @@ dependencies {
     // Butter Knife
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+
+    // Better Pickers
+    implementation 'com.code-troopers.betterpickers:library:3.1.0'
 
     implementation 'androidx.vectordrawable:vectordrawable:' + androidVersion
 

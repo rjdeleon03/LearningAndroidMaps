@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 
+import com.codetroopers.betterpickers.timezonepicker.TimeZoneInfo;
+import com.codetroopers.betterpickers.timezonepicker.TimeZonePickerDialogFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.AutocompletePrediction;
@@ -61,6 +63,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     public DestinationFragment() {
         // Required empty public constructor
     }
+
+    // region Life cycle methods
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,6 +144,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         mapView.onPause();
     }
 
+    // endregion
+
     // region OnClick listeners
 
     @OnClick(R.id.saveDestinationButton)
@@ -209,6 +215,22 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
                 new TimePickerDialog(Objects.requireNonNull(getContext()), listener,
                         dt.getHourOfDay(), dt.getMinuteOfHour(), true);
         d.show();
+    }
+
+    @OnClick(R.id.destinationTimeZoneText)
+    void onTimeZoneTextClick() {
+        TimeZonePickerDialogFragment.OnTimeZoneSetListener listener = tzi -> {
+            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+            dest.setTimeZone(tzi.mTzId);
+        };
+
+        Bundle bundle = new Bundle();
+        bundle.putString(TimeZonePickerDialogFragment.BUNDLE_TIME_ZONE, mViewModel.getDestination().getValue().getTimeZone());
+
+        TimeZonePickerDialogFragment tzpd = new TimeZonePickerDialogFragment();
+        tzpd.setArguments(bundle);
+        tzpd.setOnTimeZoneSetListener(listener);
+        tzpd.show(getFragmentManager(), "TIMEZONE_PICKER");
     }
 
     // endregion

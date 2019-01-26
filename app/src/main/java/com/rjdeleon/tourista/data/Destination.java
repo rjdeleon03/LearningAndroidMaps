@@ -5,6 +5,8 @@ import com.rjdeleon.tourista.BR;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 
+import java.util.TimeZone;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.room.Entity;
@@ -42,6 +44,9 @@ public class Destination extends BaseObservable {
     private DateTime endTime;
     private boolean isAllDay;
     private String timeZone;
+
+    @Ignore
+    private boolean isValid;
 
     public Destination(long id, String name, String placeId,
                        double lat, double lng, long eventId, long tripId,
@@ -90,9 +95,8 @@ public class Destination extends BaseObservable {
         this.startTime = DateTime.now()
                 .withSecondOfMinute(0)
                 .withMillisOfSecond(0);
-        this.endTime = DateTime.now()
-                .withSecondOfMinute(0)
-                .withMillisOfSecond(0);
+        this.endTime = this.startTime.plusMinutes(10);
+        this.timeZone = TimeZone.getDefault().getID();
     }
 
     public long getId() {
@@ -119,6 +123,8 @@ public class Destination extends BaseObservable {
     public void setName(String name) {
         this.name = name;
         notifyPropertyChanged(BR.name);
+
+        setValid(this.name != null && !this.name.trim().isEmpty());
     }
 
     @Bindable
@@ -211,12 +217,24 @@ public class Destination extends BaseObservable {
         isAllDay = allDay;
     }
 
+    @Bindable
     public String getTimeZone() {
         return timeZone;
     }
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+        notifyPropertyChanged(BR.timeZone);
+    }
+
+    @Bindable
+    public boolean getIsValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+        notifyPropertyChanged(BR.isValid);
     }
 
     public void setPlaceDetails(String placeId, String name,

@@ -207,7 +207,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/destinationStartTimeText" />
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/destinationTimeZoneText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -215,6 +215,7 @@
                             android:layout_marginBottom="8dp"
                             android:text="@string/destination_timezone"
                             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            timeZoneText="@{viewModel.destination.timeZone}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView"
                             app:layout_constraintTop_toBottomOf="@+id/destinationEndDateText" />
