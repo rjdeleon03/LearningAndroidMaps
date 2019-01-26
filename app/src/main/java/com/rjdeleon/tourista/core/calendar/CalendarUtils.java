@@ -96,16 +96,6 @@ public class CalendarUtils {
         return eventId;
     }
 
-    private static void createReminder(Context context, long eventId) {
-
-        ContentResolver cr = context.getContentResolver();
-        ContentValues cv = new ContentValues();
-        cv.put(CalendarContract.Reminders.EVENT_ID, String.valueOf(eventId));
-        cv.put(CalendarContract.Reminders.MINUTES, EVENT_REMINDER_MINS);
-        cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
-        cr.insert(CalendarContract.Reminders.CONTENT_URI, cv);
-    }
-
     private static void readEvent() {}
 
     public static int updateEvent(Context context, Destination destination, long calendarId) {
@@ -137,5 +127,15 @@ public class CalendarUtils {
 
         Uri uri = CalendarContract.Events.CONTENT_URI;
         return cr.delete(uri, selectionClause, selectionArgs);
+    }
+
+    private static void createReminder(Context context, long eventId) {
+
+        ContentResolver cr = context.getContentResolver();
+        ContentValues cv = new ContentValues();
+        cv.put(CalendarContract.Reminders.EVENT_ID, String.valueOf(eventId));
+        cv.put(CalendarContract.Reminders.MINUTES, EVENT_REMINDER_MINS);
+        cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+        cr.insert(CalendarContract.Reminders.CONTENT_URI, cv);
     }
 }
