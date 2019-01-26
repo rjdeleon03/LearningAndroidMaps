@@ -112,7 +112,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            dateText="@{viewModel.destination.date}"/>
+                            dateText="@{viewModel.destination.startTime}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,7 +137,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Menu"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            timeText="@{viewModel.destination.date}"/>
+                            timeText="@{viewModel.destination.startTime}"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

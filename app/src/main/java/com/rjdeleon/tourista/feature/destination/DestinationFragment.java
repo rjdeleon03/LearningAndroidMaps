@@ -159,10 +159,10 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     void onDateTextClick() {
         DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
-            dest.setDate(dest.getDate().withDate(y, m+1, d));
+            dest.setStartTime(dest.getStartTime().withDate(y, m+1, d));
         };
 
-        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getDate();
+        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getStartTime();
 
         DatePickerDialog d =
                 new DatePickerDialog(Objects.requireNonNull(getContext()), listener,
@@ -174,10 +174,10 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     void onTimeTextClick() {
         TimePickerDialog.OnTimeSetListener listener = (timePicker, h, m) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
-            dest.setDate(dest.getDate().withHourOfDay(h).withMinuteOfHour(m));
+            dest.setStartTime(dest.getStartTime().withHourOfDay(h).withMinuteOfHour(m));
         };
 
-        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getDate();
+        DateTime dt = Objects.requireNonNull(mViewModel.getDestination().getValue()).getStartTime();
         TimePickerDialog d =
                 new TimePickerDialog(Objects.requireNonNull(getContext()), listener,
                         dt.getHourOfDay(), dt.getMinuteOfHour(), true);

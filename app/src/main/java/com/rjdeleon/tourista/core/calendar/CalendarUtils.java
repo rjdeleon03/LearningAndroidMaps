@@ -81,14 +81,12 @@ public class CalendarUtils {
         ContentResolver cr = context.getContentResolver();
         ContentValues cv = new ContentValues();
 
-        cv.put(CalendarContract.Events.DTSTART, destination.getDate().getMillis());
-        // TODO: Update event end time
-        cv.put(CalendarContract.Events.DTEND, destination.getDate().plusMinutes(30).getMillis());
+        cv.put(CalendarContract.Events.DTSTART, destination.getStartTime().getMillis());
+        cv.put(CalendarContract.Events.DTEND, destination.getEndTime().getMillis());
         cv.put(CalendarContract.Events.TITLE, destination.getName());
         cv.put(CalendarContract.Events.DESCRIPTION, destination.getNotes());
         cv.put(CalendarContract.Events.CALENDAR_ID, calendarId);
         cv.put(CalendarContract.Events.EVENT_LOCATION, destination.getName());
-        // TODO: Update event timezone
         cv.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
 
         Uri eventUri = cr.insert(CalendarContract.Events.CONTENT_URI, cv);

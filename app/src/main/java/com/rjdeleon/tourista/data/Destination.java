@@ -6,7 +6,6 @@ import org.joda.time.DateTime;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.adapters.Converters;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -34,37 +33,50 @@ public class Destination extends BaseObservable {
 
     private String address;
     private String notes;
-
-    @TypeConverters({DateTimeConverters.class})
-    private DateTime date;
     private long tripId;
 
-    public Destination(long id, String placeId, String name, double lat, double lng, long eventId,
-                       String address, String notes, DateTime date, long tripId) {
+    @TypeConverters({DateTimeConverters.class})
+    private DateTime startTime;
+    @TypeConverters({DateTimeConverters.class})
+    private DateTime endTime;
+    private boolean isAllDay;
+    private String timeZone;
+
+    public Destination(long id, String name, String placeId,
+                       double lat, double lng, long eventId, long tripId,
+                       String address, String notes, DateTime startTime, DateTime endTime,
+                       boolean isAllDay, String timeZone) {
         this.id = id;
         this.placeId = placeId;
         this.name = name;
         this.lat = lat;
         this.lng = lng;
         this.eventId = eventId;
+        this.tripId = tripId;
         this.address = address;
         this.notes = notes;
-        this.date = date;
-        this.tripId = tripId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isAllDay = isAllDay;
+        this.timeZone = timeZone;
     }
 
     @Ignore
-    public Destination(String name, String placeId, double lat, double lng, long eventId,
-                       String address, String notes, DateTime date, long tripId) {
+    public Destination(String name, String placeId,
+                       double lat, double lng, long eventId, long tripId,
+                       String address, String notes, DateTime startTime, DateTime endTime,
+                       boolean isAllDay) {
         this.name = name;
         this.placeId = placeId;
         this.lat = lat;
         this.lng = lng;
         this.eventId = eventId;
+        this.tripId = tripId;
         this.address = address;
         this.notes = notes;
-        this.date = date;
-        this.tripId = tripId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isAllDay = isAllDay;
     }
 
     @Ignore
@@ -74,7 +86,10 @@ public class Destination extends BaseObservable {
         this.name = "";
         this.address = "";
         this.notes = "";
-        this.date = DateTime.now()
+        this.startTime = DateTime.now()
+                .withSecondOfMinute(0)
+                .withMillisOfSecond(0);
+        this.endTime = DateTime.now()
                 .withSecondOfMinute(0)
                 .withMillisOfSecond(0);
     }
@@ -133,6 +148,14 @@ public class Destination extends BaseObservable {
         this.eventId = eventId;
     }
 
+    public long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(long tripId) {
+        this.tripId = tripId;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -150,21 +173,39 @@ public class Destination extends BaseObservable {
     }
 
     @Bindable
-    public DateTime getDate() {
-        return date;
+    public DateTime getStartTime() {
+        return startTime;
     }
 
-    public void setDate(DateTime date) {
-        this.date = date;
-        notifyPropertyChanged(BR.date);
+    public void setStartTime(DateTime startTime) {
+        this.startTime = startTime;
+        notifyPropertyChanged(BR.startTime);
     }
 
-    public long getTripId() {
-        return tripId;
+    @Bindable
+    public DateTime getEndTime() {
+        return endTime;
     }
 
-    public void setTripId(long tripId) {
-        this.tripId = tripId;
+    public void setEndTime(DateTime endTime) {
+        this.endTime = endTime;
+        notifyPropertyChanged(BR.endTime);
+    }
+
+    public boolean isAllDay() {
+        return isAllDay;
+    }
+
+    public void setAllDay(boolean allDay) {
+        isAllDay = allDay;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
     }
 
     public void setPlaceDetails(String placeId, String name,
