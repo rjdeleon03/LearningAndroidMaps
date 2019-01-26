@@ -140,6 +140,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         mapView.onPause();
     }
 
+    // region OnClick listeners
+
     @OnClick(R.id.saveDestinationButton)
     void onSaveButtonClick(View view) {
         Destination destination = mViewModel.getDestination().getValue();
@@ -208,6 +210,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
                         dt.getHourOfDay(), dt.getMinuteOfHour(), true);
         d.show();
     }
+
+    // endregion
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
