@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 
 import com.rjdeleon.tourista.data.AppDatabase;
 import com.rjdeleon.tourista.data.Destination;
+import com.rjdeleon.tourista.data.DestinationDao;
 import com.rjdeleon.tourista.data.Trip;
 import com.rjdeleon.tourista.data.TripDao;
 
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -16,6 +18,7 @@ import androidx.lifecycle.LiveData;
 class TripIndivRepository {
 
     private final TripDao mTripDao;
+    private final DestinationDao mDestinationDao;
     private final LiveData<Trip> mTrip;
     private final LiveData<List<Destination>> mDestinations;
 
@@ -23,7 +26,8 @@ class TripIndivRepository {
         AppDatabase db = AppDatabase.getInstance(application.getApplicationContext());
         mTripDao = db.tripDao();
         mTrip = mTripDao.findById(id);
-        mDestinations = db.destinationDao().findByTripId(id);
+        mDestinationDao = db.destinationDao();
+        mDestinations = mDestinationDao.findByTripId(id);
     }
 
     LiveData<Trip> getTrip() {
@@ -38,6 +42,11 @@ class TripIndivRepository {
         new UpdateAsyncTask(mTripDao).execute(mTrip.getValue());
     }
 
+    void deleteDestination(int index) {
+        new DeleteAsyncTask(mDestinationDao)
+                .execute(Objects.requireNonNull(mDestinations.getValue()).get(index));
+    }
+
     private static class UpdateAsyncTask extends AsyncTask<Trip, Void, Void> {
 
         private TripDao mDao;
@@ -49,6 +58,21 @@ class TripIndivRepository {
         @Override
         protected Void doInBackground(Trip... trips) {
             mDao.update(trips[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<Destination, Void, Void> {
+
+        private DestinationDao mDao;
+
+        DeleteAsyncTask(DestinationDao dao) {
+            mDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Destination... destinations) {
+            mDao.delete(destinations[0]);
             return null;
         }
     }

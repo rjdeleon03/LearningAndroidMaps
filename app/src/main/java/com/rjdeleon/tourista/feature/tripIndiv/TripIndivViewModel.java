@@ -35,4 +35,8 @@ public class TripIndivViewModel extends AndroidViewModel {
     void save() {
         mRepository.save();
     }
+
+    void deleteDestination(int index) {
+        mRepository.deleteDestination(index);
+    }
 }

@@ -26,7 +26,7 @@ public class BaseFragment extends Fragment {
         hideKeyboard();
     }
 
-    private void hideKeyboard() {
+    protected void hideKeyboard() {
         FragmentActivity activity = Objects.requireNonNull(getActivity());
         InputMethodManager manager = ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE));
 

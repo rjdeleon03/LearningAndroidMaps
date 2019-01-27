@@ -14,10 +14,13 @@ import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.databinding.FragmentTripIndivBinding;
 import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -61,6 +64,21 @@ public class TripIndivFragment extends BaseFragment {
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                 mViewModel.deleteDestination(viewHolder.getAdapterPosition());
+            }
+        }).attachToRecyclerView(binding.destinationsRecyclerView);
 
         return view;
     }

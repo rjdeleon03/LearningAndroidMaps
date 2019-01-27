@@ -136,7 +136,7 @@ public class CalendarUtils {
 
         ContentResolver cr = context.getContentResolver();
         ContentValues cv = new ContentValues();
-        cv.put(CalendarContract.Reminders.EVENT_ID, String.valueOf(eventId));
+        cv.put(CalendarContract.Reminders.EVENT_ID, eventId);
         cv.put(CalendarContract.Reminders.MINUTES, EVENT_REMINDER_MINS);
         cv.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
         cr.insert(CalendarContract.Reminders.CONTENT_URI, cv);

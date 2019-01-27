@@ -22,6 +22,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.core.calendar.CalendarUtils;
@@ -36,6 +37,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import butterknife.BindView;
@@ -53,6 +55,9 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     private static final LatLngBounds LAT_LNG_BOUNDS =
             new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
+
+    @BindView(R.id.destinationParentLayout)
+    CoordinatorLayout destinationParentLayout;
 
     @BindView(R.id.destinationAutocompleteText)
     AutoCompleteTextView autoCompleteTextView;
@@ -150,6 +155,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     @OnClick(R.id.saveDestinationButton)
     void onSaveButtonClick(View view) {
+
         Destination destination = mViewModel.getDestination().getValue();
         if (destination == null || getContext() == null) return;
 
@@ -168,6 +174,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     @OnClick(R.id.deleteDestinationButton)
     void onDeleteButtonClick(View view) {
+
         Destination destination = mViewModel.getDestination().getValue();
         if (destination == null || getContext() == null) return;
 
