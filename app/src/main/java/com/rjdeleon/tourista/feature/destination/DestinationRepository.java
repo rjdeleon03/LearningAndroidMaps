@@ -45,6 +45,17 @@ class DestinationRepository {
         }
     }
 
+    void delete() {
+
+        /* If ID is not 0, delete; else disregard */
+        Destination destination = mDestination.getValue();
+
+        assert destination != null;
+        if (destination.getId() > 0) {
+            new DeleteAsyncTask(mDao).execute(destination);
+        }
+    }
+
     private static class InsertAsyncTask extends AsyncTask<Destination, Void, Void> {
 
         private DestinationDao mDao;
@@ -70,7 +81,22 @@ class DestinationRepository {
 
         @Override
         protected Void doInBackground(Destination... destinations) {
-            mDao.update(destinations[0]);
+            mDao.delete(destinations[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<Destination, Void, Void> {
+
+        private DestinationDao mDao;
+
+        DeleteAsyncTask(DestinationDao dao) {
+            mDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Destination... destinations) {
+            mDao.delete(destinations[0]);
             return null;
         }
     }

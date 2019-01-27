@@ -166,6 +166,17 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         Navigation.findNavController(view).navigateUp();
     }
 
+    @OnClick(R.id.deleteDestinationButton)
+    void onDeleteButtonClick(View view) {
+        Destination destination = mViewModel.getDestination().getValue();
+        if (destination == null || getContext() == null) return;
+
+        CalendarUtils.deleteEvent(getContext(), destination);
+        mViewModel.delete();
+
+        Navigation.findNavController(view).navigateUp();
+    }
+
     @OnClick(R.id.destinationStartDateText)
     void onStartDateTextClick() {
         DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {

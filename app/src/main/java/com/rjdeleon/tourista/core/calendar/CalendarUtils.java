@@ -118,7 +118,7 @@ public class CalendarUtils {
         return cr.update(uri, cv, selectionClause, selectionArgs);
     }
 
-    private static int deleteEvent(Context context, Destination destination) {
+    public static int deleteEvent(Context context, Destination destination) {
 
         ContentResolver cr = context.getContentResolver();
 

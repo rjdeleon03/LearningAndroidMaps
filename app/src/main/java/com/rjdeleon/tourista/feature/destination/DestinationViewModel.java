@@ -28,6 +28,10 @@ public class DestinationViewModel extends AndroidViewModel {
         mRepository.save();
     }
 
+    void delete() {
+        mRepository.delete();
+    }
+
     void setPlace(Place place) {
         Destination destination = mDestination.getValue();
         assert destination != null;
