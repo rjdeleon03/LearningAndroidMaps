@@ -249,6 +249,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
             dest.setTimeZone(tzi.mTzId);
         };
 
+        assert getFragmentManager() != null;
         Bundle bundle = new Bundle();
         bundle.putString(TimeZonePickerDialogFragment.BUNDLE_TIME_ZONE, mViewModel.getDestination().getValue().getTimeZone());
 

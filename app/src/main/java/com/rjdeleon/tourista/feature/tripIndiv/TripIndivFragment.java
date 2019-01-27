@@ -102,9 +102,12 @@ public class TripIndivFragment extends BaseFragment {
 
         menu.findItem(R.id.action_edit_trip_name).setOnMenuItemClickListener(item -> {
 
-            TripDialogFragment tdf = TripDialogFragment.newInstance(mId);
+            if (mDialogFragment != null) return true;
+
+            mDialogFragment = TripDialogFragment.newInstance(mId);
+            mDialogFragment.setDismissListener(() -> mDialogFragment = null);
             assert getFragmentManager() != null;
-            tdf.show(getFragmentManager(), TripDialogFragment.TAG);
+            mDialogFragment.show(getFragmentManager(), TripDialogFragment.TAG);
             return true;
         });
     }

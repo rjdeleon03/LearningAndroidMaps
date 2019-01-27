@@ -28,4 +28,6 @@
     <string name="sharedprefs_calendar">SHARED_PREFS_CALENDAR</string>
     <string name="sharedprefs_calendar_id">SHARED_PREFS_CALENDAR_ID</string>
     <string name="destination_timezone">Time Zone</string>
+    <string name="dialog_new_trip_title">Create Trip</string>
+    <string name="dialog_edit_trip_title">Edit Trip</string>
 </resources>

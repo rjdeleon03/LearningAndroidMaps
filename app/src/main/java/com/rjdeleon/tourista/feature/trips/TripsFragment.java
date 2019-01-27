@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.core.base.BaseDialogFragment;
+import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.databinding.FragmentTripsBinding;
 import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
@@ -18,7 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TripsFragment extends Fragment {
+public class TripsFragment extends BaseFragment {
 
     private TripsAdapter mAdapter;
     private TripsViewModel mViewModel;
@@ -60,9 +62,13 @@ public class TripsFragment extends Fragment {
 
     @OnClick(R.id.addTripButton)
     void onAddTripButtonClick() {
-        TripDialogFragment tdf = TripDialogFragment.newInstance();
+        if (mDialogFragment != null) return;
+
+        mDialogFragment = TripDialogFragment.newInstance();
+        mDialogFragment.setDismissListener(() -> mDialogFragment = null);
+
         assert getFragmentManager() != null;
-        tdf.show(getFragmentManager(), TripDialogFragment.TAG);
+        mDialogFragment.show(getFragmentManager(), TripDialogFragment.TAG);
     }
 
 }

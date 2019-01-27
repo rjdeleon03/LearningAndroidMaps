@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.core.base.BaseDialogFragment;
 import com.rjdeleon.tourista.databinding.DialogTripBinding;
 
 import java.util.Objects;
@@ -16,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
-public class TripDialogFragment extends DialogFragment {
+public class TripDialogFragment extends BaseDialogFragment {
 
     // region Static methods and properties
 
@@ -45,7 +47,7 @@ public class TripDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
-                .setTitle("Create Trip")
+                .setTitle(R.string.dialog_new_trip_title)
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     mViewModel.save();
                     dismiss();
@@ -57,6 +59,7 @@ public class TripDialogFragment extends DialogFragment {
         Bundle args = getArguments();
         if (args != null && getActivity() != null) {
             tripId = args.getLong(TAG_TRIP_ID);
+            b.setTitle(R.string.dialog_edit_trip_title);
         }
 
         // Set the viewModel

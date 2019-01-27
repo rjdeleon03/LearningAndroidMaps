@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -19,6 +20,8 @@ public class BaseFragment extends Fragment {
         VISIBLE,
         GONE
     }
+
+    protected BaseDialogFragment mDialogFragment = null;
 
     @Override
     public void onStop() {
