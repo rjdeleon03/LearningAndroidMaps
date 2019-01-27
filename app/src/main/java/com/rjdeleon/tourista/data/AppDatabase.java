@@ -6,7 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Trip.class, Destination.class}, version = 1, exportSchema = false)
+@Database(entities = {Trip.class, Destination.class, CustomTimeZone.class},
+        version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -14,6 +15,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TripDao tripDao();
     public abstract DestinationDao destinationDao();
+    public abstract CustomTimeZoneDao customTimeZoneDao();
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

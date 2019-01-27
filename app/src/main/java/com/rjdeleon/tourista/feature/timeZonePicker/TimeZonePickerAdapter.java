@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rjdeleon.tourista.R;
+import com.rjdeleon.tourista.data.CustomTimeZone;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class TimeZonePickerAdapter extends RecyclerView.Adapter<TimeZonePickerAdapter.TimeZonePickerViewHolder> {
 
-    private List<String> mTimeZones;
+    private List<CustomTimeZone> mTimeZones;
     private LayoutInflater mInflater;
 
     public TimeZonePickerAdapter(Context context) {
@@ -35,9 +36,10 @@ public class TimeZonePickerAdapter extends RecyclerView.Adapter<TimeZonePickerAd
 
     @Override
     public void onBindViewHolder(@NonNull TimeZonePickerViewHolder holder, int position) {
-        TimeZone tz = TimeZone.getTimeZone(mTimeZones.get(position));
-        holder.timeZoneDisplayNameText.setText(tz.getDisplayName());
+        CustomTimeZone ctz = mTimeZones.get(position);
+        holder.timeZoneDisplayNameText.setText(ctz.getDisplayName());
         holder.timeZoneOffsetText.setText("Sample Offset");
+        holder.timeZoneOffsetText.setText("Sample Country");
     }
 
     @Override
@@ -45,8 +47,8 @@ public class TimeZonePickerAdapter extends RecyclerView.Adapter<TimeZonePickerAd
         return mTimeZones == null ? 0 : mTimeZones.size();
     }
 
-    public void setTimeZones(String[] timeZones) {
-        mTimeZones = Arrays.asList(timeZones);
+    public void setTimeZones(List<CustomTimeZone> timeZones) {
+        mTimeZones = timeZones;
         notifyDataSetChanged();
     }
 

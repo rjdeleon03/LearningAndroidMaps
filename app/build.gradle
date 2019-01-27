@@ -68,6 +68,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
+    // Guava
+    implementation group: 'com.google.guava', name: 'guava', version: '24.1-jre'
+
     implementation 'androidx.vectordrawable:vectordrawable:' + androidVersion
 
     testImplementation 'junit:junit:4.12'
