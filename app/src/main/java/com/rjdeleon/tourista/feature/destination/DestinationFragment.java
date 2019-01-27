@@ -151,10 +151,17 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @OnClick(R.id.saveDestinationButton)
     void onSaveButtonClick(View view) {
         Destination destination = mViewModel.getDestination().getValue();
-
         if (destination == null || getContext() == null) return;
-        long eventId = CalendarUtils.createEvent(getContext(), destination, SharedPrefsUtils.getCalendarId(getContext()));
 
+        long calendarId = SharedPrefsUtils.getCalendarId(getContext());
+
+        /* If ID is not 0, update; else, save */
+        if (destination.getId() > 0) {
+            CalendarUtils.updateEvent(getContext(), destination, calendarId);
+        } else {
+            long eventId = CalendarUtils.createEvent(getContext(), destination, calendarId);
+            destination.setEventId(eventId);
+        }
         mViewModel.save();
         Navigation.findNavController(view).navigateUp();
     }

@@ -111,7 +111,7 @@ public class CalendarUtils {
         cv.put(CalendarContract.Events.EVENT_LOCATION, destination.getName());
         cv.put(CalendarContract.Events.EVENT_TIMEZONE, destination.getTimeZone());
 
-        String selectionClause = CalendarContract.Events.TITLE + " = ?";
+        String selectionClause = CalendarContract.Events._ID + " = ?";
         String[] selectionArgs = {String.valueOf(destination.getEventId())};
 
         Uri uri = CalendarContract.Events.CONTENT_URI;
