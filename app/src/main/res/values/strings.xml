@@ -30,4 +30,7 @@
     <string name="destination_timezone">Time Zone</string>
     <string name="dialog_new_trip_title">Create Trip</string>
     <string name="dialog_edit_trip_title">Edit Trip</string>
+    <string name="time_zone_display_name">Display Name</string>
+    <string name="time_zone_offset">Offset</string>
+    <string name="time_zone_country">Country</string>
 </resources>

@@ -37,5 +37,13 @@
         <argument
             android:name="tripId"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_destinationFragment_to_timeZonePickerFragment"
+            app:destination="@id/timeZonePickerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/timeZonePickerFragment"
+        android:name="com.rjdeleon.tourista.feature.timeZonePicker.TimeZonePickerFragment"
+        android:label="fragment_time_zone_picker"
+        tools:layout="@layout/fragment_time_zone_picker" />
 </navigation>
