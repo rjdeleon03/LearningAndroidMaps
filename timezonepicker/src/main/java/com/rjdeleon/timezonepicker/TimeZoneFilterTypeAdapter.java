@@ -15,8 +15,8 @@
  */
 
 package com.rjdeleon.timezonepicker;
-
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +32,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable, OnClickListener {
+
     public static final String TAG = "TimeZoneFilterTypeAdptr";
+
+    private Typeface mSansSerifLightTypeface;
 
     private static final boolean DEBUG = false;
 
@@ -43,10 +46,12 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
     public static final int FILTER_TYPE_GMT = 3;
 
     public interface OnSetFilterListener {
+
         void onSetFilter(int filterType, String str, int time);
     }
 
     static class ViewHolder {
+
         int filterType;
         String str;
         int time;
@@ -60,6 +65,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
     }
 
     class FilterTypeResult {
+
         int type;
         String constraint;
         public int time;
@@ -90,6 +96,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         mTimeZoneData = tzd;
         mListener = l;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
     @Override
@@ -114,7 +121,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         if (convertView != null) {
             v = convertView;
         } else {
-            v = mInflater.inflate(R.layout.time_zone_filter_item, null);
+            v = mInflater.inflate(R.layout.time_zone_filter_item, parent, false);
             ViewHolder.setupViewHolder(v);
         }
 
@@ -164,6 +171,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
     }
 
     private class ArrayFilter extends Filter {
+
         @Override
         protected FilterResults performFiltering(CharSequence prefix) {
             if (DEBUG) {
@@ -220,7 +228,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
                             || (lowerCaseCountry.charAt(0) == prefixString.charAt(0) &&
                             isStartingInitialsFor(prefixString, lowerCaseCountry))) {
                         isMatch = true;
-                    } else if (lowerCaseCountry.contains(" ")){
+                    } else if (lowerCaseCountry.contains(" ")) {
                         // We should also search other words in the country name, so that
                         // searches like "Korea" yield "South Korea".
                         for (String word : lowerCaseCountry.split(" ")) {
@@ -256,18 +264,12 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         }
 
         /**
-         * Returns true if the prefixString is an initial for string. Note that
-         * this method will return true even if prefixString does not cover all
-         * the words. Words are separated by non-letters which includes spaces
-         * and symbols).
+         * Returns true if the prefixString is an initial for string. Note that this method will return true even if
+         * prefixString does not cover all the words. Words are separated by non-letters which includes spaces and
+         * symbols).
          *
-         * For com.rjdeleon:
-         * isStartingInitialsFor("UA", "United Arab Emirates") would return true
+         * For example: isStartingInitialsFor("UA", "United Arab Emirates") would return true
          * isStartingInitialsFor("US", "U.S. Virgin Island") would return true
-         *
-         * @param prefixString
-         * @param string
-         * @return
          */
         private boolean isStartingInitialsFor(String prefixString, String string) {
             final int initialLen = prefixString.length();
@@ -300,7 +302,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         }
 
         private void handleSearchByGmt(ArrayList<FilterTypeResult> filtered, int num,
-                boolean positiveOnly) {
+                                       boolean positiveOnly) {
 
             FilterTypeResult r;
             if (num >= 0) {
@@ -340,8 +342,6 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         /**
          * Acceptable strings are in the following format: [+-]?[0-9]?[0-9]
          *
-         * @param str
-         * @param startIndex
          * @return Integer.MIN_VALUE as invalid
          */
         public int parseNum(String str, int startIndex) {

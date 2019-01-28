@@ -17,6 +17,7 @@
 package com.rjdeleon.timezonepicker;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.Spannable;
 import android.text.Spannable.Factory;
 import android.text.format.DateUtils;
@@ -33,7 +34,10 @@ import java.util.Formatter;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
+
 public class TimeZoneInfo implements Comparable<TimeZoneInfo> {
+
     private static final int GMT_TEXT_COLOR = TimeZonePickerUtils.GMT_TEXT_COLOR;
     private static final int DST_SYMBOL_COLOR = TimeZonePickerUtils.DST_SYMBOL_COLOR;
     private static final char SEPARATOR = ',';
@@ -41,7 +45,7 @@ public class TimeZoneInfo implements Comparable<TimeZoneInfo> {
     public static int NUM_OF_TRANSITIONS = 6;
     public static long time = System.currentTimeMillis() / 1000;
     public static boolean is24HourFormat;
-    private static final Factory mSpannableFactory = Factory.getInstance();
+    private static final Factory mSpannableFactory = Spannable.Factory.getInstance();
 
     TimeZone mTz;
     public String mTzId;
@@ -194,13 +198,17 @@ public class TimeZoneInfo implements Comparable<TimeZoneInfo> {
         return displayName;
     }
 
-    private static long[] getTransitions(TimeZone tz, long time)
-            throws IllegalAccessException, NoSuchFieldException {
+    private static long[] getTransitions(TimeZone tz, long time) throws IllegalAccessException, NoSuchFieldException {
         Class<?> zoneInfoClass = tz.getClass();
         Field mTransitionsField = zoneInfoClass.getDeclaredField("mTransitions");
         mTransitionsField.setAccessible(true);
-        long[] objTransitions = (long[]) mTransitionsField.get(tz);
+        long[] objTransitions;
         long[] transitions = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            objTransitions = (long[]) mTransitionsField.get(tz);
+        } else {
+            objTransitions = copyFromIntArray((int[]) mTransitionsField.get(tz));
+        }
         if (objTransitions.length != 0) {
             transitions = new long[NUM_OF_TRANSITIONS];
             int numOfTransitions = 0;
@@ -215,6 +223,17 @@ public class TimeZoneInfo implements Comparable<TimeZoneInfo> {
             }
         }
         return transitions;
+    }
+
+    public static long[] copyFromIntArray(int[] source) {
+        if(source == null){
+            return new long[0];
+        }
+        long[] dest = new long[source.length];
+        for (int i = 0; i < source.length; i++) {
+            dest[i] = source[i];
+        }
+        return dest;
     }
 
     public boolean hasSameRules(TimeZoneInfo tzi) {
@@ -310,7 +329,7 @@ public class TimeZoneInfo implements Comparable<TimeZoneInfo> {
      * instance has the same order as the other.
      */
     @Override
-    public int compareTo(TimeZoneInfo other) {
+    public int compareTo(@NonNull TimeZoneInfo other) {
         if (this.getNowOffsetMillis() != other.getNowOffsetMillis()) {
             return (other.getNowOffsetMillis() < this.getNowOffsetMillis()) ? -1 : 1;
         }
@@ -338,8 +357,9 @@ public class TimeZoneInfo implements Comparable<TimeZoneInfo> {
         }
 
         // Finally diff by display name
-        if (mDisplayName != null && other.mDisplayName != null)
+        if (mDisplayName != null && other.mDisplayName != null) {
             return this.mDisplayName.compareTo(other.mDisplayName);
+        }
 
         return this.mTz.getDisplayName(Locale.getDefault()).compareTo(
                 other.mTz.getDisplayName(Locale.getDefault()));

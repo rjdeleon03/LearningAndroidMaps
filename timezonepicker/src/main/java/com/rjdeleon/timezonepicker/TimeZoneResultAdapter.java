@@ -32,14 +32,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
+import android.graphics.Typeface;
+
+import com.rjdeleon.timezonepicker.TimeZonePickerView.OnTimeZoneSetListener;
+import com.rjdeleon.timezonepicker.TimeZoneFilterTypeAdapter.OnSetFilterListener;
+
 public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickListener,
-        TimeZoneFilterTypeAdapter.OnSetFilterListener {
+        OnSetFilterListener {
+
     private static final String TAG = "TimeZoneResultAdapter";
     private static final boolean DEBUG = false;
     private static final int VIEW_TAG_TIME_ZONE = R.id.time_zone;
     private static final int EMPTY_INDEX = -100;
 
-    /** SharedPref name and key for recent time zones */
+    /**
+     * SharedPref name and key for recent time zones
+     */
     private static final String SHARED_PREFS_NAME = "com.android.calendar_preferences";
     private static final String KEY_RECENT_TIMEZONES = "preferences_recent_timezones";
 
@@ -50,15 +58,17 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
     private boolean mHasResults = false;
 
     /**
-     * The delimiter we use when serializing recent timezones to shared
-     * preferences
+     * The delimiter we use when serializing recent timezones to shared preferences
      */
     private static final String RECENT_TIMEZONES_DELIMITER = ",";
 
-    /** The maximum number of recent timezones to save */
+    /**
+     * The maximum number of recent timezones to save
+     */
     private static final int MAX_RECENT_TIMEZONES = 3;
 
     static class ViewHolder {
+
         TextView timeZone;
         TextView timeOffset;
         TextView location;
@@ -75,14 +85,13 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
     private Context mContext;
     private LayoutInflater mInflater;
 
-    private TimeZonePickerView.OnTimeZoneSetListener mTimeZoneSetListener;
+    private OnTimeZoneSetListener mTimeZoneSetListener;
     private TimeZoneData mTimeZoneData;
 
     private int[] mFilteredTimeZoneIndices;
     private int mFilteredTimeZoneLength = 0;
 
-    public TimeZoneResultAdapter(Context context, TimeZoneData tzd,
-                                 TimeZonePickerView.OnTimeZoneSetListener l) {
+    public TimeZoneResultAdapter(Context context, TimeZoneData tzd, TimeZonePickerView.OnTimeZoneSetListener l) {
         super();
 
         mContext = context;
@@ -183,9 +192,8 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
     }
 
     /**
-     * Saves the given timezone ID as a recent timezone under shared
-     * preferences. If there are already the maximum number of recent timezones
-     * saved, it will remove the oldest and append this one.
+     * Saves the given timezone ID as a recent timezone under shared preferences. If there are already the maximum
+     * number of recent timezones saved, it will remove the oldest and append this one.
      *
      * @param id the ID of the timezone to save
      * @see {@link #MAX_RECENT_TIMEZONES}
@@ -199,7 +207,7 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
         } else {
             // De-dup
             LinkedHashSet<String> recents = new LinkedHashSet<String>();
-            for(String tzId : recentsString.split(RECENT_TIMEZONES_DELIMITER)) {
+            for (String tzId : recentsString.split(RECENT_TIMEZONES_DELIMITER)) {
                 if (!recents.contains(tzId) && !id.equals(tzId)) {
                     recents.add(tzId);
                 }
@@ -265,13 +273,13 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
         View v = convertView;
 
         if (mFilteredTimeZoneIndices[position] == EMPTY_INDEX) {
-            v = mInflater.inflate(R.layout.empty_time_zone_item, null);
+            v = mInflater.inflate(R.layout.empty_time_zone_item, parent, false);
             return v;
         }
 
         // We'll need to re-inflate the view if it was null, or if it was used as an empty item.
         if (v == null || v.findViewById(R.id.empty_item) != null) {
-            v = mInflater.inflate(R.layout.time_zone_item, null);
+            v = mInflater.inflate(R.layout.time_zone_item, parent, false);
             ViewHolder.setupViewHolder(v);
         }
 
@@ -306,8 +314,8 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
         if (mTimeZoneSetListener != null) {
             TimeZoneInfo tzi = (TimeZoneInfo) v.getTag(VIEW_TAG_TIME_ZONE);
             if (tzi != null) {
-              mTimeZoneSetListener.onTimeZoneSet(tzi);
-              saveRecentTimezone(tzi.mTzId);
+                mTimeZoneSetListener.onTimeZoneSet(tzi);
+                saveRecentTimezone(tzi.mTzId);
             }
         }
     }

@@ -30,20 +30,20 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class TimeZonePickerUtils {
+
     private static final String TAG = "TimeZonePickerUtils";
 
     public static final int GMT_TEXT_COLOR = 0xFF888888;
     public static final int DST_SYMBOL_COLOR = 0xFFBFBFBF;
-    private static final Factory mSpannableFactory = Factory.getInstance();
+    private static final Factory mSpannableFactory = Spannable.Factory.getInstance();
 
     private Locale mDefaultLocale;
     private String[] mOverrideIds;
     private String[] mOverrideLabels;
 
     /**
-     * This needs to be an instantiated class so that it doesn't need to continuously re-load the
-     * list of timezone IDs that need to be overridden.
-     * @param context
+     * This needs to be an instantiated class so that it doesn't need to continuously re-load the list of timezone IDs
+     * that need to be overridden.
      */
     public TimeZonePickerUtils(Context context) {
         // Instead of saving a reference to the context (because we might need to look up the
@@ -53,8 +53,8 @@ public class TimeZonePickerUtils {
     }
 
     /**
-     * Given a timezone id (e.g. America/Los_Angeles), returns the corresponding timezone
-     * display name (e.g. Pacific Time GMT-7).
+     * Given a timezone id (e.g. America/Los_Angeles), returns the corresponding timezone display name (e.g. Pacific
+     * Time GMT-7).
      *
      * @param context Context in case the override labels need to be re-cached.
      * @param id The timezone id
@@ -63,7 +63,7 @@ public class TimeZonePickerUtils {
      * @return The display name of the timezone.
      */
     public CharSequence getGmtDisplayName(Context context, String id, long millis,
-             boolean grayGmt) {
+                                          boolean grayGmt) {
         TimeZone timezone = TimeZone.getTimeZone(id);
         if (timezone == null) {
             return null;
@@ -149,13 +149,13 @@ public class TimeZonePickerUtils {
     }
 
     /**
-     * Gets the display name for the specified Timezone ID. If the ID matches the list of IDs that
-     * need to be have their default display names overriden, use the pre-set display name from
-     * R.arrays.
+     * Gets the display name for the specified Timezone ID. If the ID matches the list of IDs that need to be have their
+     * default display names overriden, use the pre-set display name from R.arrays.
+     *
+     * @param tz The timezone ID.
      * @param daylightTime True for daylight time, false for standard time
-     * @return The display name of the timezone. This will just use the default display name,
-     * except that certain timezones have poor defaults, and should use the pre-set override labels
-     * from R.arrays.
+     * @return The display name of the timezone. This will just use the default display name, except that certain
+     * timezones have poor defaults, and should use the pre-set override labels from R.arrays.
      */
     private String getDisplayName(TimeZone tz, boolean daylightTime) {
         if (mOverrideIds == null || mOverrideLabels == null) {

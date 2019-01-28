@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 
-import com.rjdeleon.timezonepicker.TimeZonePickerDialog;
+import com.codetroopers.betterpickers.timezonepicker.TimeZonePickerDialogFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.AutocompletePrediction;
@@ -242,22 +242,23 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     @OnClick(R.id.destinationTimeZoneText)
     void onTimeZoneTextClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.action_destinationFragment_to_timeZonePickerFragment);
+//        Navigation.findNavController(view).navigate(R.id.action_destinationFragment_to_timeZonePickerFragment);
 
 
 //        TimeZonePickerDialog.OnTimeZoneSetListener listener = tzi -> {
 //            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
 //            dest.setTimeZone(tzi.mTzId);
 //        };
-//
-//        assert getFragmentManager() != null;
-//        Bundle bundle = new Bundle();
-////        bundle.putString(TimeZonePickerDialogFragment.BUNDLE_TIME_ZONE, mViewModel.getDestination().getValue().getTimeZone());
-//
-//        TimeZonePickerDialog tzpd = new TimeZonePickerDialog();
-////        tzpd.setArguments(bundle);
+
+        assert getFragmentManager() != null;
+        Bundle bundle = new Bundle();
+//        bundle.putString(TimeZonePickerDialogFragment.BUNDLE_TIME_ZONE, mViewModel.getDestination().getValue().getTimeZone());
+
+        TimeZonePickerDialogFragment tzpd = new TimeZonePickerDialogFragment();
+
+//        tzpd.setArguments(bundle);
 //        tzpd.setOnTimeZoneSetListener(listener);
-//        tzpd.show(getFragmentManager(), "TIMEZONE_PICKER");
+        tzpd.show(getFragmentManager(), "TIMEZONE_PICKER");
     }
 
     // endregion
