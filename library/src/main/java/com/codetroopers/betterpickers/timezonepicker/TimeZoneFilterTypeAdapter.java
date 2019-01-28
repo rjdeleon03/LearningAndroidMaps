@@ -36,9 +36,7 @@ import java.util.Collections;
 
 public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable, OnClickListener {
 
-    public static final String TAG = "TimeZoneFilterTypeAdapter";
-
-    private Typeface mSansSerifLightTypeface;
+    public static final String TAG = "TimeZoneFilterTypeAdptr";
 
     private static final boolean DEBUG = false;
 
@@ -62,7 +60,7 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
 
         static void setupViewHolder(View v) {
             ViewHolder vh = new ViewHolder();
-            vh.strTextView = (TextView) v.findViewById(R.id.value);
+            vh.strTextView = v.findViewById(R.id.value);
             v.setTag(vh);
         }
     }
@@ -99,10 +97,6 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         mTimeZoneData = tzd;
         mListener = l;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        mSansSerifLightTypeface =
-                Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
-
     }
 
     @Override
@@ -143,7 +137,6 @@ public class TimeZoneFilterTypeAdapter extends BaseAdapter implements Filterable
         vh.str = filter.constraint;
         vh.time = filter.time;
         vh.strTextView.setText(filter.constraint);
-        vh.strTextView.setTypeface(mSansSerifLightTypeface);
         return v;
     }
 

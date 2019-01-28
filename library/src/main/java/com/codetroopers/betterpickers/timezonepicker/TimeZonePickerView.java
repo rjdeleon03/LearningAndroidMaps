@@ -43,8 +43,6 @@ public class TimeZonePickerView extends LinearLayout implements TextWatcher, OnI
 
     private static final String TAG = "TimeZonePickerView";
 
-    private Typeface mSansSerifLightTypeface;
-
     private Context mContext;
     private AutoCompleteTextView mAutoCompleteTextView;
     private TimeZoneFilterTypeAdapter mFilterAdapter;
@@ -68,28 +66,24 @@ public class TimeZonePickerView extends LinearLayout implements TextWatcher, OnI
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.timezonepickerview, this, true);
 
-        mSansSerifLightTypeface =
-                Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
-
         mHideFilterSearchOnStart = hideFilterSearch;
 
         TimeZoneData tzd = new TimeZoneData(mContext, timeZone, timeMillis);
 
         mResultAdapter = new TimeZoneResultAdapter(mContext, tzd, l);
-        ListView timeZoneList = (ListView) findViewById(R.id.timezonelist);
+        ListView timeZoneList = findViewById(R.id.timezonelist);
         timeZoneList.setAdapter(mResultAdapter);
         timeZoneList.setOnItemClickListener(mResultAdapter);
 
         mFilterAdapter = new TimeZoneFilterTypeAdapter(mContext, tzd, mResultAdapter);
 
-        mAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchBox);
-        mAutoCompleteTextView.setTypeface(mSansSerifLightTypeface);
+        mAutoCompleteTextView = findViewById(R.id.searchBox);
         mAutoCompleteTextView.addTextChangedListener(this);
         mAutoCompleteTextView.setOnItemClickListener(this);
         mAutoCompleteTextView.setOnClickListener(this);
 
         updateHint(R.string.hint_time_zone_search, R.drawable.ic_search_holo_light);
-        mClearButton = (ImageButton) findViewById(R.id.clear_search);
+        mClearButton = findViewById(R.id.clear_search);
         mClearButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

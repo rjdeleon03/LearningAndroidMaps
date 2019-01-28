@@ -45,8 +45,6 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
     private static final int VIEW_TAG_TIME_ZONE = R.id.time_zone;
     private static final int EMPTY_INDEX = -100;
 
-    private Typeface mSansSerifLightTypeface;
-
     /**
      * SharedPref name and key for recent time zones
      */
@@ -103,9 +101,6 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         mFilteredTimeZoneIndices = new int[mTimeZoneData.size()];
-
-        mSansSerifLightTypeface =
-                Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
 
         onSetFilter(TimeZoneFilterTypeAdapter.FILTER_TYPE_NONE, null, 0);
     }
@@ -279,8 +274,6 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
 
         if (mFilteredTimeZoneIndices[position] == EMPTY_INDEX) {
             v = mInflater.inflate(R.layout.empty_time_zone_item, parent, false);
-
-            ((TextView) v.findViewById(R.id.empty_item)).setTypeface(mSansSerifLightTypeface);
             return v;
         }
 
@@ -294,10 +287,6 @@ public class TimeZoneResultAdapter extends BaseAdapter implements OnItemClickLis
 
         TimeZoneInfo tzi = mTimeZoneData.get(mFilteredTimeZoneIndices[position]);
         v.setTag(VIEW_TAG_TIME_ZONE, tzi);
-
-        vh.timeZone.setTypeface(mSansSerifLightTypeface);
-        vh.timeOffset.setTypeface(mSansSerifLightTypeface);
-        vh.location.setTypeface(mSansSerifLightTypeface);
 
         vh.timeZone.setText(tzi.mDisplayName);
 

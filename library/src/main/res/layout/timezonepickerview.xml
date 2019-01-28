@@ -36,11 +36,9 @@
             android:layout_marginRight="8dp"
             android:completionThreshold="1"
             android:hint="@string/hint_time_zone_search"
-            android:background="@drawable/edit_text_holo_light"
             android:imeOptions="actionDone"
             android:minHeight="48dp"
-            android:singleLine="true"
-            android:paddingRight="30dp" >
+            android:singleLine="true" >
         </AutoCompleteTextView>
         <ImageButton
             android:id="@+id/clear_search"
