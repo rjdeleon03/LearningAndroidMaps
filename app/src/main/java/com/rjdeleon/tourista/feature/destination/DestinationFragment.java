@@ -244,18 +244,17 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     void onTimeZoneTextClick(View view) {
 //        Navigation.findNavController(view).navigate(R.id.action_destinationFragment_to_timeZonePickerFragment);
 
-
-//        TimeZonePickerDialog.OnTimeZoneSetListener listener = tzi -> {
-//            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
-//            dest.setTimeZone(tzi.mTzId);
-//        };
+        TimeZonePickerDialogFragment.OnTimeZoneSetListener listener = tzi -> {
+            Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
+            dest.setTimeZone(tzi.mTzId);
+        };
 
         assert getFragmentManager() != null;
         Bundle bundle = new Bundle();
 //        bundle.putString(TimeZonePickerDialogFragment.BUNDLE_TIME_ZONE, mViewModel.getDestination().getValue().getTimeZone());
 
         TimeZonePickerDialogFragment tzpd = new TimeZonePickerDialogFragment();
-
+        tzpd.setOnTimeZoneSetListener(listener);
 //        tzpd.setArguments(bundle);
 //        tzpd.setOnTimeZoneSetListener(listener);
         tzpd.show(getFragmentManager(), "TIMEZONE_PICKER");
