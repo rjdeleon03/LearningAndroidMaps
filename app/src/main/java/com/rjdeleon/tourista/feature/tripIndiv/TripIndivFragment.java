@@ -104,10 +104,13 @@ public class TripIndivFragment extends BaseFragment {
 
             if (mDialogFragment != null) return true;
 
-            mDialogFragment = TripDialogFragment.newInstance(mId);
-            mDialogFragment.setDismissListener(() -> mDialogFragment = null);
+            TripDialogFragment tdf = TripDialogFragment.newInstance(mId);
+            tdf.setDismissListener(() -> mDialogFragment = null);
+            mDialogFragment = tdf;
+
             assert getFragmentManager() != null;
-            mDialogFragment.show(getFragmentManager(), TripDialogFragment.TAG);
+            tdf.show(getFragmentManager(), TripDialogFragment.TAG);
+
             return true;
         });
     }

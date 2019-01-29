@@ -64,11 +64,12 @@ public class TripsFragment extends BaseFragment {
     void onAddTripButtonClick() {
         if (mDialogFragment != null) return;
 
-        mDialogFragment = TripDialogFragment.newInstance();
-        mDialogFragment.setDismissListener(() -> mDialogFragment = null);
+        TripDialogFragment tdf = TripDialogFragment.newInstance();
+        tdf.setDismissListener(() -> mDialogFragment = null);
+        mDialogFragment = tdf;
 
         assert getFragmentManager() != null;
-        mDialogFragment.show(getFragmentManager(), TripDialogFragment.TAG);
+        tdf.show(getFragmentManager(), TripDialogFragment.TAG);
     }
 
 }

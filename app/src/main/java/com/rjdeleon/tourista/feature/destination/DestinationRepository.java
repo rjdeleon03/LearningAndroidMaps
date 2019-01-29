@@ -81,7 +81,7 @@ class DestinationRepository {
 
         @Override
         protected Void doInBackground(Destination... destinations) {
-            mDao.delete(destinations[0]);
+            mDao.update(destinations[0]);
             return null;
         }
     }

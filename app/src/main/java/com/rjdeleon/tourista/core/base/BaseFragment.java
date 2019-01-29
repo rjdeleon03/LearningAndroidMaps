@@ -21,7 +21,7 @@ public class BaseFragment extends Fragment {
         GONE
     }
 
-    protected BaseDialogFragment mDialogFragment = null;
+    protected DialogFragment mDialogFragment = null;
 
     @Override
     public void onStop() {

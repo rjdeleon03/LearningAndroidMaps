@@ -267,10 +267,10 @@
                                 <EditText
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginEnd="4dp"
                                     android:layout_marginTop="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:padding="6dp"
+                                    android:paddingTop="0dp"
                                     android:text="@={viewModel.destination.notes}"
                                     android:textSize="@dimen/text_field_size"
                                     app:layout_constraintEnd_toEndOf="parent"
