@@ -82,7 +82,7 @@ public class TimeZonePickerView extends LinearLayout implements TextWatcher, OnI
         mAutoCompleteTextView.setOnItemClickListener(this);
         mAutoCompleteTextView.setOnClickListener(this);
 
-        updateHint(R.string.hint_time_zone_search, R.drawable.ic_search_holo_light);
+//        updateHint(R.string.hint_time_zone_search, R.drawable.ic_search_holo_light);
         mClearButton = findViewById(R.id.clear_search);
         mClearButton.setOnClickListener(new OnClickListener() {
             @Override

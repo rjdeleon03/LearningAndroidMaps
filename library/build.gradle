@@ -40,4 +40,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'androidx.appcompat:appcompat:' + androidVersion
+    implementation 'androidx.cardview:cardview:' + androidVersion
 }

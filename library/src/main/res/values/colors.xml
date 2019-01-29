@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#d81b60</color>
+
     <color name="default_text_color_holo_dark">#ffffffff</color>
     <color name="default_text_color_holo_dark_disabled">#ff4c4c4c</color>
     <color name="default_divider_color_dark">#28ffffff</color>
