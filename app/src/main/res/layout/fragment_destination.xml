@@ -23,9 +23,13 @@
                 android:id="@+id/destinationMap"
                 mapPlace="@{viewModel.destination}"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/destinationDetailsView" />
+
+            <!--
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -62,6 +66,10 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            -->
+
+            <!--
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="0dp"
@@ -109,183 +117,180 @@
                     android:layout_marginTop="20dp"
                     app:cardCornerRadius="8dp">
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <!--
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingBottom="8dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/destination_date"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
-
-                                <TextView
-                                    android:id="@+id/destinationDateText"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/destination_date_format"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    dateText="@{viewModel.destination.startTime}"/>
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingBottom="8dp">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/destination_time"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"/>
-
-                                <TextView
-                                    android:id="@+id/destinationTimeText"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/destination_time_format"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    timeText="@{viewModel.destination.startTime}"/>
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                            -->
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp">
-
-                                <ImageView
-                                    android:id="@+id/imageView"
-                                    android:layout_width="35dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="4dp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/ic_access_time_black_24dp" />
-
-                                <TextView
-                                    android:id="@+id/destinationStartDateText"
-                                    dateText="@{viewModel.destination.startTime}"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:text="@string/destination_date_format"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
-                                    android:id="@+id/destinationStartTimeText"
-                                    timeText="@{viewModel.destination.startTime}"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:text="@string/destination_time_format"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <TextView
-                                    android:id="@+id/destinationEndDateText"
-                                    dateText="@{viewModel.destination.endTime}"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:text="@string/destination_date_format"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                                    app:layout_constraintTop_toBottomOf="@+id/destinationStartDateText" />
-
-                                <TextView
-                                    android:id="@+id/destinationEndTimeText"
-                                    timeText="@{viewModel.destination.endTime}"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:text="@string/destination_time_format"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/destinationStartTimeText" />
-
-                                <TextView
-                                    android:id="@+id/destinationTimeZoneText"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="@string/destination_timezone"
-                                    android:textAppearance="@style/TextAppearance.AppCompat.Menu"
-                                    timeZoneText="@{viewModel.destination.timeZone}"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                                    app:layout_constraintTop_toBottomOf="@+id/destinationEndDateText" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:id="@+id/notesImageView"
-                                    android:layout_width="35dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="4dp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:srcCompat="@drawable/ic_event_note_black_24dp" />
-
-                                <EditText
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="4dp"
-                                    android:layout_marginEnd="4dp"
-                                    android:layout_marginTop="8dp"
-                                    android:paddingTop="0dp"
-                                    android:text="@={viewModel.destination.notes}"
-                                    android:textSize="@dimen/text_field_size"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@+id/notesImageView"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </LinearLayout>
-
-                    </ScrollView>
-
                 </androidx.cardview.widget.CardView>
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            -->
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_dialog_rounded_top_wide"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/destinationDetailsView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_location_on_black_24dp"/>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/destinationAutocompleteText"
+                        placeText="@{viewModel.destination.name}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:hint="@string/destination_name"
+                        android:textSize="@dimen/text_field_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/destinationDetailsView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_access_time_black_24dp"/>
+
+                        <TextView
+                            android:id="@+id/destinationStartDateText"
+                            dateText="@{viewModel.destination.startTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/destination_date_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/destinationStartTimeText"
+                            timeText="@{viewModel.destination.startTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/destination_time_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/destinationEndDateText"
+                            dateText="@{viewModel.destination.endTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/destination_date_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toBottomOf="@+id/destinationStartDateText"/>
+
+                        <TextView
+                            android:id="@+id/destinationEndTimeText"
+                            timeText="@{viewModel.destination.endTime}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/destination_time_format"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/destinationStartTimeText"/>
+
+                        <TextView
+                            android:id="@+id/destinationTimeZoneText"
+                            timeZoneText="@{viewModel.destination.timeZone}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/destination_timezone"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView"
+                            app:layout_constraintTop_toBottomOf="@+id/destinationEndDateText"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/notesImageView"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_event_note_black_24dp"/>
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="4dp"
+                            android:paddingTop="0dp"
+                            android:text="@={viewModel.destination.notes}"
+                            android:textSize="@dimen/text_field_size"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/notesImageView"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -154,7 +154,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     // region OnClick listeners
 
-    @OnClick(R.id.saveDestinationButton)
+
+//    @OnClick(R.id.saveDestinationButton)
     void onSaveButtonClick(View view) {
 
         Destination destination = mViewModel.getDestination().getValue();
@@ -173,7 +174,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         Navigation.findNavController(view).navigateUp();
     }
 
-    @OnClick(R.id.deleteDestinationButton)
+//    @OnClick(R.id.deleteDestinationButton)
     void onDeleteButtonClick(View view) {
 
         Destination destination = mViewModel.getDestination().getValue();
@@ -185,7 +186,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         Navigation.findNavController(view).navigateUp();
     }
 
-    @OnClick(R.id.destinationStartDateText)
+//    @OnClick(R.id.destinationStartDateText)
     void onStartDateTextClick() {
         DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
@@ -229,7 +230,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         d.show();
     }
 
-    @OnClick(R.id.destinationEndTimeText)
+//    @OnClick(R.id.destinationEndTimeText)
     void onEndTimeTextClick() {
         TimePickerDialog.OnTimeSetListener listener = (timePicker, h, m) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
