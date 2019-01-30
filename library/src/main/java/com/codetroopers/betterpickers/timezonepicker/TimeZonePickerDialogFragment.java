@@ -99,7 +99,12 @@ public class TimeZonePickerDialogFragment extends DialogFragment implements Time
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            View view = dialog.getWindow().getDecorView();
+            view.setBackgroundResource(android.R.color.transparent);
+        }
         return dialog;
     }
 

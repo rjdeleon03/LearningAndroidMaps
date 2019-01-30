@@ -19,12 +19,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="300dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/transparent">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bpWhite"
+        android:background="@android:color/transparent"
         android:layout_gravity="center_vertical" >
 
         <AutoCompleteTextView
@@ -38,7 +39,7 @@
             android:imeOptions="actionDone"
             android:minHeight="48dp"
             android:singleLine="true"
-            android:background="@color/colorAccent"
+            android:background="@drawable/shape_dialog_rounded_top"
             android:textColor="@android:color/white"
             android:textColorHint="#77000000"
             android:textCursorDrawable="@null">
@@ -63,7 +64,8 @@
         android:id="@+id/timezonelist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFECECEC"
+        android:background="@drawable/shape_dialog_rounded_body"
         android:choiceMode="singleChoice" >
     </ListView>
+
 </LinearLayout>
