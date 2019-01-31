@@ -8,4 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">@font/font_raleway</item>
     </style>
+
+    <!-- AutoCompleteTextView theme -->
+    <style name="AutoCompleteTextViewTheme" parent="android:Widget.AutoCompleteTextView">
+        <item name="fontFamily">@font/raleway_bold</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <!-- Icon ImageView theme -->
+    <style name="IconImageViewTheme" parent="android:Widget">
+        <item name="android:tint">@color/colorGray</item>
+    </style>
+
+    <!-- TextView theme -->
+    <style name="TextViewTheme" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
 </resources>
