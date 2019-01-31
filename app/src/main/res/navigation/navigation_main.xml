@@ -8,7 +8,6 @@
     <fragment
         android:id="@+id/tripsFragment"
         android:name="com.rjdeleon.tourista.feature.trips.TripsFragment"
-        android:label="fragment_trips"
         tools:layout="@layout/fragment_trips" >
         <action
             android:id="@+id/action_tripsFragment_to_tripIndivFragment"
@@ -17,7 +16,6 @@
     <fragment
         android:id="@+id/tripIndivFragment"
         android:name="com.rjdeleon.tourista.feature.tripIndiv.TripIndivFragment"
-        android:label="fragment_trip_indiv"
         tools:layout="@layout/fragment_trip_indiv" >
         <argument
             android:name="tripId"
@@ -29,7 +27,6 @@
     <fragment
         android:id="@+id/destinationFragment"
         android:name="com.rjdeleon.tourista.feature.destination.DestinationFragment"
-        android:label="fragment_destination"
         tools:layout="@layout/fragment_destination" >
         <argument
             android:name="id"

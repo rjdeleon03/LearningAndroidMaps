@@ -14,6 +14,13 @@
         android:layout_height="match_parent"
         tools:context=".feature.tripIndiv.TripIndivFragment">
 
+        <include
+            layout="@layout/toolbar_main"
+            android:id="@+id/tripIndivFragmentToolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/destinationsRecyclerView"
             android:layout_width="0dp"
@@ -22,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tripIndivFragmentToolbar"
             tools:listItem="@layout/item_destination"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

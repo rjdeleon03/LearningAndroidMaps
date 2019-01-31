@@ -19,8 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,6 +30,9 @@ public class TripIndivFragment extends BaseFragment {
 
     private TripIndivViewModel mViewModel;
     private TripIndivDestinationsAdapter mAdapter;
+
+    @BindView(R.id.appToolbar)
+    Toolbar tripIndivFragmentToolbar;
 
     private long mId = 0;
 
@@ -48,7 +53,7 @@ public class TripIndivFragment extends BaseFragment {
                     getActivity().getApplication(), mId);
             mViewModel = ViewModelProviders.of(this, factory).get(TripIndivViewModel.class);
             mViewModel.getDestinations().observe(this, destinations -> mAdapter.setDestinations(destinations));
-
+            mViewModel.getTrip().observe(this, trip -> tripIndivFragmentToolbar.setTitle(trip.getName()));
         }
     }
 
@@ -80,6 +85,12 @@ public class TripIndivFragment extends BaseFragment {
         }).attachToRecyclerView(binding.destinationsRecyclerView);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        NavigationUI.setupWithNavController(tripIndivFragmentToolbar, Navigation.findNavController(view));
     }
 
     @Override
