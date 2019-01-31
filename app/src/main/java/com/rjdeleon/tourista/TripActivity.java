@@ -1,7 +1,5 @@
 package com.rjdeleon.tourista;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,8 +9,8 @@ import com.rjdeleon.tourista.core.sharedprefs.SharedPrefsUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import butterknife.BindView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import butterknife.ButterKnife;
 
 public class TripActivity extends AppCompatActivity {
@@ -20,17 +18,16 @@ public class TripActivity extends AppCompatActivity {
     /* TODO: Temp account string constant */
     private static final String ACCOUNT = "account@gmail.com";
 
-    @BindView(R.id.appToolbar)
-    Toolbar appToolbar;
+    private NavController mNavController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip);
 
-        ButterKnife.bind(this);
-        setSupportActionBar(appToolbar);
         setupCalendar();
+
+        mNavController = Navigation.findNavController(this, R.id.navigation_fragment);
     }
 
     private void setupCalendar() {
@@ -56,5 +53,11 @@ public class TripActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.error_calendar_permission, Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        mNavController.navigateUp();
+        return super.onSupportNavigateUp();
     }
 }

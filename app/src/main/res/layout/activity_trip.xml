@@ -7,16 +7,6 @@
     tools:context=".TripActivity"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/appToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Theme.AppCompat"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        app:title="@string/app_name"
-        tools:targetApi="lollipop"/>
-
     <fragment
         android:id="@+id/navigation_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

@@ -14,9 +14,15 @@ import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
 
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -24,6 +30,9 @@ public class TripsFragment extends BaseFragment {
 
     private TripsAdapter mAdapter;
     private TripsViewModel mViewModel;
+
+    @BindView(R.id.appToolbar)
+    Toolbar tripsFragmentToolbar;
 
     public TripsFragment() {
         // Required empty public constructor
@@ -48,16 +57,13 @@ public class TripsFragment extends BaseFragment {
 
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
-
         return view;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Objects.requireNonNull(
-                (Objects.requireNonNull((AppCompatActivity) getActivity()))
-                        .getSupportActionBar()).setTitle(R.string.app_name);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        NavigationUI.setupWithNavController(tripsFragmentToolbar, Navigation.findNavController(view));
     }
 
     @OnClick(R.id.addTripButton)

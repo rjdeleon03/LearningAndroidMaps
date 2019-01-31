@@ -43,6 +43,7 @@ public class BaseFragment extends Fragment {
     }
 
     protected void setToolbarVisibility(ToolbarVisibility visibility) {
+        if (getActionBar() == null) return;
         if (visibility == ToolbarVisibility.VISIBLE) {
             getActionBar().show();
         } else {
