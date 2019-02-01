@@ -29,11 +29,11 @@ public class BaseFragment extends Fragment {
         hideKeyboard();
     }
 
-    protected void hideKeyboard() {
+    private void hideKeyboard() {
         FragmentActivity activity = Objects.requireNonNull(getActivity());
         InputMethodManager manager = ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE));
 
-        assert manager != null;
+        if (manager == null || activity.getCurrentFocus() == null) return;
         try {
             manager.hideSoftInputFromWindow(Objects
                     .requireNonNull(activity.getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

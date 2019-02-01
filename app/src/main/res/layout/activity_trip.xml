@@ -11,7 +11,7 @@
         android:id="@+id/appToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/ToolbarTheme"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         app:title="@string/app_name"

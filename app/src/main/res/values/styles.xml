@@ -24,4 +24,10 @@
     <style name="TextViewTheme" parent="android:Widget.TextView">
         <item name="android:textColor">@color/colorGray</item>
     </style>
+
+    <!-- Toolbar theme -->
+    <style name="ToolbarTheme" parent="Theme.AppCompat">
+        <item name="fontFamily">@font/raleway_bold</item>
+    </style>
+    
 </resources>

@@ -48,8 +48,6 @@ public class TripIndivFragment extends BaseFragment {
                     getActivity().getApplication(), mId);
             mViewModel = ViewModelProviders.of(this, factory).get(TripIndivViewModel.class);
             mViewModel.getDestinations().observe(this, destinations -> mAdapter.setDestinations(destinations));
-            mViewModel.getTrip().observe(this, trip -> getActionBar().setTitle(trip.getName()));
-
         }
     }
 
@@ -87,12 +85,14 @@ public class TripIndivFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (mViewModel != null)
+            mViewModel.getTrip().observe(this, trip -> getActionBar().setTitle(trip.getName()));
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     @Override

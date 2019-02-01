@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
@@ -38,8 +40,9 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,12 +56,13 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     private DestinationViewModel mViewModel;
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
     private GeoDataClient mGoogleApiClient;
+    private NavController mNavController;
 
     private static final LatLngBounds LAT_LNG_BOUNDS =
             new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
 
     @BindView(R.id.destinationParentLayout)
-    CoordinatorLayout destinationParentLayout;
+    ViewGroup destinationParentLayout;
 
     @BindView(R.id.destinationAutocompleteText)
     AutoCompleteTextView autoCompleteTextView;
@@ -106,10 +110,17 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         View view = binding.getRoot();
         ButterKnife.bind(this, view);
 
+        setHasOptionsMenu(true);
         setupAutocompleteView();
         setupGooglePlacesAndMaps(savedInstanceState);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mNavController = Navigation.findNavController(view);
     }
 
     @Override
@@ -125,9 +136,27 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_destination, menu);
+
+        menu.findItem(R.id.action_delete_destination).setOnMenuItemClickListener(item -> {
+            onDeleteButtonClick();
+            return true;
+        });
+
+        menu.findItem(R.id.action_save_destination).setOnMenuItemClickListener(item -> {
+            onSaveButtonClick();
+            return true;
+        });
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        setToolbarVisibility(ToolbarVisibility.GONE);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setTitle("");
+        getActionBar().setElevation(0);
         mapView.onResume();
     }
 
@@ -140,7 +169,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     @Override
     public void onStop() {
         super.onStop();
-        setToolbarVisibility(ToolbarVisibility.VISIBLE);
+        getActionBar().setElevation(Constants.TOOLBAR_ELEVATION);
         mapView.onStop();
     }
 
@@ -156,7 +185,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
 
 //    @OnClick(R.id.saveDestinationButton)
-    void onSaveButtonClick(View view) {
+    void onSaveButtonClick() {
 
         Destination destination = mViewModel.getDestination().getValue();
         if (destination == null || getContext() == null) return;
@@ -171,11 +200,11 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
             destination.setEventId(eventId);
         }
         mViewModel.save();
-        Navigation.findNavController(view).navigateUp();
+        mNavController.navigateUp();
     }
 
 //    @OnClick(R.id.deleteDestinationButton)
-    void onDeleteButtonClick(View view) {
+    void onDeleteButtonClick() {
 
         Destination destination = mViewModel.getDestination().getValue();
         if (destination == null || getContext() == null) return;
@@ -183,10 +212,10 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         CalendarUtils.deleteEvent(getContext(), destination);
         mViewModel.delete();
 
-        Navigation.findNavController(view).navigateUp();
+        mNavController.navigateUp();
     }
 
-//    @OnClick(R.id.destinationStartDateText)
+    @OnClick(R.id.destinationStartDateText)
     void onStartDateTextClick() {
         DatePickerDialog.OnDateSetListener listener = (datePicker, y, m, d) -> {
             Destination dest = Objects.requireNonNull(mViewModel.getDestination().getValue());
