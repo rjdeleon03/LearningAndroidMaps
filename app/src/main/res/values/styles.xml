@@ -9,6 +9,11 @@
         <item name="fontFamily">@font/font_raleway</item>
     </style>
 
+    <!-- Toolbar theme -->
+    <style name="ToolbarTheme" parent="Theme.AppCompat">
+        <item name="fontFamily">@font/raleway_semibold</item>
+    </style>
+
     <!-- AutoCompleteTextView theme -->
     <style name="AutoCompleteTextViewTheme" parent="android:Widget.AutoCompleteTextView">
         <item name="fontFamily">@font/raleway_bold</item>
@@ -23,11 +28,6 @@
     <!-- TextView theme -->
     <style name="TextViewTheme" parent="android:Widget.TextView">
         <item name="android:textColor">@color/colorGray</item>
-    </style>
-
-    <!-- Toolbar theme -->
-    <style name="ToolbarTheme" parent="Theme.AppCompat">
-        <item name="fontFamily">@font/raleway_bold</item>
     </style>
     
 </resources>

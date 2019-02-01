@@ -1,7 +1,5 @@
 package com.rjdeleon.tourista;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -39,6 +37,8 @@ public class TripActivity extends AppCompatActivity {
         mNavController = Navigation.findNavController(this, R.id.navigation_fragment);
         NavigationUI.setupActionBarWithNavController(this, mNavController);
         setupCalendar();
+
+        mNavController = Navigation.findNavController(this, R.id.navigation_fragment);
     }
 
     private void setupCalendar() {

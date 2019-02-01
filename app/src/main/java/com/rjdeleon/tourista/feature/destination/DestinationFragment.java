@@ -3,7 +3,6 @@ package com.rjdeleon.tourista.feature.destination;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +39,6 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -184,7 +182,6 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     // region OnClick listeners
 
 
-//    @OnClick(R.id.saveDestinationButton)
     void onSaveButtonClick() {
 
         Destination destination = mViewModel.getDestination().getValue();
@@ -203,7 +200,6 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
         mNavController.navigateUp();
     }
 
-//    @OnClick(R.id.deleteDestinationButton)
     void onDeleteButtonClick() {
 
         Destination destination = mViewModel.getDestination().getValue();
