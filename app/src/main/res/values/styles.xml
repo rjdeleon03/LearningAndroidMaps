@@ -6,17 +6,26 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/font_raleway</item>
         <item name="fontFamily">@font/font_raleway</item>
+        <item name="editTextStyle">@style/EditTextTheme</item>
     </style>
 
     <!-- Toolbar theme -->
     <style name="ToolbarTheme" parent="Theme.AppCompat">
+        <item name="android:fontFamily">@font/raleway_semibold</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
 
     <!-- AutoCompleteTextView theme -->
     <style name="AutoCompleteTextViewTheme" parent="android:Widget.AutoCompleteTextView">
+        <item name="android:fontFamily">@font/raleway_bold</item>
         <item name="fontFamily">@font/raleway_bold</item>
+        <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <!-- EditText theme -->
+    <style name="EditTextTheme" parent="android:Widget.EditText">
         <item name="android:textColor">@color/colorGray</item>
     </style>
 
@@ -28,6 +37,32 @@
     <!-- TextView theme -->
     <style name="TextViewTheme" parent="android:Widget.TextView">
         <item name="android:textColor">@color/colorGray</item>
+    </style>
+
+    <!-- Dialog theme -->
+    <style name="DialogTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:buttonStyle">@style/DialogButtonStyle</item>
+        <item name="android:textColorPrimary">@color/colorGray</item>
+        <item name="android:background">@drawable/shape_dialog_rounded_whole</item>
+    </style>
+
+    <!-- Dialog button style -->
+    <style name="DialogButtonStyle">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+        <item name="fontFamily">@font/raleway_semibold</item>
+    </style>
+
+    <!-- Dialog title style -->
+    <style name="DialogTitleTheme" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+        <item name="fontFamily">@font/raleway_semibold</item>
     </style>
     
 </resources>

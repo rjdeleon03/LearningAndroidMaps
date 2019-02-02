@@ -206,7 +206,7 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
     void onDeleteButtonClick() {
 
         /* Show alert dialog for confirmation */
-        DialogManager.createAndShowDialog(getContext(), R.string.destination_delete_confirmation,
+        DialogManager.createConfirmationDialog(getContext(), R.string.destination_delete_confirmation,
                 (dialog, which) -> {
                     Destination destination = mViewModel.getDestination().getValue();
                     if (destination == null || getContext() == null) return;
@@ -215,7 +215,8 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
                     mViewModel.delete();
 
                     mNavController.navigateUp();
-                }, null);
+                }, null)
+                .show();
     }
 
     @OnClick(R.id.destinationStartDateText)

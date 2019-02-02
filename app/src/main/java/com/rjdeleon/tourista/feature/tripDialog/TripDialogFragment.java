@@ -4,8 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseDialogFragment;
@@ -46,23 +52,29 @@ public class TripDialogFragment extends BaseDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.dialog_new_trip_title)
-                .setPositiveButton("OK", (dialogInterface, i) -> {
-                    mViewModel.save();
-                    dismiss();
-                })
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dismiss());
+
+        // Setup the title TextView
+        TextView tv = new TextView(new ContextThemeWrapper(getContext(), R.style.DialogTitleTheme));
+        tv.setText(R.string.dialog_new_trip_title);
 
         // Get the trip ID
         long tripId = 0;
         Bundle args = getArguments();
         if (args != null && getActivity() != null) {
             tripId = args.getLong(TAG_TRIP_ID);
-            b.setTitle(R.string.dialog_edit_trip_title);
+            tv.setText(R.string.dialog_edit_trip_title);
         }
 
-        // Set the viewModel
+        AlertDialog.Builder b = new AlertDialog.Builder(
+                new ContextThemeWrapper(getActivity(), R.style.DialogTheme))
+                .setCustomTitle(tv)
+                .setPositiveButton(R.string.text_ok, (dialogInterface, i) -> {
+                    mViewModel.save();
+                    dismiss();
+                })
+                .setNegativeButton(R.string.text_cancel, (dialogInterface, i) -> dismiss());
+
+        // Setup the viewModel
         TripDialogViewModelFactory factory =
                 new TripDialogViewModelFactory(Objects.requireNonNull(getActivity()).getApplication(), tripId);
         mViewModel = ViewModelProviders.of(this, factory).get(TripDialogViewModel.class);
@@ -73,6 +85,10 @@ public class TripDialogFragment extends BaseDialogFragment {
         binding.setLifecycleOwner(this);
 
         b.setView(binding.getRoot());
-        return b.create();
+        Dialog d = b.create();
+
+        if (d.getWindow() != null)
+            d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        return d;
     }
 }
