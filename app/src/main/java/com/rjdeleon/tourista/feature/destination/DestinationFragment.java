@@ -1,8 +1,10 @@
 package com.rjdeleon.tourista.feature.destination;
 
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.rjdeleon.tourista.Constants;
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
+import com.rjdeleon.tourista.core.base.DialogManager;
 import com.rjdeleon.tourista.core.calendar.CalendarUtils;
 import com.rjdeleon.tourista.core.places.PlaceAutocompleteAdapter;
 import com.rjdeleon.tourista.core.sharedprefs.SharedPrefsUtils;
@@ -202,13 +205,17 @@ public class DestinationFragment extends BaseFragment implements GoogleApiClient
 
     void onDeleteButtonClick() {
 
-        Destination destination = mViewModel.getDestination().getValue();
-        if (destination == null || getContext() == null) return;
+        /* Show alert dialog for confirmation */
+        DialogManager.createAndShowDialog(getContext(), R.string.destination_delete_confirmation,
+                (dialog, which) -> {
+                    Destination destination = mViewModel.getDestination().getValue();
+                    if (destination == null || getContext() == null) return;
 
-        CalendarUtils.deleteEvent(getContext(), destination);
-        mViewModel.delete();
+                    CalendarUtils.deleteEvent(getContext(), destination);
+                    mViewModel.delete();
 
-        mNavController.navigateUp();
+                    mNavController.navigateUp();
+                }, null);
     }
 
     @OnClick(R.id.destinationStartDateText)

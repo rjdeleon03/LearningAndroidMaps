@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/tripsFragment"
         android:name="com.rjdeleon.tourista.feature.trips.TripsFragment"
-        tools:layout="@layout/fragment_trips" >
+        tools:layout="@layout/fragment_trips"
+        android:label="@string/trips_title">
         <action
             android:id="@+id/action_tripsFragment_to_tripIndivFragment"
             app:destination="@id/tripIndivFragment" />
