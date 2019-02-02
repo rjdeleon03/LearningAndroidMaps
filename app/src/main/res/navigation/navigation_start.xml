@@ -15,4 +15,15 @@
         android:name="com.rjdeleon.tourista.feature.currencyConverter.CurrencyConverterFragment"
         android:label="@string/fragment_currency_converter"
         tools:layout="@layout/fragment_currency_converter" />
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.rjdeleon.tourista.feature.weather.WeatherFragment"
+        android:label="@string/fragment_weather"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/worldClockFragment"
+        android:name="com.rjdeleon.tourista.feature.worldClock.WorldClockFragment"
+        android:label="@string/fragment_world_clock"
+        tools:layout="@layout/fragment_world_clock" />
+
 </navigation>

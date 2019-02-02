@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
         mAppBarConfiguration = AppBarConfiguration
                 .Builder(setOf(
                         R.id.myLocationFragment,
-                        R.id.currencyConverterFragment
+                        R.id.weatherFragment,
+                        R.id.currencyConverterFragment,
+                        R.id.worldClockFragment
                 ))
                 .setDrawerLayout(mainDrawerLayout)
                 .build()
@@ -65,8 +67,12 @@ class MainActivity : AppCompatActivity() {
                 when (menuItem.itemId) {
                     R.id.menu_myLocationFragment ->
                         mNavController.navigate(R.id.myLocationFragment)
+                    R.id.menu_weatherFragment ->
+                        mNavController.navigate(R.id.weatherFragment)
                     R.id.menu_currencyConverterFragment ->
                         mNavController.navigate(R.id.currencyConverterFragment)
+                    R.id.menu_worldClockFragment ->
+                        mNavController.navigate(R.id.worldClockFragment)
                 }
             }
 
