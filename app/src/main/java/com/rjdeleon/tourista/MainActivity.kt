@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(mainNavigationView, mNavController)
 
         /* Handle navigation drawer item clicks */
-        mainNavigationView.menu.getItem(0).isChecked = true;
+        mainNavigationView.menu.getItem(0).isChecked = true
         mainNavigationView.setNavigationItemSelectedListener { menuItem ->
 
             if (!menuItem.isChecked) {

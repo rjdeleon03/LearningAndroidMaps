@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".feature.myLocation.MyLocationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        mapPlace="@{viewModel.destination}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/fragment_my_location" />
+        android:background="@android:color/white"/>
 
 </FrameLayout>
