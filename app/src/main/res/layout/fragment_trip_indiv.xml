@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.rjdeleon.tourista.feature.tripIndiv.TripIndivViewModel"/>
+            type="com.rjdeleon.tourista.old.tripIndiv.TripIndivViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.tripIndiv.TripIndivFragment">
+        tools:context=".old.tripIndiv.TripIndivFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/destinationsRecyclerView"

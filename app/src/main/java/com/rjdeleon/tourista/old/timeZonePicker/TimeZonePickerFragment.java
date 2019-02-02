@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.timeZonePicker;
+package com.rjdeleon.tourista.old.timeZonePicker;
 
 
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.databinding.FragmentTimeZonePickerBinding;
 
 import java.util.TimeZone;

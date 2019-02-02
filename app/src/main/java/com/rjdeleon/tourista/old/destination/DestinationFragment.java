@@ -1,10 +1,8 @@
-package com.rjdeleon.tourista.feature.destination;
+package com.rjdeleon.tourista.old.destination;
 
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

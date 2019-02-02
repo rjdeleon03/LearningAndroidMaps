@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.destination;
+package com.rjdeleon.tourista.old.destination;
 
 import android.app.Application;
 

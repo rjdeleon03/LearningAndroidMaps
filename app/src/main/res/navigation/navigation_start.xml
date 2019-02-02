@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_start"
+    app:startDestination="@id/myLocationFragment">
+
+    <fragment
+        android:id="@+id/myLocationFragment"
+        android:name="com.rjdeleon.tourista.feature.myLocation.MyLocationFragment"
+        android:label="fragment_my_location"
+        tools:layout="@layout/fragment_my_location" />
+</navigation>

@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.tripIndiv;
+package com.rjdeleon.tourista.old.tripIndiv;
 
 import android.app.Application;
 import android.os.AsyncTask;

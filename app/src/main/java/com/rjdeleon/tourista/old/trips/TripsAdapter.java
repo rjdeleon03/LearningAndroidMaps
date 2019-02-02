@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.trips;
+package com.rjdeleon.tourista.old.trips;
 
 import android.content.Context;
 import android.view.LayoutInflater;

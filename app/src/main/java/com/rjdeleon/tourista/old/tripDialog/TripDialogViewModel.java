@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.tripDialog;
+package com.rjdeleon.tourista.old.tripDialog;
 
 import android.app.Application;
 

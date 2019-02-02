@@ -3,8 +3,8 @@
     package="com.rjdeleon.tourista">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
-    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -13,27 +13,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDjS_1Kjov8pm6mLwSiQV7ZY1E39XCQiag" />
 
         <uses-library
             android:name="org.apache.http.legacy"
-            android:required="false" />
-
-        <!--<activity android:name=".old.MainActivity">-->
-        <!--</activity>-->
-
-        <!--<activity-->
-            <!--android:name=".old.PlacesMapActivity"-->
-            <!--android:label="@string/title_activity_places_map"></activity>-->
-
+            android:required="false" /> <!-- <activity android:name=".old.MainActivity"> -->
+        <!-- </activity> -->
+        <!-- <activity -->
+        <!-- android:name=".old.PlacesMapActivity" -->
+        <!-- android:label="@string/title_activity_places_map"></activity> -->
         <activity android:name=".TripActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

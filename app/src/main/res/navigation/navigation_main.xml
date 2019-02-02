@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/tripsFragment"
-        android:name="com.rjdeleon.tourista.feature.trips.TripsFragment"
+        android:name="com.rjdeleon.tourista.old.trips.TripsFragment"
         tools:layout="@layout/fragment_trips"
         android:label="@string/trips_title">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/tripIndivFragment"
-        android:name="com.rjdeleon.tourista.feature.tripIndiv.TripIndivFragment"
+        android:name="com.rjdeleon.tourista.old.tripIndiv.TripIndivFragment"
         tools:layout="@layout/fragment_trip_indiv" >
         <argument
             android:name="tripId"
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/destinationFragment"
-        android:name="com.rjdeleon.tourista.feature.destination.DestinationFragment"
+        android:name="com.rjdeleon.tourista.old.destination.DestinationFragment"
         tools:layout="@layout/fragment_destination" >
         <argument
             android:name="id"
@@ -41,6 +41,6 @@
     </fragment>
     <fragment
         android:id="@+id/timeZonePickerFragment"
-        android:name="com.rjdeleon.tourista.feature.timeZonePicker.TimeZonePickerFragment"
+        android:name="com.rjdeleon.tourista.old.timeZonePicker.TimeZonePickerFragment"
         tools:layout="@layout/fragment_time_zone_picker" />
 </navigation>

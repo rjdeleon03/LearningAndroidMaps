@@ -1,28 +1,23 @@
-package com.rjdeleon.tourista.feature.tripIndiv;
+package com.rjdeleon.tourista.old.tripIndiv;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.rjdeleon.tourista.R;
 import com.rjdeleon.tourista.core.base.BaseFragment;
 import com.rjdeleon.tourista.databinding.FragmentTripIndivBinding;
-import com.rjdeleon.tourista.feature.tripDialog.TripDialogFragment;
+import com.rjdeleon.tourista.old.tripDialog.TripDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

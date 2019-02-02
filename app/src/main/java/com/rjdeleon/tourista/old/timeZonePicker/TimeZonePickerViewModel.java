@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.timeZonePicker;
+package com.rjdeleon.tourista.old.timeZonePicker;
 
 import android.app.Application;
 

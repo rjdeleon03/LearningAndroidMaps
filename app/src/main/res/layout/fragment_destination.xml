@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.rjdeleon.tourista.feature.destination.DestinationViewModel"/>
+            type="com.rjdeleon.tourista.old.destination.DestinationViewModel"/>
     </data>
 
     <LinearLayout
@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".feature.destination.DestinationFragment">
+            tools:context=".old.destination.DestinationFragment">
 
             <LinearLayout
                 android:id="@+id/destinationPlaceInputLayout"

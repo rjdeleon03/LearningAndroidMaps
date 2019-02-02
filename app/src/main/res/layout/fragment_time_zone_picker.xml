@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".feature.timeZonePicker.TimeZonePickerFragment">
+    tools:context=".old.timeZonePicker.TimeZonePickerFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.rjdeleon.tourista.feature.timeZonePicker.TimeZonePickerViewModel"/>
+            type="com.rjdeleon.tourista.old.timeZonePicker.TimeZonePickerViewModel"/>
     </data>
 
     <LinearLayout
