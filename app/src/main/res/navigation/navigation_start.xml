@@ -10,4 +10,9 @@
         android:name="com.rjdeleon.tourista.feature.myLocation.MyLocationFragment"
         android:label="@string/fragment_my_location"
         tools:layout="@layout/fragment_my_location" />
+    <fragment
+        android:id="@+id/currencyConverterFragment"
+        android:name="com.rjdeleon.tourista.feature.currencyConverter.CurrencyConverterFragment"
+        android:label="@string/fragment_currency_converter"
+        tools:layout="@layout/fragment_currency_converter" />
 </navigation>
