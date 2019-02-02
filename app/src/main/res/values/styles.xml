@@ -64,5 +64,12 @@
         <item name="android:fontFamily">@font/raleway_semibold</item>
         <item name="fontFamily">@font/raleway_semibold</item>
     </style>
+
+    <!-- DateTimePickerDialog theme -->
+    <style name="DateTimePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+        <item name="fontFamily">@font/raleway_semibold</item>
+        <item name="android:windowBackground">@drawable/shape_dialog_rounded_whole</item>
+    </style>
     
 </resources>

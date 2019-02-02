@@ -1,6 +1,8 @@
 package com.rjdeleon.tourista.core.base;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -25,5 +27,15 @@ public class DialogManager {
         if (d.getWindow() != null)
             d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         return d;
+    }
+
+    public static DatePickerDialog createDatePickerDialog(Context context, DatePickerDialog.OnDateSetListener listener,
+                                                          int year, int month, int day) {
+        return new DatePickerDialog(context, R.style.DateTimePickerDialogTheme, listener, year, month, day);
+    }
+
+    public static TimePickerDialog createTimePickerDialog(Context context, TimePickerDialog.OnTimeSetListener listener,
+                                                          int hour, int minute) {
+        return new TimePickerDialog(context, R.style.DateTimePickerDialogTheme, listener, hour, minute, false);
     }
 }
