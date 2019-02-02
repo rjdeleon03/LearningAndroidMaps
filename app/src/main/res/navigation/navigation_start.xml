@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/myLocationFragment"
         android:name="com.rjdeleon.tourista.feature.myLocation.MyLocationFragment"
-        android:label="fragment_my_location"
+        android:label="@string/fragment_my_location"
         tools:layout="@layout/fragment_my_location" />
 </navigation>

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/myLocationFragment"
+        android:title="@string/fragment_my_location"/>
+    <item
+        android:id="@+id/weatherFragment"
+        android:title="@string/fragment_weather"/>
+    <item
+        android:id="@+id/currencyConverterFragment"
+        android:title="@string/fragment_currency_converter"/>
+    <item
+        android:id="@+id/worldClockFragment"
+        android:title="@string/fragment_world_clock"/>
 </menu>

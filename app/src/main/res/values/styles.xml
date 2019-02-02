@@ -11,6 +11,13 @@
         <item name="editTextStyle">@style/EditTextTheme</item>
     </style>
 
+    <!-- Drawer theme -->
+    <style name="DrawerTheme" parent="Theme.AppCompat">
+        <item name="android:fontFamily">@font/raleway_semibold</item>
+        <item name="fontFamily">@font/raleway_semibold</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
     <!-- Toolbar theme -->
     <style name="ToolbarTheme" parent="Theme.AppCompat">
         <item name="android:fontFamily">@font/raleway_semibold</item>

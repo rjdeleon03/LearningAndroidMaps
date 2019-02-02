@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
@@ -33,6 +35,7 @@ ext {
     androidVersionRc = "1.0.0-rc01"
     archComponentVersion = "2.0.0-rc01"
     navVersion = "1.0.0-alpha11"
+    ktxNavVersion = "1.0.0-alpha06"
 }
 
 dependencies {
@@ -41,6 +44,10 @@ dependencies {
     implementation 'com.google.android.material:material:' + androidVersionRc
     implementation 'androidx.legacy:legacy-support-v13:' + androidVersion
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Kotlin extensions
+    implementation "android.arch.navigation:navigation-fragment-ktx:$ktxNavVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$ktxNavVersion"
 
     // Places SDK
     implementation 'com.google.android.gms:play-services-places:16.0.0'
@@ -51,7 +58,7 @@ dependencies {
     // Google Room
     implementation 'androidx.room:room-runtime:' + archComponentVersion
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
     annotationProcessor 'androidx.room:room-compiler:' + archComponentVersion
 
     // Lifecycle
@@ -76,4 +83,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation project(path: ':library')
     implementation 'com.google.android.material:material:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
