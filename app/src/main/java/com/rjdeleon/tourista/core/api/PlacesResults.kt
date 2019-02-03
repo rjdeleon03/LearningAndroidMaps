@@ -13,7 +13,7 @@ class PlacesResults : Serializable {
     var nextPageToken: String? = null
 
     @SerializedName("results")
-    var results: List<Result> = ArrayList<Result>()
+    var results: List<Result> = ArrayList()
 
     @SerializedName("status")
     var status: String? = null
