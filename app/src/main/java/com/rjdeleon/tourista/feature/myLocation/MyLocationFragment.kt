@@ -52,6 +52,11 @@ class MyLocationFragment : Fragment() {
         binding.viewModel = mViewModel
         binding.setLifecycleOwner(this)
 
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
+            val x = it.itemId
+            true
+        }
+
         return view
     }
 

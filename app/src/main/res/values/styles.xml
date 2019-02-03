@@ -18,6 +18,11 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <!-- Bottom navigation theme -->
+    <style name="BottomNavigationTheme">
+        <item name="colorPrimary">@color/colorAccent</item>
+    </style>
+
     <!-- Toolbar theme -->
     <style name="ToolbarTheme" parent="Theme.AppCompat">
         <item name="android:fontFamily">@font/raleway_semibold</item>
