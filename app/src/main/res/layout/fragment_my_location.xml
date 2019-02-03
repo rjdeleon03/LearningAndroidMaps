@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".feature.myLocation.MyLocationFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        mapPlace="@{viewModel.destination}"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.rjdeleon.tourista.feature.myLocation.MyLocationViewModel"/>
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"/>
+        tools:context=".feature.myLocation.MyLocationFragment">
 
-</FrameLayout>
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            mapPlacePoint="@{viewModel.placePoint}"/>
+
+    </FrameLayout>
+</layout>

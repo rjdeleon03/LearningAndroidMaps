@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         /* Setup nav controller */
-        mNavController =  findNavController(R.id.navigation_fragment);
+        mNavController =  findNavController(R.id.navigation_fragment)
 
         setSupportActionBar(appToolbar)
         setupNavigation()

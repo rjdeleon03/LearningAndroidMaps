@@ -1,6 +1,8 @@
 package com.rjdeleon.tourista.feature.myLocation
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -8,11 +10,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.Places
 import com.rjdeleon.tourista.Constants.MAPVIEW_BUNDLE_KEY
+import com.rjdeleon.tourista.Constants.PERMISSIONS_REQ_ACCESS_FINE_LOCATION
 
 import com.rjdeleon.tourista.R
+import com.rjdeleon.tourista.databinding.FragmentMyLocationBinding
 import kotlinx.android.synthetic.main.fragment_my_location.*
 
 
@@ -21,18 +30,29 @@ import kotlinx.android.synthetic.main.fragment_my_location.*
  */
 class MyLocationFragment : Fragment() {
 
+    private lateinit var mViewModel : MyLocationViewModel
     private lateinit var mGoogleApiClient : GeoDataClient
+    private lateinit var mFusedLocationClient : FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        mViewModel = ViewModelProviders.of(this).get(MyLocationViewModel::class.java)
         mGoogleApiClient = Places.getGeoDataClient(context!!)
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_location, container, false)
+        val binding = FragmentMyLocationBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        binding.viewModel = mViewModel
+        binding.setLifecycleOwner(this)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,6 +60,7 @@ class MyLocationFragment : Fragment() {
 
         /* Setup Google maps */
         setupGoogleMaps(savedInstanceState)
+        getLastKnownLocation()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -75,8 +96,30 @@ class MyLocationFragment : Fragment() {
 
     private fun setupGoogleMaps(savedInstanceState: Bundle?) {
 
-        var mapViewBundle = savedInstanceState?.getBundle(MAPVIEW_BUNDLE_KEY)
+        val mapViewBundle = savedInstanceState?.getBundle(MAPVIEW_BUNDLE_KEY)
         mapView.onCreate(mapViewBundle)
+    }
+
+    private fun getLastKnownLocation() {
+
+        if(ActivityCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            getLocationPermission()
+            return
+        }
+
+        mFusedLocationClient.lastLocation.addOnCompleteListener {
+            val location = it.result
+
+            if (location != null)
+                mViewModel.setPlacePoint(location.latitude, location.longitude)
+        }
+    }
+
+    private fun getLocationPermission() {
+        ActivityCompat.requestPermissions(activity!!,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQ_ACCESS_FINE_LOCATION)
     }
 
 }// Required empty public constructor
