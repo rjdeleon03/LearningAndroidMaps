@@ -21,6 +21,7 @@ import com.rjdeleon.tourista.Constants.MAPVIEW_BUNDLE_KEY
 import com.rjdeleon.tourista.Constants.PERMISSIONS_REQ_ACCESS_FINE_LOCATION
 
 import com.rjdeleon.tourista.R
+import com.rjdeleon.tourista.core.api.getNearbyPlaces
 import com.rjdeleon.tourista.databinding.FragmentMyLocationBinding
 import kotlinx.android.synthetic.main.fragment_my_location.*
 
@@ -116,8 +117,14 @@ class MyLocationFragment : Fragment() {
         mFusedLocationClient.lastLocation.addOnCompleteListener {
             val location = it.result
 
-            if (location != null)
+            if (location != null) {
                 mViewModel.setPlacePoint(location.latitude, location.longitude)
+                getNearbyPlaces(location.latitude.toString() + "," + location.longitude.toString(),
+                        1500,
+                        "restaurant",
+                        "",
+                        "AIzaSyDjS_1Kjov8pm6mLwSiQV7ZY1E39XCQiag");
+            }
         }
     }
 
