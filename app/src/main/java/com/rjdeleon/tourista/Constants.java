@@ -9,4 +9,8 @@ public class Constants {
     public static final float TOOLBAR_ELEVATION = 10.5f;
 
     public static final int PERMISSIONS_REQ_ACCESS_FINE_LOCATION = 100;
+
+    public static final String FILTER_LOCATIONS_RESTAURANT = "restaurant";
+    public static final String FILTER_LOCATIONS_HOTEL = "hotel";
+    public static final String FILTER_LOCATIONS_ATTRACTION = "attraction";
 }

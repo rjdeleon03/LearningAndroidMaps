@@ -11,16 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.Places
-import com.rjdeleon.tourista.Constants.MAPVIEW_BUNDLE_KEY
-import com.rjdeleon.tourista.Constants.PERMISSIONS_REQ_ACCESS_FINE_LOCATION
-
+import com.rjdeleon.tourista.Constants.*
 import com.rjdeleon.tourista.R
+
 import com.rjdeleon.tourista.databinding.FragmentMyLocationBinding
 import kotlinx.android.synthetic.main.fragment_my_location.*
 
@@ -53,7 +51,17 @@ class MyLocationFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
-            val x = it.itemId
+
+            if (!it.isChecked) {
+                when (it.itemId) {
+                    R.id.menu_food ->
+                        mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_RESTAURANT)
+                    R.id.menu_hotels ->
+                        mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_HOTEL)
+                    R.id.menu_sights ->
+                        mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_ATTRACTION)
+                }
+            }
             true
         }
 
@@ -116,8 +124,9 @@ class MyLocationFragment : Fragment() {
         mFusedLocationClient.lastLocation.addOnCompleteListener {
             val location = it.result
 
-            if (location != null)
+            if (location != null) {
                 mViewModel.setPlacePoint(location.latitude, location.longitude)
+            }
         }
     }
 
