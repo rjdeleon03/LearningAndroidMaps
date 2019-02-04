@@ -16,6 +16,10 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.Places
+import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
+import com.mapbox.mapboxsdk.maps.Style
 import com.rjdeleon.tourista.Constants.*
 import com.rjdeleon.tourista.R
 
@@ -36,8 +40,8 @@ class MyLocationFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mViewModel = ViewModelProviders.of(this).get(MyLocationViewModel::class.java)
-        mGoogleApiClient = Places.getGeoDataClient(context!!)
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
+
+        Mapbox.getInstance(context!!, "pk.eyJ1IjoicmpkZWxlb24wMyIsImEiOiJjanJxZThqcmYxbm85M3lwOXFqNWx5YjFsIn0.7-YRO12q5EQfxXWuAdsseg")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -65,26 +69,24 @@ class MyLocationFragment : Fragment() {
             true
         }
 
+        /* Setup Google maps */
+        binding.mapView.onCreate(savedInstanceState)
+        binding.mapView.getMapAsync { mapboxMap ->
+            mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+            }
+        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /* Setup Google maps */
-        setupGoogleMaps(savedInstanceState)
-        getLastKnownLocation()
+//        getLastKnownLocation()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        var mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY)
-
-        if (mapViewBundle == null) {
-            mapViewBundle = Bundle()
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle)
-        }
-        mapView?.onSaveInstanceState(mapViewBundle)
+        mapView?.onSaveInstanceState(outState)
     }
 
     override fun onResume() {
@@ -107,10 +109,14 @@ class MyLocationFragment : Fragment() {
         mapView.onPause()
     }
 
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
+
     private fun setupGoogleMaps(savedInstanceState: Bundle?) {
 
-        val mapViewBundle = savedInstanceState?.getBundle(MAPVIEW_BUNDLE_KEY)
-        mapView.onCreate(mapViewBundle)
+
     }
 
     private fun getLastKnownLocation() {
