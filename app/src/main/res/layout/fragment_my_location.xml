@@ -14,12 +14,14 @@
         android:layout_height="match_parent"
         tools:context=".feature.myLocation.MyLocationFragment">
 
-        <com.google.android.gms.maps.MapView
+        <com.mapbox.mapboxsdk.maps.MapView
             android:id="@+id/mapView"
-            mapPlacePoint="@{viewModel.placePoint}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@android:color/white"
+            app:mapbox_cameraTargetLat="40.73581"
+            app:mapbox_cameraTargetLng="-73.99155"
+            app:mapbox_cameraZoom="11"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

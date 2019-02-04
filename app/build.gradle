@@ -37,7 +37,7 @@ ext {
     androidVersionRc = "1.0.0-rc01"
     archComponentVersion = "2.0.0-rc01"
     navVersion = "1.0.0-alpha11"
-    ktxNavVersion = "1.0.0-alpha06"
+    ktxNavVersion = "1.0.0-alpha11"
 }
 
 dependencies {
@@ -48,11 +48,14 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     // Multidex
-    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     // Kotlin extensions
     implementation "android.arch.navigation:navigation-fragment-ktx:$ktxNavVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$ktxNavVersion"
+
+    // Mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.1.1'
 
     // Places SDK
     implementation 'com.google.android.gms:play-services-places:16.0.0'
