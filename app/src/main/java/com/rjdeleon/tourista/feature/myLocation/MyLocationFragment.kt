@@ -41,7 +41,7 @@ class MyLocationFragment : Fragment() {
 
         mViewModel = ViewModelProviders.of(this).get(MyLocationViewModel::class.java)
 
-        Mapbox.getInstance(context!!, "pk.eyJ1IjoicmpkZWxlb24wMyIsImEiOiJjanJxZThqcmYxbm85M3lwOXFqNWx5YjFsIn0.7-YRO12q5EQfxXWuAdsseg")
+        Mapbox.getInstance(context!!, getString(R.string.api_key_mapbox))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -112,6 +112,11 @@ class MyLocationFragment : Fragment() {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mapView.onDestroy()
     }
 
     private fun setupGoogleMaps(savedInstanceState: Bundle?) {

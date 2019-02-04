@@ -4,6 +4,9 @@
     <string name="title_places">Places</string>
     <string name="title_map">Map</string>
 
+    <!-- API keys -->
+    <string name="api_key_mapbox">pk.eyJ1IjoicmpkZWxlb24wMyIsImEiOiJjanJxZThqcmYxbm85M3lwOXFqNWx5YjFsIn0.7-YRO12q5EQfxXWuAdsseg</string>
+
     <!-- TODO: Remove old strings -->
     <string name="date_field">Date</string>
     <string name="date_field_def">YYYY/MM/DD</string>
