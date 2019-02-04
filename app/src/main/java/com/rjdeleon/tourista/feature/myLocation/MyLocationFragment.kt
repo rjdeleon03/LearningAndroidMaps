@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -17,6 +18,9 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.places.GeoDataClient
 import com.google.android.gms.location.places.Places
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.location.LocationComponent
+import com.mapbox.mapboxsdk.location.modes.CameraMode
+import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
@@ -33,8 +37,7 @@ import kotlinx.android.synthetic.main.fragment_my_location.*
 class MyLocationFragment : Fragment() {
 
     private lateinit var mViewModel : MyLocationViewModel
-    private lateinit var mGoogleApiClient : GeoDataClient
-    private lateinit var mFusedLocationClient : FusedLocationProviderClient
+    private lateinit var mMapboxMap : MapboxMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,20 +71,14 @@ class MyLocationFragment : Fragment() {
             }
             true
         }
-
-        /* Setup Google maps */
-        binding.mapView.onCreate(savedInstanceState)
-        binding.mapView.getMapAsync { mapboxMap ->
-            mapboxMap.setStyle(Style.MAPBOX_STREETS) {
-            }
-        }
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        getLastKnownLocation()
+
+        /* Setup Google maps */
+        setupGoogleMaps(savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -120,11 +117,16 @@ class MyLocationFragment : Fragment() {
     }
 
     private fun setupGoogleMaps(savedInstanceState: Bundle?) {
-
-
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync { mapboxMap ->
+            mMapboxMap = mapboxMap
+            mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+                getLastKnownLocation(it)
+            }
+        }
     }
 
-    private fun getLastKnownLocation() {
+    private fun getLastKnownLocation(loadedMapStyle : Style) {
 
         if(ActivityCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -132,13 +134,11 @@ class MyLocationFragment : Fragment() {
             return
         }
 
-        mFusedLocationClient.lastLocation.addOnCompleteListener {
-            val location = it.result
-
-            if (location != null) {
-                mViewModel.setPlacePoint(location.latitude, location.longitude)
-            }
-        }
+        val loc = mMapboxMap.locationComponent;
+        loc.activateLocationComponent(context!!, loadedMapStyle)
+        loc.isLocationComponentEnabled = true
+        loc.cameraMode = CameraMode.TRACKING
+        loc.renderMode = RenderMode.COMPASS
     }
 
     private fun getLocationPermission() {
