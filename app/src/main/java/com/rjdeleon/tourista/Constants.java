@@ -13,4 +13,6 @@ public class Constants {
     public static final String FILTER_LOCATIONS_RESTAURANT = "restaurant";
     public static final String FILTER_LOCATIONS_HOTEL = "hotel";
     public static final String FILTER_LOCATIONS_ATTRACTION = "attraction";
+
+    public static final String API_KEY_MAPBOX = "pk.eyJ1IjoicmpkZWxlb24wMyIsImEiOiJjanJxdmw0dGQwNGpxNGFxbjFnbGpjNmJnIn0.j628BYYT8-SKhCji-ntMQg";
 }

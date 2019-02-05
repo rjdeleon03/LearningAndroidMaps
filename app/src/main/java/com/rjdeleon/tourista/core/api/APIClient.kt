@@ -17,7 +17,7 @@ object APIClient {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             retrofit = Retrofit.Builder()
-                    .baseUrl("https://maps.googleapis.com/maps/api/")
+                    .baseUrl("https://api.mapbox.com/geocoding/v5")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

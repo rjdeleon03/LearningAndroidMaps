@@ -10,25 +10,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.places.GeoDataClient
-import com.google.android.gms.location.places.Places
+import com.mapbox.android.core.location.LocationEngineCallback
+import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.location.LocationComponent
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
+import com.rjdeleon.tourista.Constants
 import com.rjdeleon.tourista.Constants.*
 import com.rjdeleon.tourista.R
 
 import com.rjdeleon.tourista.databinding.FragmentMyLocationBinding
 import kotlinx.android.synthetic.main.fragment_my_location.*
+import java.lang.Exception
 
 
 /**
@@ -44,7 +41,7 @@ class MyLocationFragment : Fragment() {
 
         mViewModel = ViewModelProviders.of(this).get(MyLocationViewModel::class.java)
 
-        Mapbox.getInstance(context!!, getString(R.string.api_key_mapbox))
+        Mapbox.getInstance(context!!, Constants.API_KEY_MAPBOX)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -139,6 +136,17 @@ class MyLocationFragment : Fragment() {
         loc.isLocationComponentEnabled = true
         loc.cameraMode = CameraMode.TRACKING
         loc.renderMode = RenderMode.COMPASS
+        loc.locationEngine?.getLastLocation(object : LocationEngineCallback<LocationEngineResult> {
+            override fun onSuccess(result: LocationEngineResult?) {
+                val lastLocation = result?.lastLocation!!
+                mViewModel.setPlacePoint(lastLocation.latitude, lastLocation.longitude)
+            }
+
+            override fun onFailure(exception: Exception) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
     }
 
     private fun getLocationPermission() {
