@@ -1,11 +1,9 @@
 package com.rjdeleon.tourista.core.api
 
-import android.util.Log
 import com.mapbox.api.geocoding.v5.MapboxGeocoding
 import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse
 import com.rjdeleon.tourista.Constants
-import com.rjdeleon.tourista.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

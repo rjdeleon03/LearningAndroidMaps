@@ -41,6 +41,7 @@ class MyLocationViewModel(application: Application) : AndroidViewModel(applicati
         searchNearbyPlaces(placePoint.latitude, placePoint.longitude, 1500, filter,
                 object : GetNearbyPlacesListener {
                     override fun onReceive(results: List<CarmenFeature>) {
+                        mNearbyPlaces.value = results
                     }
 
                     override fun onError() {

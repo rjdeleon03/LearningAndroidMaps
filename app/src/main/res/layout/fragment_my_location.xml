@@ -19,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@android:color/white"
+            mapNearbyPlaces="@{viewModel.nearbyPlaces}"
             app:mapbox_cameraTargetLat="40.73581"
             app:mapbox_cameraTargetLng="-73.99155"
             app:mapbox_cameraZoom="11"
