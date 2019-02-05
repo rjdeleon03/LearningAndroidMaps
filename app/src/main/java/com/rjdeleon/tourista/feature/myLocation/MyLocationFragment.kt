@@ -139,8 +139,9 @@ class MyLocationFragment : Fragment() {
         loc.renderMode = RenderMode.COMPASS
         loc.locationEngine?.getLastLocation(object : LocationEngineCallback<LocationEngineResult> {
             override fun onSuccess(result: LocationEngineResult?) {
-                val lastLocation = result?.lastLocation!!
-                mViewModel.setPlacePoint(lastLocation.latitude, lastLocation.longitude)
+                val lastLocation = result?.lastLocation
+                if (lastLocation != null)
+                    mViewModel.setPlacePoint(lastLocation.latitude, lastLocation.longitude)
             }
 
             override fun onFailure(exception: Exception) {
