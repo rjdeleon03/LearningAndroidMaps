@@ -1,46 +1,35 @@
 package com.rjdeleon.tourista.core.api
 
-import com.mapbox.api.geocoding.v5.MapboxGeocoding
-import com.mapbox.api.geocoding.v5.models.CarmenFeature
-import com.mapbox.api.geocoding.v5.models.GeocodingResponse
 import com.rjdeleon.tourista.Constants
+import com.rjdeleon.tourista.data.serializable.NearbyPlace
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 interface GetNearbyPlacesListener {
 
-    fun onReceive (results : List<CarmenFeature>)
+    fun onReceive(results : List<NearbyPlace>)
 
     fun onError()
 }
 
-fun searchNearbyPlaces(latitude : Double, longitude : Double,
-                       radius : Int, filter : String, listener : GetNearbyPlacesListener) {
+fun getNearbyPlaces(latitude : Double,
+                    longitude : Double,
+                    radius : Int,
+                    type : String,
+                    listener : GetNearbyPlacesListener) {
 
-    val convertedRadius = radius / 11111.0
-    val startLat = latitude - convertedRadius
-    val startLng = longitude - convertedRadius
-    val endLat = latitude + convertedRadius
-    val endLng = longitude + convertedRadius
+    val api = APIClient.client.create(MapAPI::class.java)
+    api.getNearby(Constants.API_KEY_LOCATIONIQ, latitude, longitude, type, radius)
+            .enqueue(object : Callback<List<NearbyPlace>> {
+                override fun onFailure(call: Call<List<NearbyPlace>>, t: Throwable) {
+                    listener.onError()
+                }
 
-    val mbg = MapboxGeocoding.builder()
-            .accessToken(Constants.API_KEY_MAPBOX)
-            .query(filter)
-            .bbox(startLng, startLat, endLng, endLat)
-            .build()
-    mbg.enqueueCall(object : Callback<GeocodingResponse> {
-        override fun onFailure(call: Call<GeocodingResponse>, t: Throwable) {
-            listener.onError()
-            t.printStackTrace()
-        }
+                override fun onResponse(call: Call<List<NearbyPlace>>, response: Response<List<NearbyPlace>>) {
 
-        override fun onResponse(call: Call<GeocodingResponse>, response: Response<GeocodingResponse>) {
-            val data = response.body()?.features()
-
-            if (data != null)
-                listener.onReceive(data)
-        }
-
-    })
+                    if (response.body() != null)
+                        listener.onReceive(response.body()!!)
+                }
+            })
 }

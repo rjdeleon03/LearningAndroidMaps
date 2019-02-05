@@ -4,16 +4,16 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.rjdeleon.tourista.core.api.GetNearbyPlacesListener
-import com.rjdeleon.tourista.core.api.searchNearbyPlaces
+import com.rjdeleon.tourista.core.api.getNearbyPlaces
 import com.rjdeleon.tourista.core.common.CustomMutableLiveData
 import com.rjdeleon.tourista.data.PlacePoint
+import com.rjdeleon.tourista.data.serializable.NearbyPlace
 
 class MyLocationViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mPlacePoint : CustomMutableLiveData<PlacePoint>
-    private val mNearbyPlaces : MutableLiveData<List<CarmenFeature>>
+    private val mNearbyPlaces : MutableLiveData<List<NearbyPlace>>
 
     init {
         val mld = CustomMutableLiveData<PlacePoint>()
@@ -31,21 +31,21 @@ class MyLocationViewModel(application: Application) : AndroidViewModel(applicati
         mPlacePoint.value?.updateLatLng(latitude, longitude)
     }
 
-    fun getNearbyPlaces() : LiveData<List<CarmenFeature>> {
+    fun getNearbyPlaces() : LiveData<List<NearbyPlace>> {
         return mNearbyPlaces
     }
 
     fun initNearbyPlacesRetrieval(filter : String) {
 
         val placePoint = mPlacePoint.value ?: return
-        searchNearbyPlaces(placePoint.latitude, placePoint.longitude, 1500, filter,
+        getNearbyPlaces(placePoint.latitude, placePoint.longitude, 1500, filter,
                 object : GetNearbyPlacesListener {
-                    override fun onReceive(results: List<CarmenFeature>) {
+                    override fun onReceive(results: List<NearbyPlace>) {
                         mNearbyPlaces.value = results
                     }
 
                     override fun onError() {
-                        // TODO: Fix issue
+                        // TODO: Handle
                     }
 
                 })

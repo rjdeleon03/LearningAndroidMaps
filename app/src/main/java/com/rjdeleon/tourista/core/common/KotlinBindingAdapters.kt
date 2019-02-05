@@ -8,6 +8,7 @@ import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.rjdeleon.tourista.data.PlacePoint
+import com.rjdeleon.tourista.data.serializable.NearbyPlace
 
 
 @BindingAdapter("mapPlacePoint")
@@ -26,18 +27,17 @@ fun setMapPlacePoint(mapView: MapView, placePoint: PlacePoint) {
 }
 
 @BindingAdapter("mapNearbyPlaces")
-fun setMapNearbyPlaces(mapView : MapView, results : List<CarmenFeature>) {
+fun setMapNearbyPlaces(mapView : MapView, results : List<NearbyPlace>) {
 
     mapView.getMapAsync {
         it.clear()
 
         for (place in results) {
-            var location = place.center()
-            if (location != null) {
-                it.addMarker(MarkerOptions()
-                        .position(LatLng(location.latitude(), location.longitude()))
-                        .title(place.text()))
-            }
+
+            if (place.latitude == null && place.longitude == null) continue
+            it.addMarker(MarkerOptions()
+                    .position(LatLng(place.latitude!!, place.longitude!!))
+                    .title(place.name))
         }
     }
 }
