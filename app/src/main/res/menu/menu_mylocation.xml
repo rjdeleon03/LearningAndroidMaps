@@ -7,13 +7,28 @@
         android:title="@string/menu_food"/>
 
     <item
+        android:id="@+id/menu_sights"
+        android:icon="@drawable/ic_landscape_black_24dp"
+        android:title="@string/menu_sights"/>
+
+    <item
         android:id="@+id/menu_hotels"
         android:icon="@drawable/ic_hotel_black_24dp"
         android:title="@string/menu_hotels"/>
 
     <item
-        android:id="@+id/menu_sights"
-        android:icon="@drawable/ic_landscape_black_24dp"
-        android:title="@string/menu_sights"/>
+        android:id="@+id/menu_atm"
+        android:icon="@drawable/ic_monetization_on_black_24dp"
+        android:title="@string/menu_atm"/>
+
+    <item
+        android:id="@+id/menu_shopping"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="@string/menu_shopping"/>
+
+    <!--<item-->
+        <!--android:id="@+id/menu_healthcare"-->
+        <!--android:icon="@drawable/ic_local_hospital_black_24dp"-->
+        <!--android:title="@string/menu_healthcare"/>-->
 
 </menu>

@@ -41,7 +41,10 @@
     <string name="fragment_currency_converter">Currency Converter</string>
     <string name="fragment_world_clock">World Clock</string>
 
-    <string name="menu_food">Eat</string>
-    <string name="menu_hotels">Sleep</string>
-    <string name="menu_sights">Visit</string>
+    <string name="menu_food">Dining</string>
+    <string name="menu_hotels">Hotels</string>
+    <string name="menu_sights">Sights</string>
+    <string name="menu_atm">ATM</string>
+    <string name="menu_healthcare">Healthcare</string>
+    <string name="menu_shopping">Shopping</string>
 </resources>
