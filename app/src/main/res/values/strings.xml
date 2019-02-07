@@ -44,4 +44,7 @@
     <string name="menu_food">Eat</string>
     <string name="menu_hotels">Sleep</string>
     <string name="menu_sights">Visit</string>
+    <string name="currency_source">Source Currency</string>
+    <string name="currency_amount">Amount</string>
+    <string name="currency_dest">Destination Currency</string>
 </resources>
