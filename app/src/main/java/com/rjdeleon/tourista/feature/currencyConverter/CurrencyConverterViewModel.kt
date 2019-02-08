@@ -47,19 +47,6 @@ class CurrencyConverterViewModel(application: Application) : AndroidViewModel(ap
     }
 
     fun switchCurrencies() {
-
-        val conversionData = mConversionData.value ?: return
-
-        conversionData.sourceAmount = 0.0
-        conversionData.destAmount = 0.0
-
-        val tempSourceCurrency = conversionData.sourceCurrency
-        conversionData.sourceCurrency = conversionData.destCurrency
-        conversionData.destCurrency = tempSourceCurrency
-
-        val tempSourceFlagId = conversionData.sourceFlagId
-        conversionData.sourceFlagId = conversionData.destFlagId
-        conversionData.destFlagId = tempSourceFlagId
-
+        mConversionData.value?.switchCurrencies()
     }
 }

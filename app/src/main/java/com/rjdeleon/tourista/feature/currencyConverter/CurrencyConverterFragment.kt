@@ -69,6 +69,8 @@ class CurrencyConverterFragment : BaseFragment() {
         }
 
         currencySwitchButton.setOnClickListener {
+            hideKeyboard()
+
             val rotation = currencySwitchButton.rotation + 180F
             currencySwitchButton.animate().rotation(rotation)
                     .interpolator = AccelerateDecelerateInterpolator()

@@ -28,7 +28,7 @@ fun getCurrencyConversion(sourceCurrency : String,
                     if (response.body() == null) return
 
                     try {
-                        var respStr = response.body().toString()
+                        val respStr = response.body().toString()
                         val res = respStr.replace("}", "")
                                 .split("val\":")
                         listener.onReceive(res[1].toDouble())

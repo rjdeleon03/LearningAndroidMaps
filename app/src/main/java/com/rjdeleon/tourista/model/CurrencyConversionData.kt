@@ -51,4 +51,19 @@ class CurrencyConversionData(private var _sourceCurrency : String,
             _destFlagId = value
             notifyPropertyChanged(BR.destFlagId)
         }
+    
+    fun switchCurrencies() {
+        _sourceAmount = 0.0
+        _destAmount = 0.0
+
+        val tempSourceCurrency = _sourceCurrency
+        _sourceCurrency = _destCurrency
+        _destCurrency = tempSourceCurrency
+
+        val tempSourceFlagId = _sourceFlagId
+        _sourceFlagId = _destFlagId
+        _destFlagId = tempSourceFlagId
+
+        notifyChange()
+    }
 }
