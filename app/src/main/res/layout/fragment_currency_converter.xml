@@ -24,39 +24,53 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/currency_sourceLabel"
+                    android:id="@+id/currencySourceLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/currency_source"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/currency_sourceText"
+                <LinearLayout
+                    android:id="@+id/currencySourceLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PHP"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="@android:color/black"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currency_sourceLabel" />
+                    app:layout_constraintTop_toBottomOf="@id/currencySourceLabel">
+
+                    <ImageView
+                        android:id="@+id/currencySourceImage"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"/>
+
+                    <TextView
+                        android:id="@+id/currencySourceText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PHP"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                        android:textColor="@android:color/black"/>
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/currency_sourceAmountLabel"
+                    android:id="@+id/currencySourceAmountLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/currency_amount"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currency_sourceText" />
+                    app:layout_constraintTop_toBottomOf="@id/currencySourceLayout" />
 
                 <EditText
-                    android:id="@+id/currency_sourceAmountText"
+                    android:id="@+id/currencySourceAmountText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/currency_sourceAmountLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/currencySourceAmountLabel" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -81,39 +95,53 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/currency_destLabel"
+                    android:id="@+id/currencyDestLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/currency_dest"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/currency_destText"
+                <LinearLayout
+                    android:id="@+id/currencyDestLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EUR"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="@android:color/black"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currency_destLabel" />
+                    app:layout_constraintTop_toBottomOf="@id/currencyDestLabel">
+
+                    <ImageView
+                        android:id="@+id/currencyDestImage"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"/>
+
+                    <TextView
+                        android:id="@+id/currencyDestText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EUR"
+                        android:layout_marginStart="8dp"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                        android:textColor="@android:color/black"/>
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/currency_destAmountLabel"
+                    android:id="@+id/currencyDestAmountLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/currency_amount"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currency_destText" />
+                    app:layout_constraintTop_toBottomOf="@id/currencyDestLayout" />
 
                 <EditText
-                    android:id="@+id/currency_destAmountText"
+                    android:id="@+id/currencyDestAmountText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/currency_destAmountLabel" />
+                    app:layout_constraintTop_toBottomOf="@+id/currencyDestAmountLabel" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>            
