@@ -58,6 +58,13 @@ class CurrencyConverterFragment : Fragment() {
             }
             picker.show(fragmentManager!!, Constants.CURRENCY_PICKER_FRAGMENT_KEY)
         }
+
+        currencyConvertButton.setOnClickListener {
+
+            mViewModel.convertCurrency()
+        }
+
+
     }
 
 

@@ -1,16 +1,17 @@
 package com.rjdeleon.tourista.core.common
 
 import android.graphics.BitmapFactory
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
 import com.bumptech.glide.Glide
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.rjdeleon.tourista.data.PlacePoint
 import com.rjdeleon.tourista.data.serializable.NearbyPlace
+import java.lang.Exception
 
 
 @BindingAdapter("mapPlacePoint")
@@ -53,4 +54,20 @@ fun setImageFromId(imageView : ImageView, id : Int) {
     Glide.with(context)
             .load(context.resources?.getDrawable(id))
             .into(imageView)
+}
+
+@BindingAdapter("android:text")
+fun setTextFromDouble(editText : EditText, value : Double) {
+
+    editText.setText(value.toString())
+}
+
+@InverseBindingAdapter(attribute = "android:text", event = "android:textAttrChanged")
+fun getDoubleFromText(editText : EditText) : Double {
+
+    try {
+        return editText.text.toString().toDouble()
+    } catch (ex : Exception) {
+        return 0.0
+    }
 }

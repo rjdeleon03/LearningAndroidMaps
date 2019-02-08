@@ -5,10 +5,10 @@ import androidx.databinding.Bindable
 import com.rjdeleon.tourista.BR
 
 class CurrencyConversionData(private var _sourceCurrency : String,
-                             private var _sourceAmount : Int,
+                             private var _sourceAmount : Double,
                              private var _sourceFlagId : Int,
                              private var _destCurrency : String,
-                             private var _destAmount : Int,
+                             private var _destAmount : Double,
                              private var _destFlagId : Int) : BaseObservable() {
 
     var sourceCurrency : String
@@ -18,11 +18,10 @@ class CurrencyConversionData(private var _sourceCurrency : String,
             notifyPropertyChanged(BR.sourceCurrency)
         }
 
-    var sourceAmount : Int
+    var sourceAmount : Double
         @Bindable get() = _sourceAmount
         set(value) {
             _sourceAmount = value
-            notifyPropertyChanged(BR.sourceAmount)
         }
 
     var sourceFlagId : Int
@@ -39,7 +38,7 @@ class CurrencyConversionData(private var _sourceCurrency : String,
             notifyPropertyChanged(BR.destCurrency)
         }
 
-    var destAmount : Int
+    var destAmount : Double
         @Bindable get() = _destAmount
         set(value) {
             _destAmount = value

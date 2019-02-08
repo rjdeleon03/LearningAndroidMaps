@@ -3,6 +3,7 @@ package com.rjdeleon.tourista.core.api.forex
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 object ForexAPIClient {
 
@@ -16,8 +17,9 @@ object ForexAPIClient {
             val client = OkHttpClient.Builder()
                     .addInterceptor(interceptor).build()
             retrofit = Retrofit.Builder()
-                    .baseUrl("https://www.freeforexapi.com/api/live")
-                    .client(client)
+                    .baseUrl("https://free.currencyconverterapi.com/api/v6/")
+//                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build()
             return retrofit as Retrofit
         }
