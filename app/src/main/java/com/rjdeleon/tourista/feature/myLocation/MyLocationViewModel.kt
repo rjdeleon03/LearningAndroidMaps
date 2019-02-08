@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.rjdeleon.tourista.core.api.GetNearbyPlacesListener
-import com.rjdeleon.tourista.core.api.getNearbyPlaces
+import com.rjdeleon.tourista.core.api.map.GetNearbyPlacesListener
+import com.rjdeleon.tourista.core.api.map.getNearbyPlaces
 import com.rjdeleon.tourista.core.common.CustomMutableLiveData
 import com.rjdeleon.tourista.data.PlacePoint
 import com.rjdeleon.tourista.data.serializable.NearbyPlace

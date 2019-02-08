@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.core.api
+package com.rjdeleon.tourista.core.api.map
 
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
@@ -6,11 +6,11 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
 
-object APIClient {
+object MapAPIClient {
 
-    private var retrofit: Retrofit? = null
+    private var retrofit : Retrofit? = null
 
-    val client: Retrofit
+    val client : Retrofit
         get() {
 
             val interceptor = HttpLoggingInterceptor()

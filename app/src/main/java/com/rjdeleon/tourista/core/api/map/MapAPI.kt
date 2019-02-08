@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.core.api
+package com.rjdeleon.tourista.core.api.map
 
 import com.rjdeleon.tourista.data.serializable.NearbyPlace
 import retrofit2.Call

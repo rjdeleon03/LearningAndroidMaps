@@ -1,6 +1,7 @@
-package com.rjdeleon.tourista.core.api
+package com.rjdeleon.tourista.core.api.map
 
 import com.google.gson.annotations.SerializedName
+import com.rjdeleon.tourista.core.api.Result
 import java.io.Serializable
 
 

@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.core.api
+package com.rjdeleon.tourista.core.api.map
 
 import com.rjdeleon.tourista.Constants
 import com.rjdeleon.tourista.data.serializable.NearbyPlace
@@ -19,7 +19,7 @@ fun getNearbyPlaces(latitude : Double,
                     type : String,
                     listener : GetNearbyPlacesListener) {
 
-    val api = APIClient.client.create(MapAPI::class.java)
+    val api = MapAPIClient.client.create(MapAPI::class.java)
     api.getNearby(Constants.API_KEY_LOCATIONIQ, latitude, longitude, type, radius)
             .enqueue(object : Callback<List<NearbyPlace>> {
                 override fun onFailure(call: Call<List<NearbyPlace>>, t: Throwable) {
