@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.RotateAnimation
 import androidx.lifecycle.ViewModelProviders
 import com.mynameismidori.currencypicker.CurrencyPicker
 import com.rjdeleon.tourista.Constants
@@ -43,7 +45,7 @@ class CurrencyConverterFragment : BaseFragment() {
         currencySourceText.setOnClickListener {
 
             val picker = CurrencyPicker.newInstance("Select Currency")
-            picker.setListener { name, code, symbol, flagDrawableResID ->
+            picker.setListener { _, code, _, flagDrawableResID ->
                 picker.dismiss()
                 mViewModel.updateSourceCurrency(code, flagDrawableResID)
             }
@@ -53,7 +55,7 @@ class CurrencyConverterFragment : BaseFragment() {
         currencyDestText.setOnClickListener {
 
             val picker = CurrencyPicker.newInstance("Select Currency")
-            picker.setListener { name, code, symbol, flagDrawableResID ->
+            picker.setListener { _, code, _, flagDrawableResID ->
                 picker.dismiss()
                 mViewModel.updateDestCurrency(code,flagDrawableResID)
             }
@@ -63,6 +65,14 @@ class CurrencyConverterFragment : BaseFragment() {
         currencyConvertButton.setOnClickListener {
             hideKeyboard()
             mViewModel.convertCurrency()
+
+        }
+
+        currencySwitchButton.setOnClickListener {
+            val rotation = currencySwitchButton.rotation + 180F
+            currencySwitchButton.animate().rotation(rotation)
+                    .interpolator = AccelerateDecelerateInterpolator()
+            mViewModel.switchCurrencies()
         }
 
 
