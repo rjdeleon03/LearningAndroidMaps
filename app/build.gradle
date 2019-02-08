@@ -41,6 +41,8 @@ ext {
 }
 
 dependencies {
+    kapt "com.android.databinding:compiler:$android_plugin_version"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:' + androidVersion
     implementation 'com.google.android.material:material:' + androidVersionRc
@@ -96,6 +98,10 @@ dependencies {
 
     // Country Currency Picker
     implementation 'com.github.midorikocak:currency-picker-android:1.2.1'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

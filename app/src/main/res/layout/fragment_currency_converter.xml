@@ -1,162 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".feature.currencyConverter.CurrencyConverterFragment"
-    android:background="@drawable/shape_dialog_rounded_top_wide">
+    tools:context=".feature.currencyConverter.CurrencyConverterFragment">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.rjdeleon.tourista.feature.currencyConverter.CurrencyConverterViewModel"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/shape_dialog_rounded_top_wide">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="32dp">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="32dp">
 
-                <TextView
-                    android:id="@+id/currencySourceLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/currency_source"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:id="@+id/currencySourceLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currencySourceLabel">
-
-                    <ImageView
-                        android:id="@+id/currencySourceImage"
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/currencySourceText"
+                        android:id="@+id/currencySourceLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PHP"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                        android:textColor="@android:color/black"/>
+                        android:text="@string/currency_source"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/currencySourceLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/currencySourceLabel">
 
-                <TextView
-                    android:id="@+id/currencySourceAmountLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/currency_amount"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currencySourceLayout" />
+                        <ImageView
+                            android:id="@+id/currencySourceImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            imageFromId="@{viewModel.conversionData.sourceFlagId}"/>
 
-                <EditText
-                    android:id="@+id/currencySourceAmountText"
+                        <TextView
+                            android:id="@+id/currencySourceText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.conversionData.sourceCurrency}"
+                            android:layout_marginStart="8dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/currencySourceAmountLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/currency_amount"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/currencySourceLayout" />
+
+                    <EditText
+                        android:id="@+id/currencySourceAmountText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/currencySourceAmountLabel" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/currencyDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="32dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/currencySourceAmountLabel" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/currencyDestLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/currency_dest"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/currencyDestLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/currencyDestLabel">
+
+                        <ImageView
+                            android:id="@+id/currencyDestImage"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            imageFromId="@{viewModel.conversionData.destFlagId}" />
+
+                        <TextView
+                            android:id="@+id/currencyDestText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.conversionData.destCurrency}"
+                            android:layout_marginStart="8dp"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/currencyDestAmountLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/currency_amount"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/currencyDestLayout" />
+
+                    <EditText
+                        android:id="@+id/currencyDestAmountText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/currencyDestAmountLabel" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/currencyDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="32dp">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_swap_vert_black_24dp"
+            app:layout_anchor="@id/currencyDivider"
+            app:layout_anchorGravity="center" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/currencyDestLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/currency_dest"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:id="@+id/currencyDestLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currencyDestLabel">
-
-                    <ImageView
-                        android:id="@+id/currencyDestImage"
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"/>
-
-                    <TextView
-                        android:id="@+id/currencyDestText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="EUR"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                        android:textColor="@android:color/black"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/currencyDestAmountLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/currency_amount"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/currencyDestLayout" />
-
-                <EditText
-                    android:id="@+id/currencyDestAmountText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/currencyDestAmountLabel" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>            
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_swap_vert_black_24dp"
-        app:layout_anchor="@id/currencyDivider"
-        app:layout_anchorGravity="center"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

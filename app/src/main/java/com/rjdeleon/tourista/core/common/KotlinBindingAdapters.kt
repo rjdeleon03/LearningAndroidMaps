@@ -1,7 +1,9 @@
 package com.rjdeleon.tourista.core.common
 
 import android.graphics.BitmapFactory
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
@@ -40,4 +42,15 @@ fun setMapNearbyPlaces(mapView : MapView, results : List<NearbyPlace>) {
                     .title(place.name))
         }
     }
+}
+
+@BindingAdapter("imageFromId")
+fun setImageFromId(imageView : ImageView, id : Int) {
+
+    if (id == 0) return
+
+    val context = imageView.context
+    Glide.with(context)
+            .load(context.resources?.getDrawable(id))
+            .into(imageView)
 }

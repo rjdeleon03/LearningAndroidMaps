@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.mynameismidori.currencypicker.CurrencyPicker
 import com.rjdeleon.tourista.Constants
 
-import com.rjdeleon.tourista.R
+import com.rjdeleon.tourista.databinding.FragmentCurrencyConverterBinding
 import kotlinx.android.synthetic.main.fragment_currency_converter.*
 
 /**
@@ -18,10 +19,21 @@ import kotlinx.android.synthetic.main.fragment_currency_converter.*
  */
 class CurrencyConverterFragment : Fragment() {
 
+    private lateinit var mViewModel: CurrencyConverterViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProviders.of(this).get(CurrencyConverterViewModel::class.java)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_currency_converter, container, false)
+        var binding = FragmentCurrencyConverterBinding.inflate(inflater, container, false)
+        binding.viewModel = mViewModel
+        binding.setLifecycleOwner(this)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,8 +43,8 @@ class CurrencyConverterFragment : Fragment() {
 
             val picker = CurrencyPicker.newInstance("Select Currency")
             picker.setListener { name, code, symbol, flagDrawableResID ->
-                currencySourceImage.setImageDrawable(context?.resources?.getDrawable(flagDrawableResID)!!)
-                picker.dismiss();
+                picker.dismiss()
+                mViewModel.updateSourceCurrency(code, flagDrawableResID)
             }
             picker.show(fragmentManager!!, Constants.CURRENCY_PICKER_FRAGMENT_KEY)
         }
@@ -41,8 +53,8 @@ class CurrencyConverterFragment : Fragment() {
 
             val picker = CurrencyPicker.newInstance("Select Currency")
             picker.setListener { name, code, symbol, flagDrawableResID ->
-                currencyDestImage.setImageDrawable(context?.resources?.getDrawable(flagDrawableResID)!!)
-                picker.dismiss();
+                picker.dismiss()
+                mViewModel.updateDestCurrency(code,flagDrawableResID)
             }
             picker.show(fragmentManager!!, Constants.CURRENCY_PICKER_FRAGMENT_KEY)
         }
