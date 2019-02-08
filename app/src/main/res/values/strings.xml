@@ -47,4 +47,5 @@
     <string name="currency_source">Source Currency</string>
     <string name="currency_amount">Amount</string>
     <string name="currency_dest">Destination Currency</string>
+    <string name="currencyConvertButtonText">Convert</string>
 </resources>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.mynameismidori.currencypicker.CurrencyPicker
 import com.rjdeleon.tourista.Constants
+import com.rjdeleon.tourista.core.base.BaseFragment
 
 import com.rjdeleon.tourista.databinding.FragmentCurrencyConverterBinding
 import kotlinx.android.synthetic.main.fragment_currency_converter.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_currency_converter.*
  * A simple [Fragment] subclass.
  *
  */
-class CurrencyConverterFragment : Fragment() {
+class CurrencyConverterFragment : BaseFragment() {
 
     private lateinit var mViewModel: CurrencyConverterViewModel
 
@@ -29,9 +30,9 @@ class CurrencyConverterFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        var binding = FragmentCurrencyConverterBinding.inflate(inflater, container, false)
+        val binding = FragmentCurrencyConverterBinding.inflate(inflater, container, false)
         binding.viewModel = mViewModel
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         return binding.root
     }
@@ -60,7 +61,7 @@ class CurrencyConverterFragment : Fragment() {
         }
 
         currencyConvertButton.setOnClickListener {
-
+            hideKeyboard()
             mViewModel.convertCurrency()
         }
 

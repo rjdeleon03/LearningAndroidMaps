@@ -24,12 +24,14 @@
                 android:id="@+id/currencyConvertButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
-                android:text="Convert"
                 android:background="@drawable/shape_dialog_rounded_whole"
-                app:backgroundTint="@color/colorAccent"/>
+                android:text="@string/currencyConvertButtonText"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+                android:textSize="18sp"
+                app:backgroundTint="@color/colorAccent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,22 +56,23 @@
                         android:id="@+id/currencySourceLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:orientation="horizontal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/currencySourceLabel">
 
                         <ImageView
                             android:id="@+id/currencySourceImage"
+                            imageFromId="@{viewModel.conversionData.sourceFlagId}"
                             android:layout_width="55dp"
-                            android:layout_height="55dp"
-                            imageFromId="@{viewModel.conversionData.sourceFlagId}"/>
+                            android:layout_height="55dp" />
 
                         <TextView
                             android:id="@+id/currencySourceText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.conversionData.sourceCurrency}"
                             android:layout_marginStart="8dp"
+                            android:text="@{viewModel.conversionData.sourceCurrency}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                             android:textColor="@android:color/black" />
 
@@ -84,11 +87,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/currencySourceLayout" />
 
+                    <!--@={viewModel.conversionData.sourceAmount}-->
                     <EditText
                         android:id="@+id/currencySourceAmountText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:inputType="numberDecimal"
+                        android:background="@drawable/shape_dialog_rounded_whole_bordered"
+                        android:padding="8dp"
+                        android:textSize="24sp"
                         android:text="@={viewModel.conversionData.sourceAmount}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/currencySourceAmountLabel" />
@@ -128,6 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/currencyDestLabel">
 
@@ -157,12 +166,15 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/currencyDestLayout" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/currencyDestAmountText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="@{viewModel.conversionData.destAmount}"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/shape_dialog_rounded_whole_bordered"
+                        android:padding="8dp"
+                        android:textSize="24sp"
+                        android:text="@{String.valueOf(viewModel.conversionData.destAmount)}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/currencyDestAmountLabel" />
 
