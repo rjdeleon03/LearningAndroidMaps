@@ -4,13 +4,8 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.rjdeleon.tourista.Constants;
 import com.rjdeleon.tourista.R;
-import com.rjdeleon.tourista.data.Destination;
 
 import org.joda.time.DateTime;
 
@@ -58,22 +53,5 @@ public class BindingAdapters {
             return;
         }
         view.setText(TimeZone.getTimeZone(timeZoneId).getDisplayName());
-    }
-
-    @BindingAdapter("mapPlace")
-    public static void setPlace(MapView view, Destination destination) {
-        if (destination == null) return;
-        view.getMapAsync(googleMap -> {
-            googleMap.clear();
-
-            if (destination.getName().isEmpty() || destination.getAddress().isEmpty())
-                return;
-
-            LatLng latLng = new LatLng(destination.getLat(), destination.getLng());
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 8.0f));
-            googleMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title(destination.getName()));
-        });
     }
 }

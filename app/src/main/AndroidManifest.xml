@@ -36,8 +36,6 @@
         <!-- <activity -->
         <!-- android:name=".old.PlacesMapActivity" -->
         <!-- android:label="@string/title_activity_places_map"></activity> -->
-        <activity android:name=".TripActivity">
-        </activity>
     </application>
 
 </manifest>
