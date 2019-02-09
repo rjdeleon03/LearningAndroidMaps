@@ -67,6 +67,9 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.1.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.3.0'
 
+    // HERE map
+    implementation 'org.locationtech.jts:jts-core:1.15.0'
+
     // Places SDK
     implementation 'com.google.android.gms:play-services-places:16.0.0'
 

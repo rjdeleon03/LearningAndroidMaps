@@ -65,6 +65,10 @@ class MyLocationFragment : Fragment() {
                         mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_HOTEL)
                     R.id.menu_sights ->
                         mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_ATTRACTION)
+                    R.id.menu_atm ->
+                        mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_ATM)
+                    R.id.menu_shopping ->
+                        mViewModel.initNearbyPlacesRetrieval(FILTER_LOCATIONS_SHOPPING)
                 }
             }
             true

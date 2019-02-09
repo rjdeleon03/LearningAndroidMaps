@@ -9,11 +9,12 @@ import com.rjdeleon.tourista.core.api.map.getNearbyPlaces
 import com.rjdeleon.tourista.core.common.CustomMutableLiveData
 import com.rjdeleon.tourista.data.PlacePoint
 import com.rjdeleon.tourista.data.serializable.NearbyPlace
+import com.rjdeleon.tourista.data.serializable.PlaceResult
 
 class MyLocationViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mPlacePoint : CustomMutableLiveData<PlacePoint>
-    private val mNearbyPlaces : MutableLiveData<List<NearbyPlace>>
+    private val mNearbyPlaces : MutableLiveData<List<PlaceResult>>
 
     init {
         val mld = CustomMutableLiveData<PlacePoint>()
@@ -31,7 +32,7 @@ class MyLocationViewModel(application: Application) : AndroidViewModel(applicati
         mPlacePoint.value?.updateLatLng(latitude, longitude)
     }
 
-    fun getNearbyPlaces() : LiveData<List<NearbyPlace>> {
+    fun getNearbyPlaces() : LiveData<List<PlaceResult>> {
         return mNearbyPlaces
     }
 
@@ -40,7 +41,7 @@ class MyLocationViewModel(application: Application) : AndroidViewModel(applicati
         val placePoint = mPlacePoint.value ?: return
         getNearbyPlaces(placePoint.latitude, placePoint.longitude, 1500, filter,
                 object : GetNearbyPlacesListener {
-                    override fun onReceive(results: List<NearbyPlace>) {
+                    override fun onReceive(results: List<PlaceResult>) {
                         mNearbyPlaces.value = results
                     }
 

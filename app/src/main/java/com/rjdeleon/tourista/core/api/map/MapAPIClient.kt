@@ -17,7 +17,7 @@ object MapAPIClient {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             retrofit = Retrofit.Builder()
-                    .baseUrl("https://us1.locationiq.com/v1/")
+                    .baseUrl("https://places.cit.api.here.com/places/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
