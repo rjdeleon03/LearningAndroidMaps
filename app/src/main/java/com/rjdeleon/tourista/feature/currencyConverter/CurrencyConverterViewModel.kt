@@ -3,6 +3,7 @@ package com.rjdeleon.tourista.feature.currencyConverter
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.mynameismidori.currencypicker.ExtendedCurrency
 import com.rjdeleon.tourista.core.api.forex.GetCurrencyConversionListener
 import com.rjdeleon.tourista.core.api.forex.getCurrencyConversion
 import com.rjdeleon.tourista.model.CurrencyConversionData
@@ -12,9 +13,14 @@ class CurrencyConverterViewModel(application: Application) : AndroidViewModel(ap
     private val mConversionData : MutableLiveData<CurrencyConversionData> = MutableLiveData()
 
     init {
+        val usdCode = "USD"
+        val eurCode = "EUR"
+        val usd = ExtendedCurrency.getCurrencyByISO(usdCode)
+        val eur = ExtendedCurrency.getCurrencyByISO(eurCode)
+
         mConversionData.value = CurrencyConversionData(
-                "PHP", 0.0, 0,
-                "USD", 0.0, 0)
+                usdCode, 0.0, usd.flag,
+                eurCode, 0.0, eur.flag)
     }
 
     fun getConversionData() : MutableLiveData<CurrencyConversionData> {
