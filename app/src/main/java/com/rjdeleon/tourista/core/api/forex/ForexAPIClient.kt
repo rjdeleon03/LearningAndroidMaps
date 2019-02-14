@@ -14,11 +14,8 @@ object ForexAPIClient {
 
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
-            val client = OkHttpClient.Builder()
-                    .addInterceptor(interceptor).build()
             retrofit = Retrofit.Builder()
                     .baseUrl("https://free.currencyconverterapi.com/api/v6/")
-//                    .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             return retrofit as Retrofit

@@ -9,5 +9,6 @@ interface  ForexAPI {
 
     @GET("convert")
     fun getConversionRate(@Query("q") convCode : String,
-                          @Query("compact") isCompact : Char) : Call<JsonElement>
+                          @Query("compact") isCompact : Char,
+                          @Query("apiKey") apiKey : String) : Call<JsonElement>
 }

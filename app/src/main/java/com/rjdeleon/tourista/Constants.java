@@ -22,4 +22,5 @@ public class Constants {
     public static final String API_KEY_LOCATIONIQ = "5ed5f156409e8c";
     public static final String API_KEY_HERE_ID = "Dvfh9ZDH35bwg7wpJ4II";
     public static final String API_KEY_HERE_CODE = "ZIbivcTfOSSUlbL9D-qz3w";
+    public static final String API_KEY_FOREX = "2176e0017761590c9793";
 }

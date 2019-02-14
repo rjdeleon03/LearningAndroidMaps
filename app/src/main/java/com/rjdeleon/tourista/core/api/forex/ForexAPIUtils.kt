@@ -1,6 +1,7 @@
 package com.rjdeleon.tourista.core.api.forex
 
 import com.google.gson.JsonElement
+import com.rjdeleon.tourista.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +19,7 @@ fun getCurrencyConversion(sourceCurrency : String,
                           listener : GetCurrencyConversionListener) {
 
     val api = ForexAPIClient.client.create(ForexAPI::class.java)
-    api.getConversionRate(sourceCurrency + "_" + destCurrency, 'y')
+    api.getConversionRate(sourceCurrency + "_" + destCurrency, 'y', Constants.API_KEY_FOREX)
             .enqueue(object : Callback<JsonElement> {
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                     listener.onError()
