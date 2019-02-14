@@ -2,6 +2,7 @@ package com.rjdeleon.tourista.feature.myLocation
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 
@@ -14,8 +15,10 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineCallback
+import com.mapbox.android.core.location.LocationEngineRequest
 import com.mapbox.android.core.location.LocationEngineResult
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.location.LocationComponent
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
@@ -141,7 +144,19 @@ class MyLocationFragment : Fragment() {
         loc.isLocationComponentEnabled = true
         loc.cameraMode = CameraMode.TRACKING
         loc.renderMode = RenderMode.COMPASS
-        loc.locationEngine?.getLastLocation(object : LocationEngineCallback<LocationEngineResult> {
+        requestLocation(loc.locationEngine!!)
+    }
+
+    private fun getLocationPermission() {
+        ActivityCompat.requestPermissions(activity!!,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSIONS_REQ_ACCESS_FINE_LOCATION)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun requestLocation(engine : LocationEngine) {
+
+        engine.requestLocationUpdates(LocationEngineRequest.Builder(300000).build(), object : LocationEngineCallback<LocationEngineResult> {
             override fun onSuccess(result: LocationEngineResult?) {
                 val lastLocation = result?.lastLocation
                 if (lastLocation != null)
@@ -149,16 +164,9 @@ class MyLocationFragment : Fragment() {
             }
 
             override fun onFailure(exception: Exception) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-        })
-    }
-
-    private fun getLocationPermission() {
-        ActivityCompat.requestPermissions(activity!!,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSIONS_REQ_ACCESS_FINE_LOCATION)
+        }, null)
     }
 
 }// Required empty public constructor
