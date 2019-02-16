@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.currencyConverter
+package com.rjdeleon.tourista.feature.currencyconverter
 
 
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.RotateAnimation
 import androidx.lifecycle.ViewModelProviders
 import com.mynameismidori.currencypicker.CurrencyPicker
 import com.rjdeleon.tourista.Constants

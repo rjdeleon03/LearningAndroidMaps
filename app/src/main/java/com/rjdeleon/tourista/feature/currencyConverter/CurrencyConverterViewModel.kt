@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.currencyConverter
+package com.rjdeleon.tourista.feature.currencyconverter
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.myLocation
+package com.rjdeleon.tourista.feature.mylocation
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -8,7 +8,6 @@ import com.rjdeleon.tourista.core.api.map.GetNearbyPlacesListener
 import com.rjdeleon.tourista.core.api.map.getNearbyPlaces
 import com.rjdeleon.tourista.core.common.CustomMutableLiveData
 import com.rjdeleon.tourista.data.PlacePoint
-import com.rjdeleon.tourista.data.serializable.NearbyPlace
 import com.rjdeleon.tourista.data.serializable.PlaceResult
 
 class MyLocationViewModel(application: Application) : AndroidViewModel(application) {

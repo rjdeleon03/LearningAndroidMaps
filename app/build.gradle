@@ -37,7 +37,7 @@ ext {
     androidVersionRc = "1.0.0-rc01"
     archComponentVersion = "2.0.0-rc01"
     navVersion = "1.0.0-alpha11"
-    ktxNavVersion = "1.0.0-alpha11"
+    ktxNavVersion = "1.0.0-beta02"
 }
 
 dependencies {
@@ -56,9 +56,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'
 
-    // Multidex
-    implementation 'androidx.multidex:multidex:2.0.1'
-
     // Kotlin extensions
     implementation "android.arch.navigation:navigation-fragment-ktx:$ktxNavVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$ktxNavVersion"
@@ -66,21 +63,16 @@ dependencies {
     // Mapbox
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.1.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:4.3.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v7:0.5.0'
 
     // HERE map
     implementation 'org.locationtech.jts:jts-core:1.15.0'
 
-    // Places SDK
-    implementation 'com.google.android.gms:play-services-places:16.0.0'
-
-    // Maps SDK
-    implementation 'com.google.android.libraries.places:places-compat:1.0.0'
-
     // Google Room
     implementation 'androidx.room:room-runtime:' + archComponentVersion
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    annotationProcessor 'androidx.room:room-compiler:' + archComponentVersion
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
+    kapt 'androidx.room:room-compiler:' + archComponentVersion
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-extensions:' + archComponentVersion
@@ -93,18 +85,14 @@ dependencies {
     // Joda time
     implementation 'joda-time:joda-time:2.10.1'
 
-    // Butter Knife
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
-
-    implementation 'androidx.vectordrawable:vectordrawable:' + androidVersion
-
     // Country Currency Picker
     implementation 'com.github.midorikocak:currency-picker-android:1.2.1'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
+    implementation 'androidx.vectordrawable:vectordrawable:' + androidVersion
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

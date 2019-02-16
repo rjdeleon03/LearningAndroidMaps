@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/myLocationFragment"
-        android:name="com.rjdeleon.tourista.feature.myLocation.MyLocationFragment"
+        android:name="com.rjdeleon.tourista.feature.mylocation.MyLocationFragment"
         android:label="@string/fragment_my_location"
         tools:layout="@layout/fragment_my_location" />
     <fragment
         android:id="@+id/currencyConverterFragment"
-        android:name="com.rjdeleon.tourista.feature.currencyConverter.CurrencyConverterFragment"
+        android:name="com.rjdeleon.tourista.feature.currencyconverter.CurrencyConverterFragment"
         android:label="@string/fragment_currency_converter"
         tools:layout="@layout/fragment_currency_converter" />
     <fragment
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_weather" />
     <fragment
         android:id="@+id/worldClockFragment"
-        android:name="com.rjdeleon.tourista.feature.worldClock.WorldClockFragment"
+        android:name="com.rjdeleon.tourista.feature.worldclock.WorldClockFragment"
         android:label="@string/fragment_world_clock"
         tools:layout="@layout/fragment_world_clock" />
 

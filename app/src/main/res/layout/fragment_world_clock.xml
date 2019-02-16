@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.worldClock.WorldClockFragment">
+    tools:context=".feature.worldclock.WorldClockFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

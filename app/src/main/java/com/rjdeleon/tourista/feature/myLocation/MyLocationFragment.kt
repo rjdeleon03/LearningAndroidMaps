@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.myLocation
+package com.rjdeleon.tourista.feature.mylocation
 
 
 import android.Manifest
@@ -12,17 +12,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineCallback
 import com.mapbox.android.core.location.LocationEngineRequest
 import com.mapbox.android.core.location.LocationEngineResult
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.location.LocationComponent
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.plugins.annotation.Symbol
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
+import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.rjdeleon.tourista.Constants
 import com.rjdeleon.tourista.Constants.*
 import com.rjdeleon.tourista.R
@@ -39,6 +43,8 @@ class MyLocationFragment : Fragment() {
 
     private lateinit var mViewModel : MyLocationViewModel
     private lateinit var mMapboxMap : MapboxMap
+    private var mSymbolManager : SymbolManager? = null
+    private var mSymbolList : List<Symbol> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +62,7 @@ class MyLocationFragment : Fragment() {
         val view = binding.root
 
         binding.viewModel = mViewModel
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
 
@@ -126,9 +132,28 @@ class MyLocationFragment : Fragment() {
         mapView.getMapAsync { mapboxMap ->
             mMapboxMap = mapboxMap
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+                mSymbolManager = SymbolManager(mapView, mapboxMap, it)
+                mSymbolManager?.iconAllowOverlap = true
                 getLastKnownLocation(it)
             }
         }
+
+        mViewModel.getNearbyPlaces().observe(this, Observer { results ->
+
+            if (mSymbolManager == null) return@Observer
+            if (!mSymbolList.isEmpty())
+                mSymbolManager?.delete(mSymbolList)
+
+            val options = ArrayList<SymbolOptions>()
+            for (place in results) {
+
+                if (place.position != null && place.position.size == 2) {
+                    options.add(SymbolOptions()
+                            .withGeometry(Point.fromLngLat(place.position[1], place.position[0])))
+                }
+            }
+            mSymbolList = mSymbolManager!!.create(options)
+        })
     }
 
     private fun getLastKnownLocation(loadedMapStyle : Style) {

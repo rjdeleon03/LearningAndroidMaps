@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".feature.currencyConverter.CurrencyConverterFragment">
+    tools:context=".feature.currencyconverter.CurrencyConverterFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.rjdeleon.tourista.feature.currencyConverter.CurrencyConverterViewModel"/>
+            type="com.rjdeleon.tourista.feature.currencyconverter.CurrencyConverterViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

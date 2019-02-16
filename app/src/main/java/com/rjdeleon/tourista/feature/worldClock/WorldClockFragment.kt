@@ -1,4 +1,4 @@
-package com.rjdeleon.tourista.feature.worldClock
+package com.rjdeleon.tourista.feature.worldclock
 
 
 import android.os.Bundle
