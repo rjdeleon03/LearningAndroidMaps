@@ -32,18 +32,18 @@ fun setMapPlacePoint(mapView: MapView, placePoint: PlacePoint) {
 @BindingAdapter("mapNearbyPlaces")
 fun setMapNearbyPlaces(mapView : MapView, results : List<PlaceResult>) {
 
-    mapView.getMapAsync {
-        it.clear()
-
-        for (place in results) {
-
-            if (place.position != null && place.position.size == 2) {
-                it.addMarker(MarkerOptions()
-                        .position(LatLng(place.position[0], place.position[1]))
-                        .title(place.name))
-            }
-        }
-    }
+//    mapView.getMapAsync {
+//        it.clear()
+//
+//        for (place in results) {
+//
+//            if (place.position != null && place.position.size == 2) {
+//                it.addMarker(MarkerOptions()
+//                        .position(LatLng(place.position[0], place.position[1]))
+//                        .title(place.name))
+//            }
+//        }
+//    }
 }
 
 @BindingAdapter("imageFromId")

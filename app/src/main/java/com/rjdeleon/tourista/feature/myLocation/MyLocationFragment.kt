@@ -27,6 +27,8 @@ import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.plugins.annotation.Symbol
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.rjdeleon.tourista.Constants
 import com.rjdeleon.tourista.Constants.*
 import com.rjdeleon.tourista.R
@@ -132,8 +134,14 @@ class MyLocationFragment : Fragment() {
         mapView.getMapAsync { mapboxMap ->
             mMapboxMap = mapboxMap
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
+
                 mSymbolManager = SymbolManager(mapView, mapboxMap, it)
                 mSymbolManager?.iconAllowOverlap = true
+                mSymbolManager?.addLongClickListener {
+
+                    // TODO: Get location using ID
+                }
+
                 getLastKnownLocation(it)
             }
         }
@@ -149,7 +157,8 @@ class MyLocationFragment : Fragment() {
 
                 if (place.position != null && place.position.size == 2) {
                     options.add(SymbolOptions()
-                            .withGeometry(Point.fromLngLat(place.position[1], place.position[0])))
+                            .withGeometry(Point.fromLngLat(place.position[1], place.position[0]))
+                            .withIconImage("airport-15"))
                 }
             }
             mSymbolList = mSymbolManager!!.create(options)
